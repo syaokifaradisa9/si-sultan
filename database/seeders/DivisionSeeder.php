@@ -17,5 +17,17 @@ class DivisionSeeder extends Seeder
         Division::create([
             'nama' => 'Manajemen'
         ]);
+        Division::create([
+            'nama' => 'Lab PK'
+        ]);
+        Division::create([
+            'nama' => 'Lab UK'
+        ]);
+        Division::create([
+            'nama' => 'Lab PDP'
+        ]);
+        Division::create([
+            'nama' => 'Lab Sapras'
+        ]);
     }
 }

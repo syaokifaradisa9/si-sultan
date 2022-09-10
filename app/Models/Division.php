@@ -10,4 +10,9 @@ class Division extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function UserDivision()
+    {
+        return $this->hasMany(UserDivision::class);
+    }
 }
