@@ -6,8 +6,7 @@
       <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
           <div class="login-brand">
-            <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="100"
-              class="shadow-light rounded-circle">
+            <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
           </div>
           <div class="card card-primary">
             <div class="card-header">
@@ -15,38 +14,63 @@
             </div>
 
             <div class="card-body">
-              <form method="POST">
+              <form method="POST" action="{{ route('regis.store') }}">
+                @csrf
                 <div class="form-group">
-                  <label for="nama">Nama</label>
-                  <input id="nama" type="text" class="form-control" name="nama" autofocus>
+                  <label for="name">Nama</label>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" autofocus>
+                  @error('name')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
                 </div>
 
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input id="email" type="email" class="form-control" name="email">
-                  <div class="invalid-feedback">
-                  </div>
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                  @error('email')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
                 </div>
 
                 <div class="form-group">
                   <label for="password" class="d-block">Password</label>
-                  <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
-                    name="password">
+                  <input id="password" type="password" class="form-control pwstrength @error('password') is-invalid @enderror"
+                    data-indicator="pwindicator" name="password">
                   <div id="pwindicator" class="pwindicator">
                     <div class="bar"></div>
                     <div class="label"></div>
                   </div>
+                  @error('password')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
                 </div>
 
-                <div class="form-group">
-                  <label>Role</label>
-                  <select class="form-control selectric">
-                    <option>Admin Bagian</option>
-                    <option>Kepala Bagian</option>
-                    <option>Tata Operasional</option>
-                    <option>Administrasi Umum</option>
-                    <option>Kepala LPFK</option>
-                    <option>PPK</option>
+                <div class="form-group test">
+                  <label for="role">Role</label>
+                  <select class="form-control selectric @error('role') is-invalid @enderror" name="role" id="role">
+                    <option hidden value="">Pilih Role</option>
+                    <option value="admin_bagian">Admin Bagian</option>
+                    <option value="kepala_bagian">Kepala Bagian</option>
+                    <option value="tata_operational">Tata Operasional</option>
+                    <option value="administrasi_umum">Administrasi Umum</option>
+                    <option value="kepala_lpfk">Kepala LPFK</option>
+                    <option value="ppk">PPK</option>
+                  </select>
+                </div>
+
+                <div class="form-group division d-none">
+                  <label for="division">Divisi</label>
+                  <select class="form-control selectric @error('division_id') is-invalid @enderror" name="division_id" id="division">
+                    <option hidden value="">Pilih Divisi</option>
+                    @foreach ($divisions as $divisi)
+                      <option value="{{ $divisi->id }}">{{ $divisi->nama }}</option>
+                    @endforeach
                   </select>
                 </div>
 
@@ -62,4 +86,19 @@
       </div>
     </div>
   </section>
+
+  <script>
+    const roles = document.getElementById('role')
+    const divisions = document.querySelector('.division')
+
+    roles.addEventListener('change', function() {
+      const role = this.value
+
+      if (role === 'admin_bagian' || role === 'kepala_bagian') {
+        divisions.classList.remove('d-none')
+      } else {
+        divisions.classList.add('d-none')
+      }
+    })
+  </script>
 @endsection

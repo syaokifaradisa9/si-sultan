@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::get('/register', [RegisterController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('regis.store');
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
