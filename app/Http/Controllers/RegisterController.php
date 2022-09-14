@@ -12,7 +12,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('auth.register', [
+        return view('auth.register.index', [
             'title' => 'Registration | SI-SULTAN',
             'header' => 'Registration',
             'divisions' => Division::all()
@@ -23,14 +23,15 @@ class RegisterController extends Controller
     {
         $validate = $request->all();
 
-        if ($validate['role'] === "admin_bagian" || $validate['role'] === "kepala_bagian") {
-            UserDivision::create($validate);
-        }
-
         $validate['password'] = bcrypt($validate['password']);
 
-        User::create($validate);
+        if ($validate['role'] === "admin_divisi" || $validate['role'] === "kepala_divisi") {
+            UserDivision::create($validate);
+        } else {
+            User::create($validate);
+        }
 
-        return back();
+
+        return redirect()->route('login');
     }
 }

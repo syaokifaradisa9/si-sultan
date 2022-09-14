@@ -12,8 +12,8 @@
   {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"
-    integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
 
   <!-- CSS Libraries -->
 
@@ -70,7 +70,7 @@
 
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
-  {{-- <script src="{{ asset('vendor/stisla/js/stisla.js') }}"></script> --}}
+  <script src="{{ asset('vendor/stisla/js/custom.js') }}"></script>
 
   <!-- Page Specific JS File -->
 </body>

@@ -1,66 +1,65 @@
 <div class="main-sidebar sidebar-style-2">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="index.html">SI-SULTAN</a>
+      <a href="">SI-SULTAN</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
       <a href="index.html">St</a>
     </div>
     <ul class="sidebar-menu">
-      <li class="menu-header">Dashboard</li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-          <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-        </ul>
-      </li>
-      <li class="menu-header">Starter</li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-          <span>Layout</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-          <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-          <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-        </ul>
-      </li>
-      <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
-          <li><a class="nav-link" href="bootstrap-badge.html">Badge</a></li>
-          <li><a class="nav-link" href="bootstrap-breadcrumb.html">Breadcrumb</a></li>
-          <li><a class="nav-link" href="bootstrap-buttons.html">Buttons</a></li>
-          <li><a class="nav-link" href="bootstrap-card.html">Card</a></li>
-          <li><a class="nav-link" href="bootstrap-carousel.html">Carousel</a></li>
-          <li><a class="nav-link" href="bootstrap-collapse.html">Collapse</a></li>
-          <li><a class="nav-link" href="bootstrap-dropdown.html">Dropdown</a></li>
-          <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
-          <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
-          <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-          <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
-          <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
-          <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
-          <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
-          <li><a class="nav-link" href="bootstrap-popover.html">Popover</a></li>
-          <li><a class="nav-link" href="bootstrap-progress.html">Progress</a></li>
-          <li><a class="nav-link" href="bootstrap-table.html">Table</a></li>
-          <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
-          <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
-        </ul>
-      </li>
-      <li class="menu-header">Superadmin</li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="/register">Add NewUsers</a></li>
-        </ul>
-      </li>
-      <li class="menu-header">Superadmin</li>
-      <li class="{{ Request::is('register') ? 'active' : '' }}"><a class="nav-link" href="/register"><i
-            class="fas fa-user-plus"></i> Add New Users</a></li>
+      @isAdminDiv
+        <li class="menu-header">Admin Divisi</li>
+        <li class="{{ Request::is('home_admin_divisi') ? 'active' : '' }}"><a class="nav-link" href="/home_admin_divisi"><i class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisAdminDiv
+
+      @isKadiv
+        <li class="menu-header">Kepala Divisi</li>
+        <li class="{{ Request::is('home_kepala_divisi') ? 'active' : '' }}"><a class="nav-link" href="/home_kepala_divisi"><i class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisKadiv
+
+      @isTo
+        <li class="menu-header">Tata Operasional</li>
+        <li class="{{ Request::is('home_tata_operasional') ? 'active' : '' }}"><a class="nav-link" href="/home_tata_operasional"><i
+              class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisTo
+
+      @isAdum
+        <li class="menu-header">Administrasi Umum</li>
+        <li class="{{ Request::is('home_administrasi_umum') ? 'active' : '' }}"><a class="nav-link" href="/home_administrasi_umum"><i
+              class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisAdum
+
+      @isLead
+        <li class="menu-header">Kepala LPFK</li>
+        <li class="{{ Request::is('home_kepala_lpfk') ? 'active' : '' }}"><a class="nav-link" href="/home_kepala_lpfk"><i class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisLead
+
+      @isPpk
+        <li class="menu-header">PPK</li>
+        <li class="{{ Request::is('home_ppk') ? 'active' : '' }}"><a class="nav-link" href="/home_ppk"><i class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+      @endisPpk
+
+      @isSuperadmin
+        <li class="menu-header">Superadmin</li>
+        <li class="{{ Request::is('home_superadmin') ? 'active' : '' }}"><a class="nav-link" href="/home_superadmin"><i class="fas fa-th-large">
+            </i> Home</a>
+        </li>
+        <li class="{{ Request::is('register') ? 'active' : '' }}"><a class="nav-link" href="/register"><i class="fas fa-user-plus">
+            </i> Add New Users</a>
+        </li>
+      @endisSuperadmin
     </ul>
 
     {{-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

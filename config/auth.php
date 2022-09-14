@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'division' => [
+            'driver' => 'session',
+            'provider' => 'divisions',
+        ]
     ],
 
     /*
@@ -65,6 +69,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'divisions' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserDivision::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -88,6 +97,12 @@ return [
 
     'passwords' => [
         'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'divisions' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

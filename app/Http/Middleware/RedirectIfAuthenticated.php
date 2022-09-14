@@ -19,11 +19,37 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        // $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->user()->role === 'superadmin') {
+        //         return redirect()->intended(route('admin.home'));
+        //     }
+        // }
+
+        if (Auth::guard('web')->check()) {
+            if (Auth::guard('web')->user()->role === 'tata_operasional') {
+                return redirect()->intended(route('to.home'));
+            }
+            if (Auth::guard('web')->user()->role === 'administrasi_umum') {
+                return redirect()->intended(route('adum.home'));
+            }
+            if (Auth::guard('web')->user()->role === 'kepala_lpfk') {
+                return redirect()->intended(route('lpfk.home'));
+            }
+            if (Auth::guard('web')->user()->role === 'ppk') {
+                return redirect()->intended(route('ppk.home'));
+            }
+            if (Auth::guard('web')->user()->role === 'superadmin') {
+                return redirect()->intended(route('admin.home'));
+            }
+        } else if (Auth::guard('division')->check()) {
+            if (Auth::guard('division')->user()->role === 'admin_divisi') {
+                return redirect()->intended(route('addiv.home'));
+            }
+
+            if (Auth::guard('division')->user()->role === 'kepala_divisi') {
+                return redirect()->intended(route('kadiv.home'));
             }
         }
 

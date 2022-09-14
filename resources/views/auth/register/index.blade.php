@@ -55,12 +55,13 @@
                   <label for="role">Role</label>
                   <select class="form-control selectric @error('role') is-invalid @enderror" name="role" id="role">
                     <option hidden value="">Pilih Role</option>
-                    <option value="admin_bagian">Admin Bagian</option>
-                    <option value="kepala_bagian">Kepala Bagian</option>
-                    <option value="tata_operational">Tata Operasional</option>
+                    <option value="admin_divisi">Admin Divisi</option>
+                    <option value="kepala_divisi">Kepala Divisi</option>
+                    <option value="tata_operasional">Tata Operasional</option>
                     <option value="administrasi_umum">Administrasi Umum</option>
                     <option value="kepala_lpfk">Kepala LPFK</option>
                     <option value="ppk">PPK</option>
+                    <option value="superadmin">Superadmin</option>
                   </select>
                 </div>
 
@@ -88,17 +89,17 @@
   </section>
 
   <script>
-    const roles = document.getElementById('role')
-    const divisions = document.querySelector('.division')
+    const roles = document.getElementById("role");
+    const divisions = document.querySelector(".division");
 
-    roles.addEventListener('change', function() {
-      const role = this.value
+    roles.addEventListener("change", function() {
+      const role = this.value;
 
-      if (role === 'admin_bagian' || role === 'kepala_bagian') {
-        divisions.classList.remove('d-none')
+      if (role === "admin_divisi" || role === "kepala_divisi") {
+        divisions.classList.remove("d-none");
       } else {
-        divisions.classList.add('d-none')
+        divisions.classList.add("d-none");
       }
-    })
+    });
   </script>
 @endsection

@@ -9,11 +9,9 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"
-    integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
 
   <!-- CSS Libraries -->
 
@@ -26,16 +24,15 @@
     <div class="d-flex flex-wrap align-items-stretch">
       <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
         <div class="p-4 m-3">
-          <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="80"
-            class="shadow-light rounded-circle mb-5 mt-2">
+          <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
           <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Si-Sultan</span></h4>
           <p class="text-muted">Before you get started, you must login or register if you don't already have an account.
           </p>
-          <form method="POST" action="#" class="needs-validation" novalidate="">
+          <form method="POST" action="{{ route('login.auth') }}" class="needs-validation" novalidate="">
+            @csrf
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" type="email" class="form-control" name="email" tabindex="1" required
-                autofocus>
+              <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
               <div class="invalid-feedback">
                 Please fill in your email
               </div>
@@ -60,8 +57,7 @@
 
         </div>
       </div>
-      <div
-        class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
+      <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
         data-background="{{ asset('vendor/stisla/img/unsplash/login-bg.jpg') }}">
         <div class="absolute-bottom-left index-2">
           <div class="text-light p-5 pb-2">
@@ -91,7 +87,6 @@
 
 <!-- Template JS File -->
 <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
-{{-- <script src="{{ asset('vendor/stisla/js/stisla.js') }}"></script> --}}
 
 <!-- Page Specific JS File -->
 </body>
