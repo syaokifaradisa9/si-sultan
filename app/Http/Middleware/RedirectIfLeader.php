@@ -21,6 +21,9 @@ class RedirectIfLeader
             if (Auth::guard('web')->user()->role === 'kepala_lpfk') {
                 return $next($request);
             }
+            elseif (Auth::guard('web')->user()->role === 'superadmin') {
+                return $next($request);
+            }
         }
 
         return abort(403);

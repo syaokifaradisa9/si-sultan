@@ -22,6 +22,11 @@ class RedirectIfKadiv
                 return $next($request);
             }
         }
+        if (Auth::guard('web')->check()) {
+            if (Auth::guard('web')->user()->role === 'superadmin') {
+                return $next($request);
+            }
+        }
 
         return abort(403);
     }

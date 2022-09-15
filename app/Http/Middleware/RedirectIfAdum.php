@@ -22,6 +22,9 @@ class RedirectIfAdum
             if (Auth::guard('web')->user()->role === 'administrasi_umum') {
                 return $next($request);
             }
+            elseif (Auth::guard('web')->user()->role === 'superadmin') {
+                return $next($request);
+            }
         }
 
         return abort(403);

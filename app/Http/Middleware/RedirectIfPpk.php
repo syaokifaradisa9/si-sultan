@@ -21,6 +21,9 @@ class RedirectIfPpk
             if (Auth::guard('web')->user()->role === 'ppk') {
                 return $next($request);
             }
+            elseif (Auth::guard('web')->user()->role === 'superadmin') {
+                return $next($request);
+            }
         }
 
         return abort(403);

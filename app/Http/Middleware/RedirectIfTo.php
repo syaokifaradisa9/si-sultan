@@ -21,7 +21,11 @@ class RedirectIfTo
             if (Auth::guard('web')->user()->role === 'tata_operasional') {
                 return $next($request);
             }
+            elseif (Auth::guard('web')->user()->role === 'superadmin') {
+                return $next($request);
+            }
         }
+
 
         return abort(403);
     }
