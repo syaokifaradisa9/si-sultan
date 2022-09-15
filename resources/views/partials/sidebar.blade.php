@@ -18,8 +18,8 @@
 
       @isKadiv
         <li class="menu-header">Kepala Divisi</li>
-        <li class="nav-item">
-          <a href="/home_kepala_divisi" class="nav-link {{ Request::is('home_kepala_divisi') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('kadiv/home') ? 'active' : '' }}">
+          <a href="/kadiv/home" class="nav-link ">
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
@@ -27,8 +27,8 @@
 
       @isTo
         <li class="menu-header">Tata Operasional</li>
-        <li class="nav-item">
-          <a href="/home_tata_operasional" class="nav-link {{ Request::is('home_tata_operasional') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('to/home') ? 'active' : '' }}">
+          <a href="/to/home" class="nav-link ">
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
@@ -36,8 +36,8 @@
 
       @isAdum
         <li class="menu-header">Administrasi Umum</li>
-        <li class="nav-item">
-          <a href="/home_administrasi_umum" class="nav-link {{ Request::is('home_administrasi_umum') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
+          <a href="/adum/home" class="nav-link ">
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
@@ -45,8 +45,8 @@
 
       @isLead
         <li class="menu-header">Kepala LPFK</li>
-        <li class="nav-item">
-          <a href="/home_kepala_lpfk" class="nav-link {{ Request::is('home_kepala_lpfk') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('lpfk/home') ? 'active' : '' }}">
+          <a href="/lpfk/home" class="nav-link ">
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
@@ -54,8 +54,8 @@
 
       @isPpk
         <li class="menu-header">PPK</li>
-        <li class="nav-item">
-          <a href="/home_ppk" class="nav-link {{ Request::is('home_ppk') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::is('ppk/home') ? 'active' : '' }}">
+          <a href="/ppk/home" class="nav-link ">
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
