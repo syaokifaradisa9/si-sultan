@@ -9,55 +9,69 @@
     <ul class="sidebar-menu">
       @isAdminDiv
         <li class="menu-header">Admin Divisi</li>
-        <li class="{{ Request::is('home_admin_divisi') ? 'active' : '' }}"><a class="nav-link" href="/home_admin_divisi"><i class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
+          <a href="/addiv/home" class="nav-link ">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisAdminDiv
 
       @isKadiv
         <li class="menu-header">Kepala Divisi</li>
-        <li class="{{ Request::is('home_kepala_divisi') ? 'active' : '' }}"><a class="nav-link" href="/home_kepala_divisi"><i class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item">
+          <a href="/home_kepala_divisi" class="nav-link {{ Request::is('home_kepala_divisi') ? 'active' : '' }}">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisKadiv
 
       @isTo
         <li class="menu-header">Tata Operasional</li>
-        <li class="{{ Request::is('home_tata_operasional') ? 'active' : '' }}"><a class="nav-link" href="/home_tata_operasional"><i
-              class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item">
+          <a href="/home_tata_operasional" class="nav-link {{ Request::is('home_tata_operasional') ? 'active' : '' }}">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisTo
 
       @isAdum
         <li class="menu-header">Administrasi Umum</li>
-        <li class="{{ Request::is('home_administrasi_umum') ? 'active' : '' }}"><a class="nav-link" href="/home_administrasi_umum"><i
-              class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item">
+          <a href="/home_administrasi_umum" class="nav-link {{ Request::is('home_administrasi_umum') ? 'active' : '' }}">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisAdum
 
       @isLead
         <li class="menu-header">Kepala LPFK</li>
-        <li class="{{ Request::is('home_kepala_lpfk') ? 'active' : '' }}"><a class="nav-link" href="/home_kepala_lpfk"><i class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item">
+          <a href="/home_kepala_lpfk" class="nav-link {{ Request::is('home_kepala_lpfk') ? 'active' : '' }}">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisLead
 
       @isPpk
         <li class="menu-header">PPK</li>
-        <li class="{{ Request::is('home_ppk') ? 'active' : '' }}"><a class="nav-link" href="/home_ppk"><i class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item">
+          <a href="/home_ppk" class="nav-link {{ Request::is('home_ppk') ? 'active' : '' }}">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
       @endisPpk
 
       @isSuperadmin
         <li class="menu-header">Superadmin</li>
-        <li class="{{ Request::is('home_superadmin') ? 'active' : '' }}"><a class="nav-link" href="/home_superadmin"><i class="fas fa-th-large">
-            </i> Home</a>
+        <li class="nav-item {{ Request::is('admin/home') ? 'active' : '' }}">
+          <a href="/admin/home" class="nav-link ">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
         </li>
-        <li class="{{ Request::is('register') ? 'active' : '' }}"><a class="nav-link" href="/register"><i class="fas fa-user-plus">
-            </i> Add New Users</a>
+        <li class="nav-item {{ Request::is('register') ? 'active' : '' }}">
+          <a href="/register" class="nav-link ">
+            <i class="fas fa-user-plus"></i><span>Add New User</span>
+          </a>
         </li>
       @endisSuperadmin
     </ul>

@@ -70,3 +70,7 @@ Route::name('ppk.')->prefix('ppk')->middleware('ppk')->group(function () {
 Route::name('admin.')->prefix('admin')->middleware('superadmin')->group(function () {
   Route::get('/home', [SuperadminController::class, 'index'])->name('home');
 });
+
+Route::get('{prefix}', function ($prefix) {
+  return redirect(route($prefix . '.home'));
+});

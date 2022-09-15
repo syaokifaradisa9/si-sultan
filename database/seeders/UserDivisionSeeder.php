@@ -15,5 +15,13 @@ class UserDivisionSeeder extends Seeder
     public function run()
     {
         UserDivision::factory(3)->create();
+
+        UserDivision::create([
+            'name' => 'addiv',
+            'email' => 'addiv@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin_divisi',
+            'division_id' => 1
+        ]);
     }
 }

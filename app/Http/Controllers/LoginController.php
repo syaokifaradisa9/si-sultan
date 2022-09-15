@@ -52,6 +52,8 @@ class LoginController extends Controller
         return redirect()->intended(route('admin.home'));
       }
     }
+
+    return redirect(route('login'))->with('error', 'Email atau password yang anda masukkan salah');
   }
 
   public function logout(Request $request)

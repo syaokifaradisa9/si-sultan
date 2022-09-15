@@ -17,9 +17,18 @@ class RedirectIfNotAddiv
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('division')->user()->role !== 'admin_divisi') {
-            abort(403);
+        if (Auth::guard('division')->check()) {
+            if (Auth::guard('division')->user()->role !== 'admin_divisi') {
+                abort(403);
+            }
         }
+
+        if (Auth::guard('web')->check()) {
+            if (Auth::guard('web')->user()->role !== 'superadmin') {
+                abort(403);
+            }
+        }
+
 
         return $next($request);
     }

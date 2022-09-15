@@ -31,7 +31,6 @@ class RegisterController extends Controller
             User::create($validate);
         }
 
-
         return redirect()->route('login');
     }
 }
