@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             DivisionSeeder::class,
             UserDivisionSeeder::class,
             UserSeeder::class,
-            InventorySeeder::class
+            InventorySeeder::class,
+            InventoryHpSeeder::class
         ]);
     }
 }
