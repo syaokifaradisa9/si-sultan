@@ -23,9 +23,15 @@
 
       @isKadiv
         <li class="menu-header">Kepala Divisi</li>
+        </li>
         <li class="nav-item {{ Request::is('kadiv/home') ? 'active' : '' }}">
           <a href="/kadiv/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('kadiv/order*') ? 'active' : '' }}">
+          <a href="/kadiv/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisKadiv

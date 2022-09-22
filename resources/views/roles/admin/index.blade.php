@@ -3,60 +3,11 @@
 @section('container')
   <div class="card">
     <div class="card-header">
-      <h4>Barang Tidak Habis Pakai</h4>
-      <div class="card-header-form">
-        <form>
-        </form>
-      </div>
-    </div>
-    <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table table-bordered" id="order-table">
-          <thead>
-            <tr>
-              <th class="text-center" style="width: 15px">No</th>
-              <th class="text-center" style="width: 220px">Nama Barang</th>
-              <th class="text-center" style="width: 15px">Baik</th>
-              <th class="text-center" style="width: 15px">Rusak Ringan</th>
-              <th class="text-center" style="width: 15px">Rusak Berat</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($inventories as $index => $inventory)
-              <tr>
-                <td class="text-center align-middle">
-                  {{ $loop->iteration }}
-                </td>
-                <td>
-                  {{ $inventory->nama_barang }}
-                </td>
-                <td class="text-center align-middle">
-                  {{ $inventory->baik }}
-                </td>
-                <td class="text-center align-middle">
-                  {{ $inventory->rusak_ringan }}
-                </td>
-                <td class="text-center align-middle">
-                  {{ $inventory->rusak_berat }}
-                </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
       <h4>Barang Habis Pakai</h4>
-      <div class="card-header-form">
-        <form>
-        </form>
-      </div>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered" id="order-table">
+        <table class="table table-bordered" id="used-table">
           <thead>
             <tr>
               <th class="text-center" style="width: 15px">No</th>
@@ -64,29 +15,89 @@
               <th class="text-center" style="width: 15px">Total</th>
             </tr>
           </thead>
-          <tbody>
-            @foreach ($inventory_hps as $index => $inventory_hp)
-              <tr>
-                <td class="text-center align-middle">
-                  {{ $index + 1 }}
-                </td>
-                <td class="text-center align-middle">
-                  {{ $inventory_hp->nama_barang }}
-                </td>
-                <td class="text-center align-middle">
-                  {{ $inventory_hp->total }}
-                </td>
-              </tr>
-            @endforeach
+          <tbody class="text-center">
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h4>Barang Tidak Habis Pakai</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="order-table">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 15px">No</th>
+              <th class="text-center">Nama Barang</th>
+              <th class="text-center" style="width: 200px">Baik</th>
+              <th class="text-center" style="width: 200px">Rusak Ringan</th>
+              <th class="text-center" style="width: 200px">Rusak Berat</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   </div>
+
+  <script>
+    $(function() {
+      let table = $('#order-table').DataTable({
+        bAutoWidth: false,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
+        columns: [{
+            data: 'id',
+            name: 'id'
+          },
+          {
+            data: 'nama_barang',
+            name: 'nama_barang'
+          },
+          {
+            data: 'baik',
+            name: 'baik'
+          },
+          {
+            data: 'rusak_ringan',
+            name: 'rusak_ringan',
+          },
+          {
+            data: 'rusak_berat',
+            name: 'rusak_berat',
+          },
+        ]
+      });
+    });
+
+    $(function() {
+      let table = $('#used-table').DataTable({
+        bAutoWidth: false,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
+        columns: [{
+            data: 'id',
+            name: 'id'
+          },
+          {
+            data: 'nama_barang',
+            name: 'nama_barang'
+          },
+          {
+            data: 'total',
+            name: 'total'
+          },
+        ]
+      });
+    });
+  </script>
 @endsection

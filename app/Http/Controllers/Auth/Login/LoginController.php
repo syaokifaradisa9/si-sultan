@@ -51,7 +51,7 @@ class LoginController extends Controller
       }
     }
 
-    return redirect(route('login'))->with('error', 'Email atau password yang anda masukkan salah');
+    return redirect(route('login'))->with('error', 'Login gagal');
   }
 
   public function logout(Request $request)

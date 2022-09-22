@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Addiv;
 
-use App\Http\Controllers\Controller;
 use App\Models\Inventory;
 use App\Models\InventoryHp;
-use App\Models\Propose;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminDivisiController extends Controller
 {
@@ -14,9 +14,20 @@ class AdminDivisiController extends Controller
   {
     return view('roles.admin.index', [
       'header' => 'Home',
-      'inventories' => Inventory::all(),
-      'inventory_hps' => InventoryHp::all()
     ]);
+  }
+
+  public function datatable(Request $request, $type)
+  {
+    if ($request->ajax()) {
+      if ($type == 'thp') {
+        $data = Inventory::all();
+        return DataTables::of($data)->make(true);
+      } else {
+        $data = InventoryHp::all();
+        return DataTables::of($data)->make(true);
+      }
+    }
   }
 
   public function order()

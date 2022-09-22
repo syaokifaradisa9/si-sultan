@@ -36,6 +36,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Admin Divisi
 Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
+  Route::get('/home/datatable/{type}', [AdminDivisiController::class, 'datatable'])->name('datatable');
   Route::get('/order', [AdminDivisiController::class, 'order'])->name('order');
   Route::get('/order/usulan', [AdminDivisiController::class, 'usulan'])->name('usulan');
   Route::post('/order/store', [AdminDivisiController::class, 'store'])->name('store');
