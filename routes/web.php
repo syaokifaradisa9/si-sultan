@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminDivisiController;
-use App\Http\Controllers\AdministrasiUmumController;
+use App\Http\Controllers\Addiv\AdminDivisiController;
+use App\Http\Controllers\Adum\AdministrasiUmumController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KepalaDivisiController;
-use App\Http\Controllers\KepalaLpfkController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PpkController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SuperadminController;
-use App\Http\Controllers\TataOperasionalController;
+use App\Http\Controllers\Kadiv\KepalaDivisiController;
+use App\Http\Controllers\Lead\KepalaLpfkController;
+use App\Http\Controllers\Auth\Login\LoginController;
+use App\Http\Controllers\Ppk\PpkController;
+use App\Http\Controllers\Auth\Register\RegisterController;
+use App\Http\Controllers\Admin\SuperadminController;
+use App\Http\Controllers\To\TataOperasionalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +33,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('superadmin');
-Route::post('/register', [RegisterController::class, 'store'])->name('regis.store');
-
 // Admin Divisi
 Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
+  Route::get('/order', [AdminDivisiController::class, 'order'])->name('order');
+  Route::get('/order/usulan', [AdminDivisiController::class, 'usulan'])->name('usulan');
+  Route::post('/order/store', [AdminDivisiController::class, 'store'])->name('store');
 });
 
 // Kepala Divisi
@@ -69,8 +69,10 @@ Route::name('ppk.')->prefix('ppk')->middleware('ppk')->group(function () {
 // Superadmin
 Route::name('admin.')->prefix('admin')->middleware('superadmin')->group(function () {
   Route::get('/home', [SuperadminController::class, 'index'])->name('home');
+  Route::get('/register', [RegisterController::class, 'index'])->name('register');
+  Route::post('/register', [RegisterController::class, 'store'])->name('store');
 });
 
-Route::get('{prefix}', function ($prefix) {
-  return redirect(route($prefix . '.home'));
+Route::get('{prefix}', function () {
+  return back();
 });

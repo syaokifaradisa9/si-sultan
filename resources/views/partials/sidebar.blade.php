@@ -11,7 +11,12 @@
         <li class="menu-header">Admin Divisi</li>
         <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
           <a href="/addiv/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('addiv/order*') ? 'active' : '' }}">
+          <a href="/addiv/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisAdminDiv
@@ -68,8 +73,8 @@
             <i class="fas fa-th-large"></i><span>Home</span>
           </a>
         </li>
-        <li class="nav-item {{ Request::is('register') ? 'active' : '' }}">
-          <a href="/register" class="nav-link ">
+        <li class="nav-item {{ Request::is('admin/register') ? 'active' : '' }}">
+          <a href="/admin/register" class="nav-link ">
             <i class="fas fa-user-plus"></i><span>Add New User</span>
           </a>
         </li>

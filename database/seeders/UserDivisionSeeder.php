@@ -7,21 +7,21 @@ use Illuminate\Database\Seeder;
 
 class UserDivisionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        UserDivision::factory(3)->create();
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    UserDivision::factory(3)->create();
 
-        UserDivision::create([
-            'name' => 'addiv',
-            'email' => 'addiv@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'admin_divisi',
-            'division_id' => 1
-        ]);
-    }
+    UserDivision::create([
+      'name' => 'addiv',
+      'email' => 'addiv@gmail.com',
+      'password' => bcrypt('password'),
+      'role' => 'admin_divisi',
+      'division_id' => 1
+    ]);
+  }
 }

@@ -9,7 +9,7 @@
   {{-- @auth --}}
   <ul class="navbar-nav navbar-right">
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->guard('division')->user()->name ??auth()->guard('web')->user()->name }}
+        <div class="d-sm-none d-lg-inline-block">{{ Str::ucfirst(auth()->guard('division')->user()->name ??auth()->guard('web')->user()->name) }}
         </div>
       </a>
       <div class="dropdown-menu dropdown-menu-right">

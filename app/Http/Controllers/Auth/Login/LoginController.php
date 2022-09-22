@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth\Login;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -19,8 +19,6 @@ class LoginController extends Controller
 
   public function authenticate(LoginRequest $request)
   {
-    // dd($request->all());
-
     $validate = $request->only('email', 'password');
 
     $request->session()->regenerate();
