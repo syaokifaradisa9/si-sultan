@@ -19,8 +19,6 @@
               <th class="text-center" style="width: 15px">Baik</th>
               <th class="text-center" style="width: 15px">Rusak Ringan</th>
               <th class="text-center" style="width: 15px">Rusak Berat</th>
-              <th class="text-center" style="width: 300px">Spesifikasi</th>
-              <th class="text-center" style="width: 300px">Justifikasi</th>
             </tr>
           </thead>
           <tbody>
@@ -41,7 +39,6 @@
                 <td class="text-center align-middle">
                   {{ $inventory->rusak_berat }}
                 </td>
-
               </tr>
             @endforeach
           </tbody>
