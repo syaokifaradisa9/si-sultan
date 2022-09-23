@@ -45,6 +45,7 @@ Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
 // Kepala Divisi
 Route::name('kadiv.')->prefix('kadiv')->middleware('kadiv')->group(function () {
   Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
+  Route::get('/order', [KepalaDivisiController::class, 'order'])->name('order');
 });
 
 // Tata Operasional

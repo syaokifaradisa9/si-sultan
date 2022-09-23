@@ -10,6 +10,14 @@ class KepalaDivisiController extends Controller
 {
     public function index()
     {
-        return view('roles.kadiv.index');
+        return view('roles.kadiv.index', [
+            'header' => 'Beranda',
+          ]);
+    }
+    public function order()
+    {
+      return view('roles.kadiv.order', [
+        'header' => 'Order'
+      ]);
     }
 }
