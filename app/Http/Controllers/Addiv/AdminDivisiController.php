@@ -13,7 +13,7 @@ class AdminDivisiController extends Controller
   public function index()
   {
     return view('roles.admin.index', [
-      'header' => 'Home',
+      'header' => 'Beranda',
     ]);
   }
 
