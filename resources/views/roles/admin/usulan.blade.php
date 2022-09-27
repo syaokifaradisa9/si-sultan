@@ -156,7 +156,6 @@
     const btnDelete = document.querySelectorAll('.btn-delete')
     const select = document.querySelectorAll('.eventSelect')
     const option = document.querySelectorAll('.usulan')
-
     
     // untuk mendapatkan nilai bpm
     const getBpm = async (e) => {
