@@ -155,6 +155,7 @@
     const btnAdd = document.querySelectorAll('.btn-add')
     const btnDelete = document.querySelectorAll('.btn-delete')
     const select = document.querySelectorAll('.eventSelect')
+    const option = document.querySelectorAll('.usulan')
 
     
     // untuk mendapatkan nilai bpm
@@ -206,7 +207,6 @@
         }
       };
     }
-
 
     // fungsi untuk tombol tambah form
     btnAdd.forEach(element => {
@@ -312,7 +312,6 @@
     });
 
     // menjalankan fungsi getBpm untuk menampilkan data dari tabel inventory
-    const option = document.querySelectorAll('.usulan')
     option.forEach(element => {
       element.addEventListener('change', getBpm)
     });

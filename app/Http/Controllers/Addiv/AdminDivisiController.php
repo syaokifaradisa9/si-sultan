@@ -6,7 +6,7 @@ use App\Models\Inventory;
 use App\Models\InventoryHp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use App\Http\Requests\ProposeRequest;
+use App\Http\Requests\ProposeRequest;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminDivisiController extends Controller
@@ -48,8 +48,9 @@ class AdminDivisiController extends Controller
     ]);
   }
 
-  public function store(Request $request)
+  public function store(ProposeRequest $request)
   {
-    dd($request->all());
+    // dd($request->all());
+    $validate = $request->all();
   }
 }
