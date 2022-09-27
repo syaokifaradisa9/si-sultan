@@ -3,7 +3,7 @@
 @section('container')
   <div class="section-body">
     <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan yang ada</p>
+    <p class="section-lead">Tabel order dari usulan</p>
 
     <div class="card">
       <div class="card-header">

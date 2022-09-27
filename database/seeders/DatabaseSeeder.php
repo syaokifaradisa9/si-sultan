@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             UserDivisionSeeder::class,
             UserSeeder::class,
             InventorySeeder::class,
-            InventoryHpSeeder::class
+            InventoryHpSeeder::class,
+            ProposeHPSeeder::class,
+            ProposeSeeder::class
         ]);
     }
 }

@@ -31,8 +31,6 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 // Admin Divisi
 Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');

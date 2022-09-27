@@ -6,6 +6,7 @@ use App\Models\Inventory;
 use App\Models\InventoryHp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProposeRequest;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminDivisiController extends Controller
@@ -20,11 +21,12 @@ class AdminDivisiController extends Controller
   public function datatable(Request $request, $type)
   {
     if ($request->ajax()) {
+      if ($type == 'hp') {
+        $data = InventoryHp::all();
+        return DataTables::of($data)->make(true);
+      }
       if ($type == 'thp') {
         $data = Inventory::all();
-        return DataTables::of($data)->make(true);
-      } else {
-        $data = InventoryHp::all();
         return DataTables::of($data)->make(true);
       }
     }
@@ -40,12 +42,15 @@ class AdminDivisiController extends Controller
   public function usulan()
   {
     return view('roles.admin.usulan', [
-      'header' => 'Usulan'
+      'header' => 'Usulan',
+      'hp' => InventoryHp::all(),
+      'thp' => Inventory::all()
     ]);
   }
 
-  public function store(Request $request)
+  public function store(ProposeRequest $request)
   {
-    dd($request->all());
+    // dd($request->all());
+    $validate = $request->all();
   }
 }
