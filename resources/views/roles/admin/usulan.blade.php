@@ -25,40 +25,85 @@
               </tr>
             </thead>
             <tbody class="duplicate-form">
-              <tr class="text-center duplicate">
-                <td class="count">1</td>
-                <td class="usulan" id="hp">
-                  <select class="form-control form-control-sm eventSelect" name="usulan_hp[]">
-                    <option selected hidden value="">Pilih Barang</option>
-                    @foreach ($hp as $item)
-                      <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
-                    @endforeach
-                    <option value="lainnya">Lainnya...</option>
-                  </select>
-                </td>
-                <td>
-                  <div class="total">-</div>
-                </td>
-                <td>
-                  <div class="input-group">
-                    <input type="number" min="0" class="form-control" aria-label="Sizing example input" name="jumlah_hp[]"
-                      aria-describedby="inputGroup-sizing-default">
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">
-                    <textarea class="form-control firstTextarea" aria-label="With textarea" name="spesifikasi_hp[]"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">
-                    <textarea class="form-control secondTextarea" aria-label="With textarea" name="justifikasi_hp[]"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
-                </td>
-              </tr>
+              {{-- untuk mendapatkan old value --}}
+              @if (old('usulan_hp.0'))
+                {{ $i = 0 }}
+                @while (old('usulan_hp.'.$i) !== null)
+                  <tr class="text-center duplicate">
+                    <td class="count">1</td>
+                    <td class="usulan" id="hp">
+                      <select class="form-control form-control-sm eventSelect  @error('usulan_hp.*') is-invalid @enderror" name="usulan_hp[]">
+                        <option selected hidden value="">Pilih Barang</option>
+                        @foreach ($hp as $item)
+                          @if (old('usulan_hp.'.$i) == $item->id)
+                            <option value="{{ $item->id }}" selected>{{ $item->nama_barang }}</option>
+                          @else
+                            <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
+                          @endif
+                        @endforeach
+                        <option value="lainnya">Lainnya...</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="total">-</div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <input type="number" min="0" class="form-control @error('jumlah_hp.*') is-invalid @enderror" aria-label="Sizing example input" name="jumlah_hp[]"
+                        value="{{ old('jumlah_hp.'.$i) }}">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <textarea class="form-control firstTextarea  @error('spesifikasi_hp.*') is-invalid @enderror" aria-label="With textarea" name="spesifikasi_hp[]">{{ old('spesifikasi_hp.'.$i) }}</textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <textarea class="form-control secondTextarea  @error('justifikasi_hp.*') is-invalid @enderror" aria-label="With textarea" name="justifikasi_hp[]">{{ old('justifikasi_hp.'.$i) }}</textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
+                    </td>
+                  </tr>
+                  {{ $i++ }}
+                @endwhile
+              @else
+                <tr class="text-center duplicate">
+                  <td class="count">1</td>
+                  <td class="usulan" id="hp">
+                    <select class="form-control form-control-sm eventSelect  @error('usulan_hp.*') is-invalid @enderror" name="usulan_hp[]">
+                      <option selected hidden value="">Pilih Barang</option>
+                      @foreach ($hp as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
+                      @endforeach
+                      <option value="lainnya">Lainnya...</option>
+                    </select>
+                  </td>
+                  <td>
+                    <div class="total">-</div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <input type="number" min="0" class="form-control @error('jumlah_hp.*') is-invalid @enderror" aria-label="Sizing example input" name="jumlah_hp[]">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <textarea class="form-control firstTextarea  @error('spesifikasi_hp.*') is-invalid @enderror" aria-label="With textarea" name="spesifikasi_hp[]"></textarea>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <textarea class="form-control secondTextarea  @error('justifikasi_hp.*') is-invalid @enderror" aria-label="With textarea" name="justifikasi_hp[]"></textarea>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
+                  </td>
+                </tr>
+              @endif
               <tr class="text-center">
                 <td colspan="6"></td>
                 <td>
@@ -95,40 +140,90 @@
               </tr>
             </thead>
             <tbody class="duplicate-form">
-              <tr class="text-center duplicate">
-                <td class="count">1</td>
-                <td class="usulan" id="thp">
-                  <select class="form-control form-control-sm eventSelect" name="usulan_thp[]">
-                    <option selected hidden value="">Pilih Barang</option>
-                    @foreach ($thp as $item)
-                      <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
-                    @endforeach
-                    <option value="lainnya">Lainnya...</option>
-                  </select>
-                </td>
-                <td class="baik">-</td>
-                <td class="rusak_ringan">-</td>
-                <td class="rusak_berat">-</td>
-                <td>
-                  <div class="input-group">
-                    <input type="number" min="0" class="form-control" aria-label="Sizing example input" name="jumlah_thp[]"
-                      aria-describedby="inputGroup-sizing-default">
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">
-                    <textarea class="form-control firstTextarea" aria-label="With textarea" name="spesifikasi_thp[]"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">
-                    <textarea class="form-control secondTextarea" aria-label="With textarea" name="justifikasi_thp[]"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
-                </td>
-              </tr>
+              {{-- untuk mendapatkan old value --}}
+              @if (old('usulan_thp.0'))
+                {{ $i = 0 }}
+                @while (old('usulan_thp.'.$i) !== null)
+                  <tr class="text-center duplicate">
+                    <td class="count">1</td>
+                    <td class="usulan" id="thp">
+                      <select class="form-control form-control-sm eventSelect @error('usulan_thp.*') is-invalid @enderror" name="usulan_thp[]" >
+                        <option selected hidden value="">Pilih Barang</option>
+                        @foreach ($thp as $item)
+                          @if (old('usulan_thp.'.$i) == $item->id)
+                            <option value="{{ $item->id }}" selected>{{ $item->nama_barang }}</option>
+                          @else
+                            <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
+                          @endif
+                        @endforeach
+                        <option value="lainnya">Lainnya...</option>
+                      </select>
+                    </td>
+                    <td class="baik" name="baik">{{ Request::json('test') ?? '-' }}</td>
+                    <td class="rusak_ringan" name="rusak_ringan" value="{{ old('rusak_ringan') }}">-</td>
+                    <td class="rusak_berat" name="rusak_berat" value="{{ old('rusak_berat') }}">-</td>
+                    <td>
+                      <div class="input-group">
+                        <input type="number" min="0" class="form-control @error('jumlah_thp.*') is-invalid @enderror" name="jumlah_thp[]"
+                          value="{{ old('jumlah_thp.'.$i) }}">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <textarea class="form-control firstTextarea @error('spesifikasi_thp.*') is-invalid @enderror" name="spesifikasi_thp[]">{{ old('spesifikasi_thp.'.$i) }}</textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <textarea class="form-control secondTextarea @error('justifikasi_thp.*') is-invalid @enderror" name="justifikasi_thp[]">{{ old('justifikasi_thp.'.$i) }}</textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
+                    </td>
+                  </tr>
+                  {{ $i++ }}
+                @endwhile
+              @else
+                <tr class="text-center duplicate">
+                  <td class="count">1</td>
+                  <td class="usulan" id="thp">
+                    <select class="form-control form-control-sm eventSelect @error('usulan_thp.*') is-invalid @enderror" name="usulan_thp[]" >
+                      <option selected hidden value="">Pilih Barang</option>
+                      @foreach ($thp as $item)
+                        @if (old('usulan_thp.*') == $item->id)
+                          <option value="{{ $item->id }}" selected>{{ $item->nama_barang }}</option>
+                        @else
+                          <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
+                        @endif
+                      @endforeach
+                      <option value="lainnya">Lainnya...</option>
+                    </select>
+                  </td>
+                  <td class="baik" name="baik">-</td>
+                  <td class="rusak_ringan" name="rusak_ringan">-</td>
+                  <td class="rusak_berat" name="rusak_berat">-</td>
+                  <td>
+                    <div class="input-group">
+                      <input type="number" min="0" class="form-control @error('jumlah_thp.*') is-invalid @enderror" name="jumlah_thp[]"
+                        value="{{ old('jumlah_thp[]') }}">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <textarea class="form-control firstTextarea @error('spesifikasi_thp.*') is-invalid @enderror" name="spesifikasi_thp[]" value="{{ old('spesifikasi_thp[]') }}"></textarea>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="input-group">
+                      <textarea class="form-control secondTextarea @error('justifikasi_thp.*') is-invalid @enderror" name="justifikasi_thp[]" value="{{ old('justifikasi_thp[]') }}"></textarea>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
+                  </td>
+                </tr>
+              @endif
               <tr class="text-center">
                 <td colspan="8"></td>
                 <td>
@@ -162,7 +257,7 @@
       const selectId = e.target.value
       const type = e.target.parentElement.getAttribute('id')
 
-      if(selectId !== "lainnya"){
+      if(selectId !== "lainnya" && type !== null){
         const response = await fetch(`http://si-sultan.test/api/inventory/${selectId}/${type}`)
         const responseJson = await response.json()
 
@@ -178,13 +273,13 @@
         }
       } else {
         if (type === 'hp') {
-          e.target.parentElement.closest('tr').querySelector('.total').innerHTML = '-'
+          e.target.parentElement.closest('tr').querySelector('.total').innerHTML = '0'
         }
 
         if (type === 'thp') {
-          e.target.parentElement.closest('tr').querySelector('.baik').innerHTML = '-'
-          e.target.parentElement.closest('tr').querySelector('.rusak_ringan').innerHTML = '-'
-          e.target.parentElement.closest('tr').querySelector('.rusak_berat').innerHTML = '-'
+          e.target.parentElement.closest('tr').querySelector('.baik').innerHTML = '0'
+          e.target.parentElement.closest('tr').querySelector('.rusak_ringan').innerHTML = '0'
+          e.target.parentElement.closest('tr').querySelector('.rusak_berat').innerHTML = '0'
         }
       }
     }
@@ -226,7 +321,6 @@
 
         // untuk membuat nilai bpm di form baru menjadi kosong
         const type = newForm.querySelector('.usulan').getAttribute('id')
-        console.log(type);
 
         if (type === 'hp') {
           newForm.querySelector('.total').innerHTML = '-'
@@ -276,8 +370,12 @@
             </select>
           `
         }
+
+        const optionNewForm = newForm.querySelectorAll('.usulan')
         
-        newForm.addEventListener('change', getBpm)
+        optionNewForm.forEach(element => {
+          element.addEventListener('change', getBpm)
+        })
 
         newForm.querySelectorAll('.eventSelect')?.forEach(element => {
           element.addEventListener('click', event)
@@ -287,6 +385,7 @@
       })
     });
 
+    // untuk menjalankan fungsi delete
     btnDelete.forEach(element => {
       element.addEventListener('click', btnOnDelete)
     });
@@ -299,7 +398,7 @@
         const name = e.target.getAttribute('name');
         e.target.closest('td').innerHTML = `
           <div class="input-group">
-            <input type="text" class="form-control" name="${name}">
+            <input type="text" class="form-control  @error('${name}') is-invalid @enderror" name="${name}">
           </div>
         `;
       }

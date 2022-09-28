@@ -24,14 +24,14 @@ class ProposeRequest extends FormRequest
     public function rules()
     {
         return [
-            'usulan_hp[]' => 'required',
-            'jumlah_hp[]' => 'required',
-            'spesifikasi_hp[]' => 'required',
-            'justifikasi_hp[]' => 'required',
-            'usulan_thp[]' => 'required',
-            'jumlah_thp[]' => 'required',
-            'spesifikasi_thp[]' => 'required',
-            'justifikasi_thp[]' => 'required',
+            'usulan_hp.*' => 'required',
+            'jumlah_hp.*' => 'required',
+            'spesifikasi_hp.*' => 'required',
+            'justifikasi_hp.*' => 'required',
+            'usulan_thp.*' => 'required',
+            'jumlah_thp.*' => 'required',
+            'spesifikasi_thp.*' => 'required',
+            'justifikasi_thp.*' => 'required',
         ];
     }
 }
