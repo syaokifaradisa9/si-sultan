@@ -49,14 +49,17 @@
 
   <script>
     $(function() {
+      let i = 1
       let table = $('#order-table').DataTable({
         bAutoWidth: false,
         processing: true,
         serverSide: true,
         ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
         columns: [{
-            data: 'id',
-            name: 'id'
+            data: null,
+            render: function(data, type, row) {
+              return i++
+            }
           },
           {
             data: 'nama_barang',
@@ -79,14 +82,17 @@
     });
 
     $(function() {
+      let i = 1
       let table = $('#used-table').DataTable({
         bAutoWidth: false,
         processing: true,
         serverSide: true,
         ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
         columns: [{
-            data: 'id',
-            name: 'id'
+            data: null,
+            render: function(data, type, row) {
+              return i++
+            }
           },
           {
             data: 'nama_barang',

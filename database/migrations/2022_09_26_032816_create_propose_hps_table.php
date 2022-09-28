@@ -1,12 +1,11 @@
 <?php
 
-use App\Models\Inventory;
 use App\Models\UserDivision;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProposesTable extends Migration
+class CreateProposeHpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +14,13 @@ class CreateProposesTable extends Migration
      */
     public function up()
     {
-        Schema::create('proposes', function (Blueprint $table) {
+        Schema::create('propose_hps', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(UserDivision::class)->constrained();
-            $table->string('usulan_thp');
-            $table->integer('jumlah_thp');
-            $table->string('spesifikasi_thp');
-            $table->string('justifikasi_thp');
+            $table->string('usulan_hp');
+            $table->integer('jumlah_hp');
+            $table->string('spesifikasi_hp');
+            $table->string('justifikasi_hp');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateProposesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proposes');
+        Schema::dropIfExists('propose_hps');
     }
 }
