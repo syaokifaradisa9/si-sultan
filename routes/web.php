@@ -39,6 +39,7 @@ Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
   Route::get('/home/datatable/{type}', [AdminDivisiController::class, 'datatable'])->name('datatable');
   Route::get('/order', [AdminDivisiController::class, 'order'])->name('order');
   Route::get('/order/usulan', [AdminDivisiController::class, 'usulan'])->name('usulan');
+  Route::get('/order/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
   Route::post('/order/store', [AdminDivisiController::class, 'store'])->name('store');
 });
 
@@ -51,6 +52,8 @@ Route::name('kadiv.')->prefix('kadiv')->middleware('kadiv')->group(function () {
 // Tata Operasional
 Route::name('to.')->prefix('to')->middleware('to')->group(function () {
   Route::get('/home', [TataOperasionalController::class, 'index'])->name('home');
+  Route::get('/order', [TataOperasionalController::class, 'order'])->name('order');
+
 });
 
 // Administrasi Umum

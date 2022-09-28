@@ -43,6 +43,12 @@ class AdminDivisiController extends Controller
       'header' => 'Usulan'
     ]);
   }
+  public function orderDetail()
+  {
+    return view('roles.admin.orderDetail', [
+      'header' => 'Detail'
+    ]);
+  }
 
   public function store(Request $request)
   {

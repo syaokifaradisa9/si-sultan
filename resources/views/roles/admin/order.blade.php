@@ -25,7 +25,7 @@
               <td>1</td>
               <td>Order 1</td>
               <td>1 September 2022</td>
-              <td><a href="" class="btn btn-primary">Detail</a></td>
+              <td><a href="{{ route('addiv.orderDetail') }}" class="btn btn-primary">Detail</a></td>
             </tr>
           </table>
         </div>
