@@ -37,10 +37,16 @@
       @endisKadiv
 
       @isTo
-        <li class="menu-header">Tata Operasional</li>
+      <li class="menu-header">Tata Operasional</li>
+        </li>
         <li class="nav-item {{ Request::is('to/home') ? 'active' : '' }}">
           <a href="/to/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('to/order*') ? 'active' : '' }}">
+          <a href="/to/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisTo

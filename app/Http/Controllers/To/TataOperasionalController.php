@@ -11,4 +11,10 @@ class TataOperasionalController extends Controller
     {
         return view('roles.tata_operasionl.index');
     }
+    public function order()
+    {
+      return view('roles.to.order', [
+        'header' => 'Order'
+      ]);
+    }
 }
