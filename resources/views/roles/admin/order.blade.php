@@ -5,6 +5,17 @@
     <h2 class="section-title">Order</h2>
     <p class="section-lead">Tabel order dari usulan</p>
 
+    @if (session()->has('success'))
+      <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+          <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+          </button>
+          {{ session('success') }}
+        </div>
+      </div>
+    @endif
+
     <div class="card">
       <div class="card-header">
         <h4>Tabel Order</h4>

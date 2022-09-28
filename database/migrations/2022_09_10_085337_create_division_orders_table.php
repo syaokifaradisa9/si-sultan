@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Order;
 use App\Models\UserDivision;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProposeHpsTable extends Migration
+class CreateDivisionOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +15,10 @@ class CreateProposeHpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('propose_hps', function (Blueprint $table) {
+        Schema::create('division_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(UserDivision::class)->constrained();
-            $table->string('usulan_hp');
-            $table->integer('jumlah_hp');
-            $table->string('spesifikasi_hp');
-            $table->string('justifikasi_hp');
+            $table->foreignIdFor(Order::class)->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateProposeHpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('propose_hps');
+        Schema::dropIfExists('division_orders');
     }
 }

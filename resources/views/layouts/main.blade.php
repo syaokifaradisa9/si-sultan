@@ -76,7 +76,7 @@
 
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
-  <script src="{{ asset('vendor/stisla/js/custom.js') }}"></script>
+  {{-- <script src="{{ asset('vendor/stisla/js/custom.js') }}"></script> --}}
 
   <!-- Page Specific JS File -->
 </body>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DivisionOrder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,8 +22,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             InventorySeeder::class,
             InventoryHpSeeder::class,
+            DivisionOrderSeeder::class,
             ProposeHPSeeder::class,
-            ProposeSeeder::class
+            ProposeSeeder::class,
         ]);
     }
 }

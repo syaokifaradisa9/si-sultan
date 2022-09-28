@@ -15,11 +15,11 @@ class ProposeHpSeeder extends Seeder
     public function run()
     {
         ProposeHp::create([
-            'user_division_id' => mt_rand(1, 4),
             'usulan_hp' => 'kertas',
-            'jumlah_hp' => '20',
+            'jumlah_hp' => 20,
             'spesifikasi_hp' => 'kertas hvs a4',
-            'justifikasi_hp' => 'untuk melakukan print'
+            'justifikasi_hp' => 'untuk melakukan print',
+            'division_order_id' => 1
         ]);
     }
 }

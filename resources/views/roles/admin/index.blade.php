@@ -57,9 +57,7 @@
         ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
         columns: [{
             data: null,
-            render: function(data, type, row) {
-              return i++
-            }
+            render: (data, type, row, meta) => meta.row + 1
           },
           {
             data: 'nama_barang',
@@ -90,9 +88,7 @@
         ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
         columns: [{
             data: null,
-            render: function(data, type, row) {
-              return i++
-            }
+            render: (data, type, row, meta) => meta.row + 1
           },
           {
             data: 'nama_barang',
