@@ -28,6 +28,6 @@ class RedirectIfKadiv
       }
     }
 
-    return abort(403);
+    return redirect()->route('login');
   }
 }

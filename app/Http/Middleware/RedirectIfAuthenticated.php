@@ -44,11 +44,11 @@ class RedirectIfAuthenticated
         return redirect()->intended(route('admin.home'));
       }
     }
+
     if (Auth::guard('division')->check()) {
       if (Auth::guard('division')->user()->role === 'admin_divisi') {
         return redirect()->intended(route('addiv.home'));
       }
-
       if (Auth::guard('division')->user()->role === 'kepala_divisi') {
         return redirect()->intended(route('kadiv.home'));
       }

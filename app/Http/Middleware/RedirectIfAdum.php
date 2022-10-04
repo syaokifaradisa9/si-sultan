@@ -26,6 +26,6 @@ class RedirectIfAdum
       }
     }
 
-    return abort(403);
+    return redirect()->route('login');
   }
 }

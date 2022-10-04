@@ -20,12 +20,11 @@ class RedirectIfLeader
         if (Auth::guard('web')->check()) {
             if (Auth::guard('web')->user()->role === 'kepala_lpfk') {
                 return $next($request);
-            }
-            elseif (Auth::guard('web')->user()->role === 'superadmin') {
+            } elseif (Auth::guard('web')->user()->role === 'superadmin') {
                 return $next($request);
             }
         }
 
-        return abort(403);
+        return redirect()->route('login');
     }
 }

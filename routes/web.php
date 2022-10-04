@@ -32,7 +32,7 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin Divisi
-Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
+Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
   Route::get('/home/datatable/{type}', [AdminDivisiController::class, 'datatable'])->name('datatable');
   Route::get('/order', [AdminDivisiController::class, 'order'])->name('order');
@@ -42,35 +42,34 @@ Route::name('addiv.')->prefix('addiv')->middleware('addiv')->group(function () {
 });
 
 // Kepala Divisi
-Route::name('kadiv.')->prefix('kadiv')->middleware('kadiv')->group(function () {
+Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function () {
   Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
   Route::get('/order', [KepalaDivisiController::class, 'order'])->name('order');
 });
 
 // Tata Operasional
-Route::name('to.')->prefix('to')->middleware('to')->group(function () {
+Route::name('to.')->prefix('to')->middleware(['to'])->group(function () {
   Route::get('/home', [TataOperasionalController::class, 'index'])->name('home');
   Route::get('/order', [TataOperasionalController::class, 'order'])->name('order');
-
 });
 
 // Administrasi Umum
-Route::name('adum.')->prefix('adum')->middleware('adum')->group(function () {
+Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
   Route::get('/home', [AdministrasiUmumController::class, 'index'])->name('home');
 });
 
 // Kepala LPFK
-Route::name('lpfk.')->prefix('lpfk')->middleware('leader')->group(function () {
+Route::name('lpfk.')->prefix('lpfk')->middleware(['leader'])->group(function () {
   Route::get('/home', [KepalaLpfkController::class, 'index'])->name('home');
 });
 
 // PPK
-Route::name('ppk.')->prefix('ppk')->middleware('ppk')->group(function () {
+Route::name('ppk.')->prefix('ppk')->middleware(['ppk'])->group(function () {
   Route::get('/home', [PpkController::class, 'index'])->name('home');
 });
 
 // Superadmin
-Route::name('admin.')->prefix('admin')->middleware('superadmin')->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['superadmin'])->group(function () {
   Route::get('/home', [SuperadminController::class, 'index'])->name('home');
   Route::get('/register', [RegisterController::class, 'index'])->name('register');
   Route::post('/register', [RegisterController::class, 'store'])->name('store');
