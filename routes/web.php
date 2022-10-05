@@ -52,6 +52,7 @@ Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function ()
 Route::name('to.')->prefix('to')->middleware(['to'])->group(function () {
   Route::get('/home', [TataOperasionalController::class, 'index'])->name('home');
   Route::get('/order', [TataOperasionalController::class, 'order'])->name('order');
+  Route::get('/order/detail', [TataOperasionalController::class, 'orderDetail'])->name('orderDetail');
 });
 
 // Administrasi Umum
