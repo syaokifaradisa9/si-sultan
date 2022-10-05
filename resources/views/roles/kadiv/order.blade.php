@@ -22,7 +22,7 @@
               <td>1</td>
               <td>Order 1</td>
               <td>1 September 2022</td>
-              <td><a href="" class="btn btn-primary">Detail</a>
+              <td><a href="{{ route('kadiv.orderDetail') }}" class="btn btn-primary">Detail</a>
               <a href="#" class="btn btn-success">Konfirmasi</a></td>
             </tr>
           </table>
