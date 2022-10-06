@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\Login\LoginController;
 use App\Http\Controllers\Ppk\PpkController;
 use App\Http\Controllers\Auth\Register\RegisterController;
 use App\Http\Controllers\Admin\SuperadminController;
+use App\Http\Controllers\Datatable\DatatableController;
 use App\Http\Controllers\To\TataOperasionalController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,11 +35,16 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Admin Divisi
 Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
-  Route::get('/home/datatable/{type}', [AdminDivisiController::class, 'datatable'])->name('datatable');
-  Route::get('/order', [AdminDivisiController::class, 'order'])->name('order');
-  Route::get('/order/usulan', [AdminDivisiController::class, 'usulan'])->name('usulan');
-  Route::get('/order/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
-  Route::post('/order/store', [AdminDivisiController::class, 'store'])->name('store');
+  Route::prefix('order')->group(function () {
+    Route::get('/', [AdminDivisiController::class, 'order'])->name('order');
+    Route::get('/usulan', [AdminDivisiController::class, 'create'])->name('usulan');
+    Route::get('/{id}/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
+    Route::post('/store', [AdminDivisiController::class, 'store'])->name('store');
+  });
+  Route::prefix('datatable')->group(function () {
+    Route::get('/{type}/home', [DatatableController::class, 'homeAdmin'])->name('datatable-home');
+    Route::get('/{type}/{id}/detail', [DatatableController::class, 'orderDetail'])->name('datatable-detail');
+  });
 });
 
 // Kepala Divisi

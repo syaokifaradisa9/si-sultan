@@ -7,11 +7,12 @@ use App\Models\InventoryHp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProposeRequest;
+use App\Models\Division;
 use App\Models\DivisionOrder;
 use App\Models\Propose;
 use App\Models\ProposeHp;
+use App\Models\UserDivision;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
 
 class AdminDivisiController extends Controller
 {
@@ -22,39 +23,36 @@ class AdminDivisiController extends Controller
     ]);
   }
 
-  public function datatable(Request $request, $type)
-  {
-    if ($request->ajax()) {
-      if ($type == 'hp') {
-        $data = InventoryHp::all();
-        return DataTables::of($data)->make(true);
-      }
-      if ($type == 'thp') {
-        $data = Inventory::all();
-        return DataTables::of($data)->make(true);
-      }
-    }
-  }
-
   public function order()
   {
+    $users = UserDivision::where('division_id', Auth::guard('division')->user()->division_id)->get();
+
+    $orders = [];
+    foreach ($users as $user) {
+      foreach ($user->divisionOrders as $order) {
+        array_push($orders, $order);
+      }
+    }
     return view('roles.admin.order', [
-      'header' => 'Order'
+      'header' => 'Order',
+      'divOrder' => $orders
     ]);
   }
 
-  public function usulan()
+  public function orderDetail()
+  {
+
+    return view('roles.admin.orderDetail', [
+      'header' => 'Detail',
+    ]);
+  }
+
+  public function create()
   {
     return view('roles.admin.usulan', [
       'header' => 'Usulan',
       'hp' => InventoryHp::all(),
       'thp' => Inventory::all()
-    ]);
-  }
-  public function orderDetail()
-  {
-    return view('roles.admin.orderDetail', [
-      'header' => 'Detail'
     ]);
   }
 

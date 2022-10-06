@@ -49,12 +49,11 @@
 
   <script>
     $(function() {
-      let i = 1
       let table = $('#order-table').DataTable({
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
+        ajax: "{{ route('addiv.datatable-home', ['type' => 'thp']) }}",
         columns: [{
             data: null,
             render: (data, type, row, meta) => meta.row + 1
@@ -80,12 +79,11 @@
     });
 
     $(function() {
-      let i = 1
       let table = $('#used-table').DataTable({
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
+        ajax: "{{ route('addiv.datatable-home', ['type' => 'hp']) }}",
         columns: [{
             data: null,
             render: (data, type, row, meta) => meta.row + 1
