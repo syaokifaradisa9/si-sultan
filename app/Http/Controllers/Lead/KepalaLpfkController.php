@@ -11,4 +11,17 @@ class KepalaLpfkController extends Controller
     {
         return view('roles.kepala_lpfk.index');
     }
+
+    public function order()
+    {
+      return view('roles.kepala_lpfk.order', [
+        'header' => 'Order'
+      ]);
+    }
+    public function orderDetail()
+    {
+      return view('roles.kepala_lpfk.orderDetail', [
+        'header' => 'Detail'
+      ]);
+    }
 }

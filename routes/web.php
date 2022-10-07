@@ -65,6 +65,8 @@ Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
 // Kepala LPFK
 Route::name('lpfk.')->prefix('lpfk')->middleware(['leader'])->group(function () {
   Route::get('/home', [KepalaLpfkController::class, 'index'])->name('home');
+  Route::get('/order', [KepalaLpfkController::class, 'order'])->name('order');
+  Route::get('/order/detail', [KepalaLpfkController::class, 'orderDetail'])->name('orderDetail');
 });
 
 // PPK

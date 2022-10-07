@@ -55,22 +55,28 @@
       <li class="menu-header">Administrasi Umum</li>
         </li>
         <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
-          <a href="/to/home" class="nav-link ">
+          <a href="/adum/home" class="nav-link ">
             <i class="fas fa-home"></i><span>Beranda</span>
           </a>
         </li>
         <li class="nav-item {{ Request::is('adum/order*') ? 'active' : '' }}">
-          <a href="/to/order" class="nav-link ">
+          <a href="/adum/order" class="nav-link ">
             <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisAdum
 
       @isLead
-        <li class="menu-header">Kepala LPFK</li>
+      <li class="menu-header">Kepala LPFK</li>
+        </li>
         <li class="nav-item {{ Request::is('lpfk/home') ? 'active' : '' }}">
           <a href="/lpfk/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('lpfk/order*') ? 'active' : '' }}">
+          <a href="/lpfk/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisLead
