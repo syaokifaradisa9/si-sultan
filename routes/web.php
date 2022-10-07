@@ -58,6 +58,8 @@ Route::name('to.')->prefix('to')->middleware(['to'])->group(function () {
 // Administrasi Umum
 Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
   Route::get('/home', [AdministrasiUmumController::class, 'index'])->name('home');
+  Route::get('/order', [AdministrasiUmumController::class, 'order'])->name('order');
+  Route::get('/order/detail', [AdministrasiUmumController::class, 'orderDetail'])->name('orderDetail');
 });
 
 // Kepala LPFK

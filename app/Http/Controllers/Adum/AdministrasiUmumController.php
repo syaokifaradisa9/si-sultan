@@ -11,4 +11,16 @@ class AdministrasiUmumController extends Controller
     {
         return view('roles.administrasi_umum.index');
     }
+    public function order()
+    {
+      return view('roles.administrasi_umum.order', [
+        'header' => 'Order'
+      ]);
+    }
+    public function orderDetail()
+    {
+      return view('roles.administrasi_umum.orderDetail', [
+        'header' => 'Detail'
+      ]);
+    }
 }

@@ -52,10 +52,16 @@
       @endisTo
 
       @isAdum
-        <li class="menu-header">Administrasi Umum</li>
+      <li class="menu-header">Administrasi Umum</li>
+        </li>
         <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
-          <a href="/adum/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+          <a href="/to/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('adum/order*') ? 'active' : '' }}">
+          <a href="/to/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisAdum
