@@ -55,12 +55,14 @@ Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function ()
 Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function () {
   Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
   Route::get('/order', [KepalaDivisiController::class, 'order'])->name('order');
+  Route::get('/order/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
 });
 
 // Tata Operasional
 Route::name('to.')->prefix('to')->middleware(['to'])->group(function () {
   Route::get('/home', [TataOperasionalController::class, 'index'])->name('home');
   Route::get('/order', [TataOperasionalController::class, 'order'])->name('order');
+  Route::get('/order/detail', [TataOperasionalController::class, 'orderDetail'])->name('orderDetail');
 });
 
 // Administrasi Umum

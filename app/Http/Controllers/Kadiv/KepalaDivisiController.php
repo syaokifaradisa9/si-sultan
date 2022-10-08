@@ -20,4 +20,10 @@ class KepalaDivisiController extends Controller
         'header' => 'Order'
       ]);
     }
+    public function orderDetail()
+    {
+      return view('roles.kadiv.orderDetail', [
+        'header' => 'Detail'
+      ]);
+    }
 }
