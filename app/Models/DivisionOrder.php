@@ -10,4 +10,19 @@ class DivisionOrder extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function userDivisions()
+    {
+        return $this->belongsTo(UserDivision::class);
+    }
+
+    public function propose()
+    {
+        return $this->hasMany(Propose::class);
+    }
+
+    public function proposeHp()
+    {
+        return $this->hasMany(ProposeHp::class);
+    }
 }

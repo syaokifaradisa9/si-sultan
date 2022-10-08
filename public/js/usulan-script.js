@@ -101,7 +101,7 @@ btnAdd.forEach((element) => {
     }
 
     // untuk membuat inputan di form baru menjadi kosong
-    newForm.querySelector("input").value = "";
+    newForm.querySelector(".input-jumlah").value = "";
     newForm.querySelector(".firstTextarea").value = "";
     newForm.querySelector(".secondTextarea").value = "";
 
@@ -112,7 +112,7 @@ btnAdd.forEach((element) => {
     // mengambil element terakhir dari node yang di duplikat
     const lastRow = parent.children[parent.children.length - 2];
 
-    // merubah nomor agar inrement
+    // merubah nomor agar increment
     newForm.querySelector(".count").innerText =
       parseInt(lastRow.querySelector(".count").innerText) + 1;
 
@@ -191,7 +191,7 @@ const changeEvent = (e) => {
   if (e.target.value == "lainnya") {
     const name = e.target.getAttribute("name");
     const id = e.target.getAttribute("id");
-    e.target.closest("td").innerHTML = `
+    e.target.closest(".usulan").innerHTML = `
           <div class="input-group">
             <input type="text" class="form-control" name="${name}" id="${id}">
           </div>

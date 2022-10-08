@@ -15,7 +15,7 @@ class DivisionOrderSeeder extends Seeder
     public function run()
     {
         DivisionOrder::create([
-            'user_division_id' => mt_rand(1, 4)
+            'user_division_id' => 4
         ]);
     }
 }

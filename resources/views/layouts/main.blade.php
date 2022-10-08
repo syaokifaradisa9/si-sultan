@@ -78,8 +78,8 @@
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
   {{-- <script src="{{ asset('vendor/stisla/js/custom.js') }}"></script> --}}
-  <script type="module" src="{{ asset('js/form-validate.js') }}"></script>
-  <script type="module" src="{{ asset('js/usulan-script.js') }}"></script>
+  <script src="{{ asset('js/form-validate.js') }}"></script>
+  <script src="{{ asset('js/usulan-script.js') }}"></script>
 
   <!-- Page Specific JS File -->
 </body>

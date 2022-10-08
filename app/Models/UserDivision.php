@@ -20,4 +20,9 @@ class UserDivision extends Authenticatable
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function divisionOrders()
+    {
+        return $this->hasMany(DivisionOrder::class);
+    }
 }
