@@ -16,7 +16,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class DatatableController extends Controller
 {
-  public function homeAdmin(Request $request, $type)
+  public function home(Request $request, $type)
   {
     if ($request->ajax()) {
       if ($type == 'hp') {

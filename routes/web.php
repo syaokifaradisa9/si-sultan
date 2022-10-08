@@ -32,6 +32,11 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::name('datatable.')->prefix('datatable')->group(function () {
+  Route::get('/{type}/home', [DatatableController::class, 'home'])->name('home');
+  Route::get('/{type}/{id}/detail', [DatatableController::class, 'orderDetail'])->name('detail');
+});
+
 // Admin Divisi
 Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function () {
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
@@ -45,17 +50,15 @@ Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function ()
       Route::put('/update', [AdminDivisiController::class, 'update'])->name('update');
     });
   });
-  Route::prefix('datatable')->group(function () {
-    Route::get('/{type}/home', [DatatableController::class, 'homeAdmin'])->name('datatable-home');
-    Route::get('/{type}/{id}/detail', [DatatableController::class, 'orderDetail'])->name('datatable-detail');
-  });
 });
 
 // Kepala Divisi
 Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function () {
   Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
-  Route::get('/order', [KepalaDivisiController::class, 'order'])->name('order');
-  Route::get('/order/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
+  Route::prefix('/order')->group(function () {
+    Route::get('/', [KepalaDivisiController::class, 'order'])->name('order');
+    Route::get('/{id}/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
+  });
 });
 
 // Tata Operasional

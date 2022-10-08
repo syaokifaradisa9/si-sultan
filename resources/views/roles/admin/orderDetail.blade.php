@@ -81,7 +81,7 @@
           bAutoWidth: false,
           processing: true,
           serverSide: true,
-          ajax: `${domain}/addiv/datatable/hp/${id}/detail`,
+          ajax: `${domain}/datatable/hp/${id}/detail`,
           columns: [{
               data: null,
               render: (data, type, row, meta) => meta.row + 1
@@ -111,7 +111,7 @@
           bAutoWidth: false,
           processing: true,
           serverSide: true,
-          ajax: `${domain}/addiv/datatable/thp/${id}/detail`,
+          ajax: `${domain}/datatable/thp/${id}/detail`,
           columns: [{
               data: null,
               render: (data, type, row, meta) => meta.row + 1

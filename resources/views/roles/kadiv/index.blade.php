@@ -45,18 +45,16 @@
     </div>
   </div>
 
-  </div>
-
   <script>
     $(function() {
       let table = $('#order-table').DataTable({
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
+        ajax: "{{ route('datatable.home', ['type' => 'thp']) }}",
         columns: [{
-            data: 'id',
-            name: 'id'
+            data: null,
+            render: (data, type, row, meta) => meta.row + 1
           },
           {
             data: 'nama_barang',
@@ -83,10 +81,10 @@
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
+        ajax: "{{ route('datatable.home', ['type' => 'hp']) }}",
         columns: [{
-            data: 'id',
-            name: 'id'
+            data: null,
+            render: (data, type, row, meta) => meta.row + 1
           },
           {
             data: 'nama_barang',

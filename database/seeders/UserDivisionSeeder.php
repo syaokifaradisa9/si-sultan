@@ -23,5 +23,13 @@ class UserDivisionSeeder extends Seeder
       'role' => 'admin_divisi',
       'division_id' => 1
     ]);
+
+    UserDivision::create([
+      'name' => 'kadiv',
+      'email' => 'kadiv@gmail.com',
+      'password' => bcrypt('password'),
+      'role' => 'kepala_divisi',
+      'division_id' => 1
+    ]);
   }
 }
