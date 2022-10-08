@@ -37,9 +37,13 @@ Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function ()
   Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
   Route::prefix('order')->group(function () {
     Route::get('/', [AdminDivisiController::class, 'order'])->name('order');
-    Route::get('/usulan', [AdminDivisiController::class, 'create'])->name('usulan');
-    Route::get('/{id}/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
+    Route::get('/create', [AdminDivisiController::class, 'create'])->name('create');
     Route::post('/store', [AdminDivisiController::class, 'store'])->name('store');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/edit', [AdminDivisiController::class, 'edit'])->name(('edit'));
+      Route::put('/update', [AdminDivisiController::class, 'update'])->name('update');
+    });
   });
   Route::prefix('datatable')->group(function () {
     Route::get('/{type}/home', [DatatableController::class, 'homeAdmin'])->name('datatable-home');

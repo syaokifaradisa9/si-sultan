@@ -231,7 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        'urlHelper' => App\Helpers\URLHelper::class,
+        'DBHelper' => App\Helpers\DBHelper::class,
     ],
 
 ];

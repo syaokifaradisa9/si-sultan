@@ -15,7 +15,7 @@
               <th class="text-center" style="width: 15px">Total</th>
             </tr>
           </thead>
-          <tbody class="text-center">
+          <tbody>
           </tbody>
         </table>
       </div>
@@ -38,7 +38,7 @@
               <th class="text-center" style="width: 200px">Rusak Berat</th>
             </tr>
           </thead>
-          <tbody class="text-center">
+          <tbody>
           </tbody>
         </table>
       </div>

@@ -64,7 +64,7 @@
       <div class="card-body">
         <div class="float-right" style="padding-right: 2.3rem">
           <a href="{{ route('addiv.order') }}" class="btn btn-light mr-2">Kembali</a>
-          <a href="" class="btn btn-info">Edit</a>
+          <a href="{{ route('addiv.edit', ['id' => $order_id]) }}" class="btn btn-warning">Edit</a>
         </div>
       </div>
     </div>

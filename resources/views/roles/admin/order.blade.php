@@ -20,7 +20,7 @@
       <div class="card-header">
         <h4>Tabel Order</h4>
         <div class="ml-auto">
-          <a href="{{ route('addiv.usulan') }}" class="btn btn-primary"v>Buat Usulan</a>
+          <a href="{{ route('addiv.create') }}" class="btn btn-primary"v>Buat Usulan</a>
         </div>
       </div>
       <div class="card-body">
@@ -34,13 +34,13 @@
             </tr>
             @foreach ($divOrder as $order)
               <tr class="text-center">
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
                 <td>
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Barang Tak Habis Pakai' }}
                 </td>
-                <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a></td>
+                <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info">Detail</a></td>
               </tr>
             @endforeach
           </table>
