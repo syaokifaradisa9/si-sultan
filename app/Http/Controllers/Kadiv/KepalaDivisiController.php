@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kadiv;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DivisionOrder;
+use App\Models\ProposeHp;
 use App\Models\UserDivision;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,10 +33,23 @@ class KepalaDivisiController extends Controller
       'orders' => $orders
     ]);
   }
-  public function orderDetail()
+  public function orderDetail($id)
   {
+    $orders = DivisionOrder::findOrFail($id);
+
     return view('roles.kadiv.orderDetail', [
-      'header' => 'Detail'
+      'header' => 'Detail',
+      'order' => $orders
     ]);
+  }
+
+  public function accept($id)
+  {
+    $orders = DivisionOrder::findOrFail($id);
+
+    $orders->approved_by_kadiv = 1;
+    $orders->save();
+
+    return redirect()->route('kadiv.order')->with('success', 'Usulan berhasil disetujui');
   }
 }

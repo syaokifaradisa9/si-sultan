@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/inventory/{type}', [ApiController::class, 'getOption']);
-Route::get('/inventory/{id}/{type}', [ApiController::class, 'getBmn']);
+Route::prefix('inventory')->group(function () {
+    Route::get('/{type}', [ApiController::class, 'getOption']);
+    Route::get('/{id}/{type}', [ApiController::class, 'getBmn']);
+});

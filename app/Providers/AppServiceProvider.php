@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         });
         Blade::if('isTo', function () {
             if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'tata_operasional' || auth()->guard('web')->user()->role === 'superadmin';
+                return auth()->guard('web')->user()->role === 'mutu' || auth()->guard('web')->user()->role === 'superadmin';
             }
         });
         Blade::if('isAdum', function () {

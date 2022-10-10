@@ -65,10 +65,11 @@
   <div class="card">
     <div class="card-body">
       <div class="float-right" style="padding-right: 2.3rem">
-        <a href="{{ route('adum.order') }}" class="btn btn-light mr-2">Kembali</a>
-        @if (!$order->approved_by_adum)
-          <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success" onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+        <a href="{{ route('mutu.order') }}" class="btn btn-light mr-2">Kembali</a>
+        @if (!$order->approved_by_mutu)
+          <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success mr-2" onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
         @endif
+        <a href="" class="btn btn-danger" onclick="confirm('Apakah anda yakin?')">Tolak</a>
       </div>
     </div>
   </div>

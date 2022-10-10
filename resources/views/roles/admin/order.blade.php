@@ -25,24 +25,47 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-striped table-md">
-            <tr class="text-center">
-              <th>No</th>
-              <th>Tanggal Usulan</th>
-              <th>Deskripsi Usulan</th>
-              <th>Aksi</th>
-            </tr>
-            @foreach ($divOrder as $order)
+          <table class="table table-bordered table-md">
+            <thead>
               <tr class="text-center">
-                <td class="align-middle">{{ $loop->iteration }}</td>
-                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
-                <td>
-                  {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
-                  {{ count($order->propose) . ' Barang Tak Habis Pakai' }}
-                </td>
-                <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info">Detail</a></td>
+                <th rowspan="2" style="vertical-align: middle">No</th>
+                <th rowspan="2" style="vertical-align: middle">Tanggal Usulan</th>
+                <th rowspan="2" style="vertical-align: middle">Deskripsi Usulan</th>
+                <th colspan="4">Status</th>
+                <th rowspan="2" style="vertical-align: middle">Aksi</th>
               </tr>
-            @endforeach
+              <tr class="text-center">
+                <th width="100px" style="vertical-align: middle">Kepala Divisi</th>
+                <th width="100px" style="vertical-align: middle">Mutu</th>
+                <th width="100px" style="vertical-align: middle">Administrasi Umum</th>
+                <th width="100px" style="vertical-align: middle">Kepala LPFK</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($divOrder as $order)
+                <tr class="text-center">
+                  <td class="align-middle">{{ $loop->iteration }}</td>
+                  <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                  <td>
+                    {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
+                    {{ count($order->propose) . ' Barang Tak Habis Pakai' }}
+                  </td>
+                  <td style="vertical-align: middle" class="{{ $order->approved_by_kadiv ? 'text-success' : 'text-warning' }}">
+                    <i class="fas {{ $order->approved_by_kadiv ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
+                  </td>
+                  <td style="vertical-align: middle" class="{{ $order->approved_by_mutu ? 'text-success' : 'text-warning' }}">
+                    <i class="fas {{ $order->approved_by_mutu ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
+                  </td>
+                  <td style="vertical-align: middle" class="{{ $order->approved_by_adum ? 'text-success' : 'text-warning' }}">
+                    <i class="fas {{ $order->approved_by_adum ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
+                  </td>
+                  <td style="vertical-align: middle" class="{{ $order->approved_by_kepala ? 'text-success' : 'text-warning' }}">
+                    <i class="fas {{ $order->approved_by_kepala ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
+                  </td>
+                  <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info">Detail</a></td>
+                </tr>
+              @endforeach
+            </tbody>
           </table>
         </div>
       </div>

@@ -21,10 +21,21 @@ class AdministrasiUmumController extends Controller
       'orders' => $orders
     ]);
   }
-  public function orderDetail()
+  public function orderDetail($id)
   {
+    $orders = DivisionOrder::findOrFail($id);
+
     return view('roles.adum.orderDetail', [
-      'header' => 'Detail'
+      'header' => 'Detail',
+      'order' => $orders
     ]);
+  }
+
+  public function accept($id)
+  {
+    $order = DivisionOrder::findOrFail($id);
+
+    $order->approved_by_adum = 1;
+    $order->save();
   }
 }

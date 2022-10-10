@@ -10,7 +10,7 @@ use App\Http\Controllers\Ppk\PpkController;
 use App\Http\Controllers\Auth\Register\RegisterController;
 use App\Http\Controllers\Admin\SuperadminController;
 use App\Http\Controllers\Datatable\DatatableController;
-use App\Http\Controllers\To\TataOperasionalController;
+use App\Http\Controllers\Mutu\MutuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +32,10 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Route Datatable
 Route::name('datatable.')->prefix('datatable')->group(function () {
   Route::get('/{type}/home', [DatatableController::class, 'home'])->name('home');
-  Route::get('/{type}/{id}/detail', [DatatableController::class, 'orderDetail'])->name('detail');
+  Route::get('/{type}/{id}/detail', [DatatableController::class, 'detail'])->name('detail');
 });
 
 // Admin Divisi
@@ -57,24 +58,36 @@ Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function ()
   Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
   Route::prefix('/order')->group(function () {
     Route::get('/', [KepalaDivisiController::class, 'order'])->name('order');
-    Route::get('/{id}/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/accept', [KepalaDivisiController::class, 'accept'])->name('accept');
+    });
   });
 });
 
-// Tata Operasional
-Route::name('to.')->prefix('to')->middleware(['to'])->group(function () {
-  Route::get('/home', [TataOperasionalController::class, 'index'])->name('home');
+// Mutu Operasional
+Route::name('mutu.')->prefix('mutu')->middleware(['to'])->group(function () {
+  Route::get('/home', [MutuController::class, 'index'])->name('home');
   Route::prefix('order')->group(function () {
-    Route::get('/', [TataOperasionalController::class, 'order'])->name('order');
-    Route::get('/{id}/detail', [TataOperasionalController::class, 'orderDetail'])->name('orderDetail');
+    Route::get('/', [MutuController::class, 'order'])->name('order');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/accept', [MutuController::class, 'accept'])->name('accept');
+      Route::get('/reject', [MutuController::class, 'reject'])->name('reject');
+    });
   });
 });
 
 // Administrasi Umum
 Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
   Route::get('/home', [AdministrasiUmumController::class, 'index'])->name('home');
-  Route::get('/order', [AdministrasiUmumController::class, 'order'])->name('order');
-  Route::get('/order/detail', [AdministrasiUmumController::class, 'orderDetail'])->name('orderDetail');
+  Route::prefix('order')->group(function () {
+    Route::get('/', [AdministrasiUmumController::class, 'order'])->name('order');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [AdministrasiUmumController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/accept', [AdministrasiUmumController::class, 'accept'])->name('accept');
+    });
+  });
 });
 
 // Kepala LPFK

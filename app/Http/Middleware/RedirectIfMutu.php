@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfTo
+class RedirectIfMutu
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class RedirectIfTo
     public function handle(Request $request, Closure $next)
     {
         if (Auth::guard('web')->check()) {
-            if (Auth::guard('web')->user()->role === 'tata_operasional') {
+            if (Auth::guard('web')->user()->role === 'mutu') {
                 return $next($request);
             } elseif (Auth::guard('web')->user()->role === 'superadmin') {
                 return $next($request);

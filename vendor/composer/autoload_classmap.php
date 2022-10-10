@@ -31,7 +31,7 @@ return array(
     'App\\Http\\Middleware\\RedirectIfNotAddiv' => $baseDir . '/app/Http/Middleware/RedirectIfNotAddiv.php',
     'App\\Http\\Middleware\\RedirectIfPpk' => $baseDir . '/app/Http/Middleware/RedirectIfPpk.php',
     'App\\Http\\Middleware\\RedirectIfSuperadmin' => $baseDir . '/app/Http/Middleware/RedirectIfSuperadmin.php',
-    'App\\Http\\Middleware\\RedirectIfTo' => $baseDir . '/app/Http/Middleware/RedirectIfTo.php',
+    'App\\Http\\Middleware\\RedirectIfMutu' => $baseDir . '/app/Http/Middleware/RedirectIfMutu.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',

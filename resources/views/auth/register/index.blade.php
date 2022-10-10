@@ -57,7 +57,7 @@
                     <option hidden value="">Pilih Role</option>
                     <option value="admin_divisi">Admin Divisi</option>
                     <option value="kepala_divisi">Kepala Divisi</option>
-                    <option value="tata_operasional">Tata Operasional</option>
+                    <option value="mutu">Mutu</option>
                     <option value="administrasi_umum">Administrasi Umum</option>
                     <option value="kepala_lpfk">Kepala LPFK</option>
                     <option value="ppk">PPK</option>

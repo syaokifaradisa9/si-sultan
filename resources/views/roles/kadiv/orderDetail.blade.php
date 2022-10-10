@@ -64,7 +64,9 @@
       <div class="card-body">
         <div class="float-right" style="padding-right: 2.3rem">
           <a href="{{ route('kadiv.order') }}" class="btn btn-light mr-2">Kembali</a>
-          <a href="" class="btn btn-success">Konfirmasi</a>
+          @if (!$order->approved_by_kadiv)
+            <a href="{{ route('kadiv.accept', ['id' => $order->id]) }}" class="btn btn-success" onclick="alert('Apakah anda yakin?')">Konfirmasi</a>
+          @endif
         </div>
       </div>
     </div>

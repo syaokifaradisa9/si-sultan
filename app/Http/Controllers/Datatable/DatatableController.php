@@ -30,7 +30,7 @@ class DatatableController extends Controller
     }
   }
 
-  public function orderDetail(Request $request, $type, $id)
+  public function detail(Request $request, $type, $id)
   {
     if ($request->ajax()) {
       $proposeHp = ProposeHp::where('division_order_id', $id)->get();

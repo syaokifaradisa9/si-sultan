@@ -18,7 +18,6 @@ class CreateDivisionOrdersTable extends Migration
         Schema::create('division_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(UserDivision::class)->constrained();
-            $table->foreignIdFor(Order::class)->nullable()->constrained();
             $table->boolean('approved_by_kadiv')->default(false);
             $table->boolean('approved_by_mutu')->default(false);
             $table->boolean('approved_by_adum')->default(false);

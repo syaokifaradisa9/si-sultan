@@ -8,7 +8,6 @@ use App\Models\InventoryHp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequest;
-use App\Http\Requests\UpdateRequest;
 use App\Models\DivisionOrder;
 use App\Models\Propose;
 use App\Models\ProposeHp;
@@ -42,23 +41,9 @@ class AdminDivisiController extends Controller
 
   public function orderDetail($id)
   {
-    $proposeHp = ProposeHp::where('division_order_id', $id)->get();
-    $propose = Propose::where('division_order_id', $id)->get();
-
-    $usulanHp = [];
-    foreach ($proposeHp as $hp) {
-      array_push($usulanHp, $hp);
-    }
-
-    $usulanThp = [];
-    foreach ($propose as $thp) {
-      array_push($usulanThp, $thp);
-    }
 
     return view('roles.admin.orderDetail', [
       'header' => 'Detail',
-      'hp' => $usulanHp,
-      'thp' => $usulanThp,
       'order_id' => $id
     ]);
   }

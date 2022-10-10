@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'addiv' => \App\Http\Middleware\RedirectIfNotAddiv::class,
         'kadiv' => \App\Http\Middleware\RedirectIfKadiv::class,
-        'to' => \App\Http\Middleware\RedirectIfTo::class,
+        'to' => \App\Http\Middleware\RedirectIfMutu::class,
         'adum' => \App\Http\Middleware\RedirectIfAdum::class,
         'leader' => \App\Http\Middleware\RedirectIfLeader::class,
         'ppk' => \App\Http\Middleware\RedirectIfPpk::class,

@@ -23,21 +23,22 @@
               <th>Aksi</th>
             </tr>
             @foreach ($orders as $order)
-              @if ($order->approved_by_kadiv && $order->approved_by_mutu)
+              @if ($order->approved_by_kadiv)
                 <tr class="text-center">
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $order->userDivision->division->nama }}</td>
-                  <td>{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                  <td class="align-middle">{{ $loop->iteration }}</td>
+                  <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
+                  <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
                   <td>
                     {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
-                    {{ count($order->propose) . ' Barang Tak Habis Pakai' }}
+                    {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
                   </td>
                   <td>
-                    <a href="{{ route('adum.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
-                    @if (!$order->approved_by_adum)
-                      <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success"
+                    <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
+                    @if (!$order->approved_by_mutu)
+                      <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success"
                         onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
                     @endif
+                    <a href="" class="btn btn-danger" onclick="confirm('Apakah anda yakin?')">Tolak</a>
                   </td>
                 </tr>
               @endif

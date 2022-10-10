@@ -33,8 +33,8 @@ class LoginController extends Controller
     }
 
     if (Auth::guard('web')->attempt($validate)) {
-      if (Auth::guard('web')->user()->role === 'tata_operasional') {
-        return redirect()->intended(route('to.home'));
+      if (Auth::guard('web')->user()->role === 'mutu') {
+        return redirect()->intended(route('mutu.home'));
       }
       if (Auth::guard('web')->user()->role === 'administrasi_umum') {
         return redirect()->intended(route('adum.home'));

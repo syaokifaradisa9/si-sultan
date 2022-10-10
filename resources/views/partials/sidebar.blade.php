@@ -37,22 +37,22 @@
       @endisKadiv
 
       @isTo
-      <li class="menu-header">Tata Operasional</li>
+        <li class="menu-header">Mutu Operasional</li>
         </li>
-        <li class="nav-item {{ Request::is('to/home') ? 'active' : '' }}">
-          <a href="/to/home" class="nav-link ">
+        <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
+          <a href="/mutu/home" class="nav-link ">
             <i class="fas fa-home"></i><span>Beranda</span>
           </a>
         </li>
-        <li class="nav-item {{ Request::is('to/order*') ? 'active' : '' }}">
-          <a href="/to/order" class="nav-link ">
+        <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
+          <a href="/mutu/order" class="nav-link ">
             <i class="fas fa-plus-square"></i></i><span>Usulan</span>
           </a>
         </li>
       @endisTo
 
       @isAdum
-      <li class="menu-header">Administrasi Umum</li>
+        <li class="menu-header">Administrasi Umum</li>
         </li>
         <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
           <a href="/adum/home" class="nav-link ">
@@ -67,7 +67,7 @@
       @endisAdum
 
       @isLead
-      <li class="menu-header">Kepala LPFK</li>
+        <li class="menu-header">Kepala LPFK</li>
         </li>
         <li class="nav-item {{ Request::is('lpfk/home') ? 'active' : '' }}">
           <a href="/lpfk/home" class="nav-link ">
