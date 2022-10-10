@@ -16,7 +16,7 @@ class UserDivision extends Authenticatable
 
     protected $guarded = ['id'];
 
-    public function divisions()
+    public function division()
     {
         return $this->belongsTo(Division::class);
     }

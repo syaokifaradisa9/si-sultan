@@ -53,7 +53,7 @@
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'thp']) }}",
+        ajax: "{{ route('datatable.home', ['type' => 'thp']) }}",
         columns: [{
             data: 'id',
             name: 'id'
@@ -83,7 +83,7 @@
         bAutoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('addiv.datatable', ['type' => 'hp']) }}",
+        ajax: "{{ route('datatable.home', ['type' => 'hp']) }}",
         columns: [{
             data: 'id',
             name: 'id'

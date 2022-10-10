@@ -3,24 +3,28 @@
 namespace App\Http\Controllers\Adum;
 
 use App\Http\Controllers\Controller;
+use App\Models\DivisionOrder;
 use Illuminate\Http\Request;
 
 class AdministrasiUmumController extends Controller
 {
-    public function index()
-    {
-        return view('roles.administrasi_umum.index');
-    }
-    public function order()
-    {
-      return view('roles.administrasi_umum.order', [
-        'header' => 'Order'
-      ]);
-    }
-    public function orderDetail()
-    {
-      return view('roles.administrasi_umum.orderDetail', [
-        'header' => 'Detail'
-      ]);
-    }
+  public function index()
+  {
+    return view('roles.adum.index');
+  }
+  public function order()
+  {
+    $orders = DivisionOrder::with('userDivision')->get();
+
+    return view('roles.adum.order', [
+      'header' => 'Order',
+      'orders' => $orders
+    ]);
+  }
+  public function orderDetail()
+  {
+    return view('roles.adum.orderDetail', [
+      'header' => 'Detail'
+    ]);
+  }
 }

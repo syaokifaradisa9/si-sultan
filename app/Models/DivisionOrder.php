@@ -11,7 +11,7 @@ class DivisionOrder extends Model
 
     protected $guarded = ['id'];
 
-    public function userDivisions()
+    public function userDivision()
     {
         return $this->belongsTo(UserDivision::class);
     }

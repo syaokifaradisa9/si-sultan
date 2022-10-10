@@ -19,6 +19,11 @@ class CreateDivisionOrdersTable extends Migration
             $table->id();
             $table->foreignIdFor(UserDivision::class)->constrained();
             $table->foreignIdFor(Order::class)->nullable()->constrained();
+            $table->boolean('approved_by_kadiv')->default(false);
+            $table->boolean('approved_by_mutu')->default(false);
+            $table->boolean('approved_by_adum')->default(false);
+            $table->boolean('approved_by_kepala')->default(false);
+            $table->text('description_by_mutu')->nullable();
             $table->timestamps();
         });
     }

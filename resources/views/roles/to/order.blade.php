@@ -8,12 +8,16 @@
     <div class="card">
       <div class="card-header">
         <h4>Tabel Order</h4>
+        <div class="ml-auto">
+          <a href="" class="btn btn-success">Konfirmasi</a>
+        </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-striped table-md">
             <tr class="text-center">
               <th>No</th>
+              <th>Order</th>
               <th>Tanggal Usulan</th>
               <th>Deskripsi Usulan</th>
               <th>Aksi</th>
@@ -21,13 +25,14 @@
             @foreach ($orders as $order)
               <tr class="text-center">
                 <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
                 <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
                 <td>
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
-                  {{ count($order->propose) . ' Tidak Barang Habis Pakai' }}
+                  {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
                 </td>
-                <td><a href="{{ route('kadiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
-                  <a href="" class="btn btn-success">Konfirmasi</a>
+                <td><a href="{{ route('to.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
+                  <a href="#" class="btn btn-success">Konfirmasi</a>
                 </td>
               </tr>
             @endforeach

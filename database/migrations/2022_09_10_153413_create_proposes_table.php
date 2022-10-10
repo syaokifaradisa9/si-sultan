@@ -23,6 +23,10 @@ class CreateProposesTable extends Migration
             $table->integer('jumlah_thp');
             $table->string('spesifikasi_thp');
             $table->string('justifikasi_thp');
+            $table->enum('status', [
+                'diajukan', 'disetujui', 'ditunda'
+            ]);
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }

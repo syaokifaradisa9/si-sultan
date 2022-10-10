@@ -143,14 +143,9 @@ class AdminDivisiController extends Controller
     ProposeHp::where('division_order_id', $id)->delete();
     // menghapus tabel usulan tidak habis pakai
     Propose::where('division_order_id', $id)->delete();
-    // menghapus tabel order divisi
-    DivisionOrder::where('id', $id)->delete();
 
-    $divOrder = DivisionOrder::create([
-      'user_division_id' => Auth::guard('division')->user()->id
-    ]);
-
-    // DBHelper::resetAutoIncrement($divOrder);
+    DBHelper::resetAutoIncrement('propose_hps');
+    DBHelper::resetAutoIncrement('proposes');
 
     $data_hp = $request->usulan_hp;
     $count_hp = count($data_hp);
@@ -162,14 +157,13 @@ class AdminDivisiController extends Controller
         $name_hp = InventoryHp::find($name_hp)->nama_barang;
       }
 
-      $hp = ProposeHp::create([
-        'division_order_id' => $divOrder->id,
+      ProposeHp::create([
+        'division_order_id' => $id,
         'usulan_hp' => $name_hp,
         'jumlah_hp' => $request->jumlah_hp[$i],
         'spesifikasi_hp' => $request->spesifikasi_hp[$i],
         'justifikasi_hp' => $request->justifikasi_hp[$i]
       ]);
-      // DBHelper::resetAutoIncrement($hp);
     }
 
     $data_thp = $request->usulan_thp;
@@ -182,14 +176,13 @@ class AdminDivisiController extends Controller
         $name_thp = Inventory::find($name_thp)->nama_barang;
       }
 
-      $thp = Propose::create([
-        'division_order_id' => $divOrder->id,
+      Propose::create([
+        'division_order_id' => $id,
         'usulan_thp' => $name_thp,
         'jumlah_thp' => $request->jumlah_thp[$i],
         'spesifikasi_thp' => $request->spesifikasi_thp[$i],
         'justifikasi_thp' => $request->justifikasi_thp[$i]
       ]);
-      // DBHelper::resetAutoIncrement($thp);
     }
 
     return redirect()->route('addiv.order')->with('success', 'Usulan berhasil diperbaharui');

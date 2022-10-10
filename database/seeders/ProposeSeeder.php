@@ -21,5 +21,13 @@ class ProposeSeeder extends Seeder
       'justifikasi_thp' => 'untuk melakukan print',
       'division_order_id' => 1
     ]);
+
+    Propose::create([
+      'usulan_thp' => 'meja',
+      'jumlah_thp' => 5,
+      'spesifikasi_thp' => 'ikea',
+      'justifikasi_thp' => 'untuk komputer',
+      'division_order_id' => 2
+    ]);
   }
 }

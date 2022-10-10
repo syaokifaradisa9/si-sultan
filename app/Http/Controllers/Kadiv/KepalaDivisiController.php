@@ -32,10 +32,8 @@ class KepalaDivisiController extends Controller
       'orders' => $orders
     ]);
   }
-  public function orderDetail($id)
+  public function orderDetail()
   {
-
-
     return view('roles.kadiv.orderDetail', [
       'header' => 'Detail'
     ]);
