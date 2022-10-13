@@ -18,14 +18,22 @@ class AdminDivisiController extends Controller
 {
   public function index()
   {
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
+
+    $divisions = [];
+    foreach ($division as $div) {
+      array_push($divisions, $div->division->nama);
+    }
+
     return view('roles.admin.index', [
-      'header' => 'Beranda',
+      'title' => 'Beranda | ' . $divisions[0],
+      'header' => 'Beranda ' . $divisions[0],
     ]);
   }
 
   public function order()
   {
-    $users = UserDivision::where('division_id', Auth::guard('division')->user()->division_id)->get();
+    $users = UserDivision::with('divisionOrders')->where('division_id', Auth::guard('division')->user()->division_id)->get();
 
     $orders = [];
     foreach ($users as $user) {
@@ -33,9 +41,11 @@ class AdminDivisiController extends Controller
         array_push($orders, $order);
       }
     }
+
     return view('roles.admin.order', [
-      'header' => 'Order',
-      'divOrder' => $orders
+      'title' => 'Order',
+      'header' => 'Order ',
+      'divOrder' => collect($orders)->sortByDesc('created_at')
     ]);
   }
 

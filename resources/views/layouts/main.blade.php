@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ $title ?? 'SI-SULTAN' }}</title>
 
   <!-- General CSS Files -->
@@ -77,7 +78,9 @@
 
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
-  {{-- <script src="{{ asset('vendor/stisla/js/custom.js') }}"></script> --}}
+  <script src="{{ asset('js/alert.js') }}"></script>
+  <script src="{{ asset('js/btn-function.js') }}"></script>
+  <script src="{{ asset('js/datatable.js') }}"></script>
   <script src="{{ asset('js/form-validate.js') }}"></script>
   <script src="{{ asset('js/usulan-script.js') }}"></script>
 

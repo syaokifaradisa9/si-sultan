@@ -5,6 +5,11 @@
     <h2 class="section-title">Order</h2>
     <p class="section-lead">Tabel order dari usulan yang ada</p>
 
+
+    @if (session()->has('success'))
+      <div id="success" data-flash="{{ session('success') }}"></div>
+    @endif
+
     <div class="card">
       <div class="card-header">
         <h4>Tabel Order</h4>
@@ -36,7 +41,7 @@
                     <a href="{{ route('adum.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
                     @if (!$order->approved_by_adum)
                       <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success"
-                        onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+                        onclick="return confirm('Apakah anda yakin?')">Konfirmasi</a>
                     @endif
                   </td>
                 </tr>

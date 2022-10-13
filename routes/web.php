@@ -70,10 +70,11 @@ Route::name('mutu.')->prefix('mutu')->middleware(['to'])->group(function () {
   Route::get('/home', [MutuController::class, 'index'])->name('home');
   Route::prefix('order')->group(function () {
     Route::get('/', [MutuController::class, 'order'])->name('order');
+    Route::get('/acceptedAll', [MutuController::class, 'acceptedAll'])->name('acceptedAll');
     Route::prefix('{id}')->group(function () {
       Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
       Route::get('/accept', [MutuController::class, 'accept'])->name('accept');
-      Route::get('/reject', [MutuController::class, 'reject'])->name('reject');
+      Route::post('/reject', [MutuController::class, 'reject'])->name('reject');
     });
   });
 });
@@ -93,8 +94,13 @@ Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
 // Kepala LPFK
 Route::name('lpfk.')->prefix('lpfk')->middleware(['leader'])->group(function () {
   Route::get('/home', [KepalaLpfkController::class, 'index'])->name('home');
-  Route::get('/order', [KepalaLpfkController::class, 'order'])->name('order');
-  Route::get('/order/detail', [KepalaLpfkController::class, 'orderDetail'])->name('orderDetail');
+  Route::prefix('order')->group(function () {
+    Route::get('/', [KepalaLpfkController::class, 'order'])->name('order');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [KepalaLpfkController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/accept', [KepalaLpfkController::class, 'accept'])->name('accept');
+    });
+  });
 });
 
 // PPK

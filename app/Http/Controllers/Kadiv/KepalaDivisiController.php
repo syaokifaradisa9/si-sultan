@@ -13,8 +13,16 @@ class KepalaDivisiController extends Controller
 {
   public function index()
   {
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
+
+    $divisions = [];
+    foreach ($division as $div) {
+      array_push($divisions, $div->division->nama);
+    }
+
     return view('roles.kadiv.index', [
-      'header' => 'Beranda',
+      'title' => 'Beranda | ' . $divisions[0],
+      'header' => 'Beranda ' . $divisions[0],
     ]);
   }
   public function order()
@@ -30,7 +38,7 @@ class KepalaDivisiController extends Controller
 
     return view('roles.kadiv.order', [
       'header' => 'Order',
-      'orders' => $orders
+      'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }
   public function orderDetail($id)

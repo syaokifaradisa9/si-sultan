@@ -15,6 +15,9 @@
 
   <!-- CSS Libraries -->
 
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('vendor/stisla/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/stisla/css/components.css') }}">
@@ -63,14 +66,7 @@
           </form>
 
           @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible show fade">
-              <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                  <span>&times;</span>
-                </button>
-                {{ session('error') }}
-              </div>
-            </div>
+            <div id="failed" data-flash="{{ session('error') }}"></div>
           @endif
         </div>
       </div>
@@ -98,12 +94,14 @@
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('vendor/stisla/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
 
 <!-- Template JS File -->
 <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
+<script src="{{ asset('js/alert.js') }}"></script>
 
 <!-- Page Specific JS File -->
 </body>

@@ -5,11 +5,15 @@
     <h2 class="section-title">Order</h2>
     <p class="section-lead">Tabel order dari usulan yang ada</p>
 
+    @if (session()->has('success'))
+      <div id="success" data-flash="{{ session('success') }}"></div>
+    @endif
+
     <div class="card">
       <div class="card-header">
         <h4>Tabel Order</h4>
         <div class="ml-auto">
-          <a href="" class="btn btn-success">Konfirmasi</a>
+          <a href="{{ route('mutu.acceptedAll') }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
         </div>
       </div>
       <div class="card-body">
@@ -19,7 +23,9 @@
               <th>No</th>
               <th>Order</th>
               <th>Tanggal Usulan</th>
-              <th>Deskripsi Usulan</th>
+              <th>Jumlah Usulan</th>
+              <th>Deskripsi</th>
+              <th>Status</th>
               <th>Aksi</th>
             </tr>
             @foreach ($orders as $order)
@@ -32,13 +38,24 @@
                     {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                     {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
                   </td>
+                  <td class="align-middle" style="max-width: 700px;">
+                    @if (!$order->description_by_mutu)
+                      Tidak ada deskripsi
+                    @else
+                      {{ $order->description_by_mutu }}
+                    @endif
+                  </td>
+                  <td class="align-middle text-danger">
+                    {{ $order->description_by_mutu ? 'Ditolak' : '' }}
+                  </td>
                   <td>
                     <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
-                    @if (!$order->approved_by_mutu)
-                      <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success"
-                        onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+                    @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                      <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
                     @endif
-                    <a href="" class="btn btn-danger" onclick="confirm('Apakah anda yakin?')">Tolak</a>
+                    @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                      <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="btn btn-danger" id="btn-reject">Tolak</a>
+                    @endif
                   </td>
                 </tr>
               @endif
@@ -48,4 +65,57 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const btnReject = document.querySelectorAll("#btn-reject");
+
+    btnReject.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const href = e.target.getAttribute("href");
+
+        Swal.fire({
+          title: "Apakah anda yakin untuk menolak usulan?",
+          text: "Silahkan masukkan deskripsi penolakan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Tolak!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              input: "textarea",
+              inputLabel: "Deskripsi",
+              inputPlaceholder: "Tuliskan deskripsi disini...",
+              inputAttributes: {
+                "aria-label": "Tuliskan deskripsi disini",
+              },
+              showCancelButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $.ajax({
+                  type: "POST",
+                  url: href,
+                  cache: false,
+                  headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                  },
+                  data: {
+                    data: result.value,
+                  },
+                  success: function(response) {
+                    if (response) {
+                      window.location.href = "{{ route('mutu.order') }}";
+                    }
+                  },
+                });
+              }
+            });
+          }
+        });
+      });
+    });
+  </script>
 @endsection

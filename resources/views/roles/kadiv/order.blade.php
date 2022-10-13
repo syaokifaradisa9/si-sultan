@@ -6,14 +6,7 @@
     <p class="section-lead">Tabel order dari usulan yang ada</p>
 
     @if (session()->has('success'))
-      <div class="alert alert-success alert-dismissible show fade">
-        <div class="alert-body">
-          <button class="close" data-dismiss="alert">
-            <span>&times;</span>
-          </button>
-          {{ session('success') }}
-        </div>
-      </div>
+      <div id="success" data-flash="{{ session('success') }}"></div>
     @endif
 
     <div class="card">
@@ -40,8 +33,7 @@
                 <td>
                   <a href="{{ route('kadiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
                   @if (!$order->approved_by_kadiv)
-                    <a href="{{ route('kadiv.accept', ['id' => $order->id]) }}" class="btn btn-success btn-confirm"
-                      onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+                    <a href="{{ route('kadiv.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
                   @endif
                 </td>
               </tr>

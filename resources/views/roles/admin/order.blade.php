@@ -6,14 +6,7 @@
     <p class="section-lead">Tabel order dari usulan</p>
 
     @if (session()->has('success'))
-      <div class="alert alert-success alert-dismissible show fade">
-        <div class="alert-body">
-          <button class="close" data-dismiss="alert">
-            <span>&times;</span>
-          </button>
-          {{ session('success') }}
-        </div>
-      </div>
+      <div id="success" data-flash="{{ session('success') }}"></div>
     @endif
 
     <div class="card">
@@ -54,7 +47,13 @@
                     <i class="fas {{ $order->approved_by_kadiv ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
                   </td>
                   <td style="vertical-align: middle" class="{{ $order->approved_by_mutu ? 'text-success' : 'text-warning' }}">
-                    <i class="fas {{ $order->approved_by_mutu ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
+                    @if ($order->description_by_mutu)
+                      <i class="fas fa-times text-danger" style="font-size: 20px"></i>
+                    @elseif ($order->approved_by_mutu)
+                      <i class="fas fa-check" style="font-size: 20px"></i>
+                    @else
+                      <i class="fas fa-history" style="font-size: 20px"></i>
+                    @endif
                   </td>
                   <td style="vertical-align: middle" class="{{ $order->approved_by_adum ? 'text-success' : 'text-warning' }}">
                     <i class="fas {{ $order->approved_by_adum ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>

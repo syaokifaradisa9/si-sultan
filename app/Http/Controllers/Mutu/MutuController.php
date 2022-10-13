@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mutu;
 
+use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\DivisionOrder;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ class MutuController extends Controller
   public function index()
   {
     return view('roles.mutu.index', [
-      'header' => 'Beranda'
+      'title' => 'Beranda | Mutu',
+      'header' => 'Beranda Mutu Operasional'
     ]);
   }
   public function order()
@@ -19,8 +21,9 @@ class MutuController extends Controller
     $divOrders = DivisionOrder::with('userDivision')->get();
 
     return view('roles.mutu.order', [
+      'title' => 'Order',
       'header' => 'Order',
-      'orders' => $divOrders
+      'orders' => collect($divOrders)->sortByDesc('created_at')
     ]);
   }
   public function orderDetail($id)
@@ -40,10 +43,29 @@ class MutuController extends Controller
     $orders->approved_by_mutu = 1;
     $orders->save();
 
-    return redirect()->route('mutu.order')->with('success', 'Usulan berhasil disetujui');
+    return redirect()->route('mutu.order')->with('success', 'Usulan telah disetujui');
   }
 
-  public function reject($id)
+  public function acceptedAll()
   {
+    $orders = DivisionOrder::where('approved_by_kadiv', 1)->get();
+
+    foreach ($orders as $order) {
+      $order->approved_by_mutu = 1;
+      $order->save();
+    }
+
+    return redirect()->route('mutu.order')->with('success', 'Usulan telah disetujui');
+  }
+
+  public function reject(Request $request, $id)
+  {
+    $orders = DivisionOrder::findOrFail($id);
+
+    $orders->description_by_mutu = $request->data;
+    $orders->save();
+
+    $request->session()->flash('success', 'Usulan telah ditolak');
+    return ApiFormatter::createdApi(200, $orders);
   }
 }

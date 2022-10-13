@@ -7,6 +7,11 @@
         <div class="card">
           <div class="card-header">
             <h4>Detail Usulan Habis Pakai</h4>
+            <div class="ml-auto">
+              @if ($order->description_by_mutu)
+                <div class="badge badge-danger" disabled>Usulan telah ditolak</div>
+              @endif
+            </div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -66,78 +71,65 @@
     <div class="card-body">
       <div class="float-right" style="padding-right: 2.3rem">
         <a href="{{ route('mutu.order') }}" class="btn btn-light mr-2">Kembali</a>
-        @if (!$order->approved_by_mutu)
-          <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success mr-2" onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+        @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+          <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success mr-2" id="btn-confirm">Konfirmasi</a>
         @endif
-        <a href="" class="btn btn-danger" onclick="confirm('Apakah anda yakin?')">Tolak</a>
+        @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+          <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="btn btn-danger" id="btn-reject">Tolak</a>
+        @endif
       </div>
     </div>
   </div>
 
   <script>
-    let url = window.location.href
-    let splitUrl = url.split('/')
+    const btnReject = document.querySelectorAll("#btn-reject");
 
-    let domain = splitUrl[0];
-    let id = splitUrl[5]
+    btnReject.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        e.preventDefault();
 
-    $(function() {
-      let table = $('#detail-hp').DataTable({
-        bAutoWidth: false,
-        processing: true,
-        serverSide: true,
-        ajax: `${domain}/datatable/hp/${id}/detail`,
-        columns: [{
-            data: null,
-            render: (data, type, row, meta) => meta.row + 1
-          },
-          {
-            data: 'usulan_hp',
-            name: 'usulan_hp'
-          },
-          {
-            data: 'jumlah_hp',
-            name: 'jumlah_hp',
-          },
-          {
-            data: 'spesifikasi_hp',
-            name: 'spesifikasi_hp',
-          },
-          {
-            data: 'justifikasi_hp',
-            name: 'justifikasi_hp',
-          },
-        ]
-      });
-    });
+        const href = e.target.getAttribute("href");
 
-    $(function() {
-      let table = $('#detail-thp').DataTable({
-        bAutoWidth: false,
-        processing: true,
-        serverSide: true,
-        ajax: `${domain}/datatable/thp/${id}/detail`,
-        columns: [{
-            data: null,
-            render: (data, type, row, meta) => meta.row + 1
-          },
-          {
-            data: 'usulan_thp',
-            name: 'usulan_thp'
-          },
-          {
-            data: 'jumlah_thp',
-            name: 'jumlah_thp',
-          },
-          {
-            data: 'spesifikasi_thp',
-            name: 'spesifikasi_thp',
-          },
-          {
-            data: 'justifikasi_thp',
-            name: 'justifikasi_thp',
-          },
-        ]
+        Swal.fire({
+          title: "Apakah anda yakin untuk menolak usulan?",
+          text: "Silahkan masukkan deskripsi penolakan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Tolak!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              input: "textarea",
+              inputLabel: "Deskripsi",
+              inputPlaceholder: "Tuliskan deskripsi disini...",
+              inputAttributes: {
+                "aria-label": "Tuliskan deskripsi disini",
+              },
+              showCancelButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                $.ajax({
+                  type: "POST",
+                  url: href,
+                  cache: false,
+                  headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                  },
+                  data: {
+                    data: result.value,
+                  },
+                  success: function(response) {
+                    if (response) {
+                      window.location.href = "{{ route('mutu.order') }}";
+                    }
+                  },
+                });
+              }
+            });
+          }
+        });
       });
     });
   </script>

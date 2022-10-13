@@ -18,7 +18,7 @@ class AdministrasiUmumController extends Controller
 
     return view('roles.adum.order', [
       'header' => 'Order',
-      'orders' => $orders
+      'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }
   public function orderDetail($id)
@@ -37,5 +37,7 @@ class AdministrasiUmumController extends Controller
 
     $order->approved_by_adum = 1;
     $order->save();
+
+    return redirect()->route('adum.order')->with('success', 'Usulan berhasil dikonfirmasi');
   }
 }
