@@ -27,9 +27,12 @@
     <div class="d-flex flex-wrap align-items-stretch">
       <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
         <div class="p-4 m-3">
-          <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
-          <h4 class="text-dark font-weight-normal">Selamat Datang di Aplikasi <span class="font-weight-bold">Si-Sultan</span></h4>
-          <p class="text-muted">Sebelum menggunakan aplikasi ini, silahkan login terlebih dahulu. Jika tidak mempunyai akun, silahkan hubungi tim
+        <div class="text-center">
+                <img src="{{ asset('assets/img//logo/logo.png') }}" alt="logo" width="60" class="mb-5 mt-2 mr-2">
+                <img src="{{ asset('assets/img//logo/logo-kemenkes.png') }}" alt="logo" width="90" class="mb-5 mt-2">
+            </div>
+            <h4 class="text-dark font-weight-normal text-center">Selamat Datang di <br><span class="font-weight-bold">Sistem Informasi</span><br><span class="font-weight-bold">Usulan dan Inventaris</span></h4>
+          <p class="text-muted text-justify">Sebelum menggunakan aplikasi ini, silahkan login terlebih dahulu. Jika tidak mempunyai akun, silahkan hubungi tim
             admin
           </p>
           <form method="POST" action="{{ route('login.auth') }}" class="needs-validation" novalidate="">
@@ -59,11 +62,14 @@
             </div>
 
             <div class="form-group text-right">
-              <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
-                Login
-              </button>
+            <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right px-3 text-center" tabindex="4">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
             </div>
           </form>
+          <div class="text-center mt-5 pt-5 text-small">
+              Copyright &copy; BPFK Banjarbaru.
+          </div>
 
           @if (session()->has('error'))
             <div id="failed" data-flash="{{ session('error') }}"></div>

@@ -78,11 +78,11 @@
 
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
-  <script src="{{ asset('js/alert.js') }}"></script>
-  <script src="{{ asset('js/btn-function.js') }}"></script>
-  <script src="{{ asset('js/datatable.js') }}"></script>
-  <script src="{{ asset('js/form-validate.js') }}"></script>
-  <script src="{{ asset('js/usulan-script.js') }}"></script>
+  <script src="{{ asset('assets/js/alert.js') }}"></script>
+  <script src="{{ asset('assets/js/btn-function.js') }}"></script>
+  <script src="{{ asset('assets/js/datatable.js') }}"></script>
+  <script src="{{ asset('assets/js/form-validate.js') }}"></script>
+  <script src="{{ asset('assets/js/usulan-script.js') }}"></script>
 
   <!-- Page Specific JS File -->
 </body>
