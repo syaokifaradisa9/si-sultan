@@ -4,7 +4,7 @@
       <a href="">SI-SULTAN</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="index.html">St</a>
+      <a href="http://si-sultan.test/">SS</a>
     </div>
     <ul class="sidebar-menu">
       @isAdminDiv
@@ -85,7 +85,12 @@
         <li class="menu-header">PPK</li>
         <li class="nav-item {{ Request::is('ppk/home') ? 'active' : '' }}">
           <a href="/ppk/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('ppk/order*') ? 'active' : '' }}">
+          <a href="/ppk/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i><span>Order</span>
           </a>
         </li>
       @endisPpk
@@ -104,11 +109,5 @@
         </li>
       @endisSuperadmin
     </ul>
-
-    {{-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-        <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-          <i class="fas fa-rocket"></i> Documentation
-        </a>
-      </div> --}}
   </aside>
 </div>

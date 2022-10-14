@@ -10,14 +10,18 @@ class KepalaLpfkController extends Controller
 {
   public function index()
   {
-    return view('roles.kepala_lpfk.index');
+    return view('roles.kepala_lpfk.index', [
+      'title' => 'Beranda | Kepala LPFK',
+      'header' => 'Inventaris Barang'
+    ]);
   }
 
   public function order()
   {
-    $divOrders = DivisionOrder::with('userDivision')->get();
+    $divOrders = DivisionOrder::with('userDivision')->where('approved_by_kadiv', 1)->where('approved_by_mutu', 1)->where('approved_by_adum', 1)->get();
 
     return view('roles.kepala_lpfk.order', [
+      'title' => 'Order | Kepala LPFK',
       'header' => 'Order',
       'orders' => collect($divOrders)->sortByDesc('created_at')
     ]);
@@ -39,6 +43,6 @@ class KepalaLpfkController extends Controller
     $orders->approved_by_kepala = 1;
     $orders->save();
 
-    return redirect()->route('mutu.order')->with('success', 'Usulan berhasil disetujui');
+    return redirect()->route('lpfk.order')->with('success', 'Usulan berhasil disetujui');
   }
 }

@@ -22,6 +22,10 @@ class CreateProposeHpsTable extends Migration
             $table->integer('jumlah_hp');
             $table->string('spesifikasi_hp');
             $table->string('justifikasi_hp');
+            $table->enum('status', [
+                'diajukan', 'disetujui', 'ditunda'
+            ]);
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }

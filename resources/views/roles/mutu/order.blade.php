@@ -3,7 +3,7 @@
 @section('container')
   <div class="section-body">
     <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan yang ada</p>
+    <p class="section-lead">Tabel order dari usulan yang telah disetujui oleh Kepala Bagian</p>
 
     @if (session()->has('success'))
       <div id="success" data-flash="{{ session('success') }}"></div>
@@ -12,9 +12,6 @@
     <div class="card">
       <div class="card-header">
         <h4>Tabel Order</h4>
-        <div class="ml-auto">
-          <a href="{{ route('mutu.acceptedAll') }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
-        </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -29,36 +26,34 @@
               <th>Aksi</th>
             </tr>
             @foreach ($orders as $order)
-              @if ($order->approved_by_kadiv)
-                <tr class="text-center">
-                  <td class="align-middle">{{ $loop->iteration }}</td>
-                  <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
-                  <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
-                  <td>
-                    {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
-                    {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
-                  </td>
-                  <td class="align-middle" style="max-width: 700px;">
-                    @if (!$order->description_by_mutu)
-                      Tidak ada deskripsi
-                    @else
-                      {{ $order->description_by_mutu }}
-                    @endif
-                  </td>
-                  <td class="align-middle text-danger">
-                    {{ $order->description_by_mutu ? 'Ditolak' : '' }}
-                  </td>
-                  <td>
-                    <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
-                    @if (!$order->approved_by_mutu && !$order->description_by_mutu)
-                      <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
-                    @endif
-                    @if (!$order->approved_by_mutu && !$order->description_by_mutu)
-                      <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="btn btn-danger" id="btn-reject">Tolak</a>
-                    @endif
-                  </td>
-                </tr>
-              @endif
+              <tr class="text-center">
+                <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
+                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                <td>
+                  {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
+                  {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
+                </td>
+                <td class="align-middle" style="max-width: 700px;">
+                  @if (!$order->description_by_mutu)
+                    Tidak ada deskripsi
+                  @else
+                    {{ $order->description_by_mutu }}
+                  @endif
+                </td>
+                <td class="align-middle text-danger">
+                  {{ $order->description_by_mutu ? 'Ditolak' : '' }}
+                </td>
+                <td>
+                  <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
+                  @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                    <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
+                  @endif
+                  @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                    <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="btn btn-danger" id="btn-reject">Tolak</a>
+                  @endif
+                </td>
+              </tr>
             @endforeach
           </table>
         </div>

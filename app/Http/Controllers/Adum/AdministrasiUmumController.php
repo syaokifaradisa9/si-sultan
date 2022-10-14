@@ -10,14 +10,18 @@ class AdministrasiUmumController extends Controller
 {
   public function index()
   {
-    return view('roles.adum.index');
+    return view('roles.adum.index', [
+      'title' => 'Beranda | Administrasi Umum',
+      'header' => 'Beranda Administrasi Umum'
+    ]);
   }
   public function order()
   {
-    $orders = DivisionOrder::with('userDivision')->get();
+    $orders = DivisionOrder::with('userDivision')->where('approved_by_kadiv', 1)->where('approved_by_mutu', 1)->get();
 
     return view('roles.adum.order', [
-      'header' => 'Order',
+      'title' => 'Order | Administrasi Umum',
+      'header' => 'Order Administrasi Umum',
       'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }
