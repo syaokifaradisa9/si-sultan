@@ -67,7 +67,7 @@
       <div class="float-right" style="padding-right: 2.3rem">
         <a href="{{ route('adum.order') }}" class="btn btn-light mr-2">Kembali</a>
         @if (!$order->approved_by_adum)
-          <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success" onclick="confirm('Apakah anda yakin?')">Konfirmasi</a>
+          <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
         @endif
       </div>
     </div>

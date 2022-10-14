@@ -3,7 +3,7 @@
 @section('container')
   <div class="section-body">
     <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan yang ada</p>
+    <p class="section-lead">Tabel order dari usulan yang telah disetujui oleh Kepala Urusan Administrasi Umum</p>
 
     @if (session()->has('success'))
       <div id="success" data-flash="{{ session('success') }}"></div>
@@ -23,22 +23,20 @@
               <th>Aksi</th>
             </tr>
             @foreach ($orders as $order)
-              @if ($order->approved_by_kadiv && $order->approved_by_mutu && $order->approved_by_adum)
-                <tr class="text-center">
-                  <td class="align-middle">{{ $loop->iteration }}</td>
-                  <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
-                  <td>
-                    {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
-                    {{ count($order->propose) . ' Tidak Barang Habis Pakai' }}
-                  </td>
-                  <td>
-                    <a href="{{ route('lpfk.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
-                    @if (!$order->approved_by_kepala)
-                      <a href="{{ route('lpfk.accept', ['id' => $order->id]) }}" class="btn btn-success btn-confirm" id="btn-confirm">Konfirmasi</a>
-                    @endif
-                  </td>
-                </tr>
-              @endif
+              <tr class="text-center">
+                <td class="align-middle">{{ $loop->iteration }}</td>
+                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                <td>
+                  {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
+                  {{ count($order->propose) . ' Tidak Barang Habis Pakai' }}
+                </td>
+                <td>
+                  <a href="{{ route('lpfk.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
+                  @if (!$order->approved_by_kepala)
+                    <a href="{{ route('lpfk.accept', ['id' => $order->id]) }}" class="btn btn-success btn-confirm" id="btn-confirm">Konfirmasi</a>
+                  @endif
+                </td>
+              </tr>
             @endforeach
           </table>
         </div>

@@ -18,7 +18,7 @@ class MutuController extends Controller
   }
   public function order()
   {
-    $divOrders = DivisionOrder::with('userDivision')->get();
+    $divOrders = DivisionOrder::with('userDivision')->where('approved_by_kadiv', 1)->get();
 
     return view('roles.mutu.order', [
       'title' => 'Order',
@@ -42,18 +42,6 @@ class MutuController extends Controller
 
     $orders->approved_by_mutu = 1;
     $orders->save();
-
-    return redirect()->route('mutu.order')->with('success', 'Usulan telah disetujui');
-  }
-
-  public function acceptedAll()
-  {
-    $orders = DivisionOrder::where('approved_by_kadiv', 1)->get();
-
-    foreach ($orders as $order) {
-      $order->approved_by_mutu = 1;
-      $order->save();
-    }
 
     return redirect()->route('mutu.order')->with('success', 'Usulan telah disetujui');
   }

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Addiv\AdminDivisiController;
 use App\Http\Controllers\Adum\AdministrasiUmumController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Kadiv\KepalaDivisiController;
 use App\Http\Controllers\Lead\KepalaLpfkController;
 use App\Http\Controllers\Auth\Login\LoginController;
@@ -70,7 +69,6 @@ Route::name('mutu.')->prefix('mutu')->middleware(['to'])->group(function () {
   Route::get('/home', [MutuController::class, 'index'])->name('home');
   Route::prefix('order')->group(function () {
     Route::get('/', [MutuController::class, 'order'])->name('order');
-    Route::get('/acceptedAll', [MutuController::class, 'acceptedAll'])->name('acceptedAll');
     Route::prefix('{id}')->group(function () {
       Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
       Route::get('/accept', [MutuController::class, 'accept'])->name('accept');
@@ -106,6 +104,9 @@ Route::name('lpfk.')->prefix('lpfk')->middleware(['leader'])->group(function () 
 // PPK
 Route::name('ppk.')->prefix('ppk')->middleware(['ppk'])->group(function () {
   Route::get('/home', [PpkController::class, 'index'])->name('home');
+  Route::prefix('order')->group(function () {
+    Route::get('/', [PpkController::class, 'order'])->name('order');
+  });
 });
 
 // Superadmin
