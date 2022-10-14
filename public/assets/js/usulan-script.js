@@ -10,7 +10,7 @@ const getBmn = async (e) => {
 
   if (selectId !== "lainnya" && type !== null) {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/inventory/${selectId}/${type}`
+      `http://si-sultan.test/api/inventory/${selectId}/${type}`
     );
     const responseJson = await response.json();
 
@@ -123,7 +123,7 @@ btnAdd.forEach((element) => {
     const getOption = async () => {
       const type = newForm.querySelector(".usulan")?.getAttribute("id");
       const response = await fetch(
-        `http://127.0.0.1:8000/api/inventory/${type}`
+        `http://si-sultan.test/api/inventory/${type}`
       );
       const responseJson = await response.json();
       const data = responseJson.data;
