@@ -3,6 +3,7 @@
         <div class="sidebar-brand">
             <img src="{{ asset('assets/img//logo/logo-crop.png') }}" alt="logo" width="60" class="mb-5 mt-2 mr-2">
         </div>
+        <div class="text-center">SI-SULTAN</div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="http://si-sultan.test/">SS</a>
         </div>
