@@ -57,7 +57,9 @@
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2022 - Depeloved By Siapa, ya?
+                    Copyright &copy; 2022 - <a target="_blank"
+                        href="http://127.0.0.1:8000/vendor/team-portfolio/index.html">BPFK
+                        Banjarbaru</a>
                 </div>
                 <div class="footer-right">
 

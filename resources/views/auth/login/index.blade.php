@@ -72,8 +72,9 @@
                                 Login
                         </div>
                     </form>
-                    <div class="text-center mt-5 pt-5 text-small">
-                        Copyright &copy; BPFK Banjarbaru.
+                    <div class="text-center mt-5 pt-5 text-small text-dark bb">
+                        Copyright &copy; 2022 - <a class="text-dark bb" target="_blank"
+                            href="vendor/team-portfolio/index.html">BPFK Banjarbaru</a>
                     </div>
 
                     @if (session()->has('error'))
