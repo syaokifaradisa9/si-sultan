@@ -7,7 +7,7 @@
     <div class="sidebar-brand sidebar-brand-sm">
       <a href="http://si-sultan.test/">SS</a>
     </div>
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu mt-3">
       @isAdminDiv
         <li class="menu-header">Admin Divisi</li>
         <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
@@ -63,22 +63,6 @@
           </a>
         </li>
       @endisMutu
-
-      @isTo
-        <li class="menu-header">Mutu Operasional</li>
-        </li>
-        <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
-          <a href="/mutu/home" class="nav-link ">
-            <i class="fas fa-home"></i><span>Beranda</span>
-          </a>
-        </li>
-        <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
-          <a href="/mutu/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-          </a>
-        </li>
-      @endisTo
-
 
       @isAdum
         <li class="menu-header">Administrasi Umum</li>
