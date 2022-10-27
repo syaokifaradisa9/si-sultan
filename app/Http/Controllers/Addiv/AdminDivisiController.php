@@ -154,13 +154,10 @@ class AdminDivisiController extends Controller
 
   public function edit($id)
   {
-    $divOrder = DivisionOrder::all();
+    $divOrder = DivisionOrder::findOrFail($id);
 
-
-    foreach ($divOrder as $div) {
-      if ($div->approved_by_kadiv) {
-        return redirect()->back();
-      }
+    if ($divOrder->approved_by_kadiv === 1) {
+      return redirect()->back();
     }
 
     $divId = Auth::guard('division')->user()->division_id;
