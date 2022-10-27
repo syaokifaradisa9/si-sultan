@@ -32,7 +32,6 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('vendor/stisla/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/stisla/css/components.css') }}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css"></script>
 </head>
 
 <body>

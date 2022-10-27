@@ -59,8 +59,10 @@
                   <td style="vertical-align: middle" class="{{ $order->approved_by_kepala ? 'text-success' : 'text-warning' }}">
                     <i class="fas {{ $order->approved_by_kepala ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
                   </td>
-                  <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info"><i class="fas fa-info-circle"></i>
-                      Detail</a></td>
+                  <td>
+                    <a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info"><i class="fas fa-info-circle"></i>
+                      Detail</a>
+                  </td>
                 </tr>
               @endforeach
             </tbody>
