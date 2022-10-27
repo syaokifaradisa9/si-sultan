@@ -21,8 +21,8 @@ class KepalaLpfkController extends Controller
     $divOrders = DivisionOrder::with('userDivision')->where('approved_by_kadiv', 1)->where('approved_by_mutu', 1)->where('approved_by_adum', 1)->get();
 
     return view('roles.kepala_lpfk.order', [
-      'title' => 'Order | Kepala LPFK',
-      'header' => 'Order',
+      'title' => 'Usulan | Kepala LPFK',
+      'header' => 'Usulan',
       'orders' => collect($divOrders)->sortByDesc('created_at')
     ]);
   }

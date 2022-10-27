@@ -22,7 +22,12 @@ class InventoryHpSeeder extends Seeder
         InventoryHp::create([
             'nama_barang' => 'Pensil',
             'total' => 4,
-            'division_id' => mt_rand(1, 5)
+            'division_id' => 1
+        ]);
+        InventoryHp::create([
+            'nama_barang' => 'Masker',
+            'total' => 15,
+            'division_id' => 1
         ]);
     }
 }

@@ -18,8 +18,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::prefix('inventory')->group(function () {
-    Route::get('/{type}', [ApiController::class, 'getOption']);
-    Route::get('/{id}/{type}', [ApiController::class, 'getBmn']);
-});

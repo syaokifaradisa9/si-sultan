@@ -18,11 +18,10 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="text-center">
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -47,6 +46,7 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>

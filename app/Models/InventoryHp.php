@@ -9,4 +9,9 @@ class InventoryHp extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function proposeHp()
+    {
+        return $this->hasMany(ProposeHp::class);
+    }
 }

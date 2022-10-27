@@ -19,13 +19,20 @@ class InventorySeeder extends Seeder
             'baik' => 3,
             'rusak_ringan' => 1,
             'rusak_berat' => 1,
-            'division_id' => mt_rand(1, 5)
+            'division_id' => 1
         ]);
         Inventory::create([
             'nama_barang' => 'Kabel Roll',
             'baik' => 3,
             'rusak_ringan' => 2,
             'rusak_berat' => 1,
+            'division_id' => 1
+        ]);
+        Inventory::create([
+            'nama_barang' => 'Meja',
+            'baik' => 4,
+            'rusak_ringan' => 1,
+            'rusak_berat' => 2,
             'division_id' => mt_rand(1, 5)
         ]);
     }

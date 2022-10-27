@@ -3,7 +3,7 @@ const btnDelete = document.querySelectorAll(".btn-delete");
 const select = document.querySelectorAll(".eventSelect");
 const option = document.querySelectorAll(".usulan");
 
-// untuk mendapatkan nilai bpm
+// untuk mendapatkan nilai bmn
 const getBmn = async (e) => {
   const selectId = e.target.value;
   const type = e.target.parentElement.getAttribute("id");
@@ -208,7 +208,3 @@ select.forEach((element) => {
 option.forEach((element) => {
   element.addEventListener("change", getBmn);
 });
-
-// option.forEach((element) => {
-//   element.addEventListener("change", getOption);
-// });

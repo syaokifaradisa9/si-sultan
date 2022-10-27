@@ -18,6 +18,7 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,7 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>

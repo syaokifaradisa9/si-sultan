@@ -8,7 +8,7 @@
     </div>
     <ul class="sidebar-menu">
       @isAdminDiv
-        <li class="menu-header">Admin Divisi</li>
+        <li class="menu-header">Admin Bagian</li>
         <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
           <a href="/addiv/home" class="nav-link ">
             <i class="fas fa-home"></i><span>Beranda</span>
@@ -22,7 +22,7 @@
       @endisAdminDiv
 
       @isKadiv
-        <li class="menu-header">Kepala Divisi</li>
+        <li class="menu-header">Kepala Bagian</li>
         </li>
         <li class="nav-item {{ Request::is('kadiv/home') ? 'active' : '' }}">
           <a href="/kadiv/home" class="nav-link ">
@@ -36,7 +36,7 @@
         </li>
       @endisKadiv
 
-      @isTo
+      @isMutu
         <li class="menu-header">Mutu Operasional</li>
         </li>
         <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
@@ -46,10 +46,22 @@
         </li>
         <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
           <a href="/mutu/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
           </a>
         </li>
-      @endisTo
+        <hr style="margin: 15px 20px">
+        <li class="menu-header">Usulan</li>
+        <li class="nav-item {{ Request::is('mutu/approved*') ? 'active' : '' }}">
+          <a href="/mutu/approved" class="nav-link ">
+            <i class="fas fa-check-circle"></i><span>Disetujui</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/pending*') ? 'active' : '' }}">
+          <a href="/mutu/pending" class="nav-link ">
+            <i class="fas fa-exclamation-circle"></i><span>Ditunda</span>
+          </a>
+        </li>
+      @endisMutu
 
       @isAdum
         <li class="menu-header">Administrasi Umum</li>
@@ -85,12 +97,12 @@
         <li class="menu-header">PPK</li>
         <li class="nav-item {{ Request::is('ppk/home') ? 'active' : '' }}">
           <a href="/ppk/home" class="nav-link ">
-            <i class="fas fa-home"></i><span>Home</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
           </a>
         </li>
         <li class="nav-item {{ Request::is('ppk/order*') ? 'active' : '' }}">
           <a href="/ppk/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i><span>Order</span>
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
           </a>
         </li>
       @endisPpk

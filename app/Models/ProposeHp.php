@@ -14,4 +14,9 @@ class ProposeHp extends Model
     {
         return $this->belongsTo(DivisionOrder::class);
     }
+
+    public function inventoryHp()
+    {
+        return $this->belongsTo(InventoryHp::class);
+    }
 }

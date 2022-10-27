@@ -27,6 +27,7 @@ class KepalaDivisiController extends Controller
   }
   public function order()
   {
+    // untuk menampilkan data sesuai dengan divisi user
     $users = UserDivision::where('division_id', Auth::guard('division')->user()->division_id)->get();
 
     $orders = [];
@@ -36,8 +37,17 @@ class KepalaDivisiController extends Controller
       }
     }
 
+    // untuk menampilkan nama divisi user
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
+
+    $divisions = [];
+    foreach ($division as $div) {
+      array_push($divisions, $div->division->nama);
+    }
+
     return view('roles.kadiv.order', [
-      'header' => 'Order',
+      'title' => 'Usulan |' . $divisions[0],
+      'header' => 'Usulan ' . $divisions[0],
       'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }

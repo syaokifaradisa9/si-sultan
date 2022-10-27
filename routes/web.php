@@ -1,27 +1,17 @@
 <?php
 
-use App\Http\Controllers\Addiv\AdminDivisiController;
-use App\Http\Controllers\Adum\AdministrasiUmumController;
-use App\Http\Controllers\Kadiv\KepalaDivisiController;
-use App\Http\Controllers\Lead\KepalaLpfkController;
-use App\Http\Controllers\Auth\Login\LoginController;
-use App\Http\Controllers\Ppk\PpkController;
-use App\Http\Controllers\Auth\Register\RegisterController;
-use App\Http\Controllers\Admin\SuperadminController;
-use App\Http\Controllers\Datatable\DatatableController;
-use App\Http\Controllers\Mutu\MutuController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\API\ApiController;
+use App\Http\Controllers\Ppk\PpkController;
+use App\Http\Controllers\Mutu\MutuController;
+use App\Http\Controllers\Lead\KepalaLpfkController;
+use App\Http\Controllers\Admin\SuperadminController;
+use App\Http\Controllers\Auth\Login\LoginController;
+use App\Http\Controllers\Addiv\AdminDivisiController;
+use App\Http\Controllers\Kadiv\KepalaDivisiController;
+use App\Http\Controllers\Datatable\DatatableController;
+use App\Http\Controllers\Adum\AdministrasiUmumController;
+use App\Http\Controllers\Auth\Register\RegisterController;
 
 Route::middleware('guest')->group(function () {
   Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -30,6 +20,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// API
+Route::prefix('api')->group(function () {
+  Route::prefix('inventory')->group(function () {
+    Route::get('/{type}', [ApiController::class, 'getOption']);
+    Route::get('/{id}/{type}', [ApiController::class, 'getBmn']);
+  });
+  Route::get('propose/{id}/{type}', [ApiController::class, 'getPropose']);
+});
+
 
 // Route Datatable
 Route::name('datatable.')->prefix('datatable')->group(function () {
@@ -65,14 +65,22 @@ Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function ()
 });
 
 // Mutu Operasional
-Route::name('mutu.')->prefix('mutu')->middleware(['to'])->group(function () {
+Route::name('mutu.')->prefix('mutu')->middleware(['mutu'])->group(function () {
   Route::get('/home', [MutuController::class, 'index'])->name('home');
+  Route::prefix('/approved')->group(function () {
+    Route::get('/', [MutuController::class, 'approvedByPpk'])->name('approvedByPPK');
+    Route::get('/{id}/{type}', [MutuController::class, 'detailApproved'])->name('detailApproved');
+  });
+  Route::prefix('pending')->group(function () {
+    Route::get('/', [MutuController::class, 'pendingByPpk'])->name('pendingByPPK');
+    Route::get('{id}/{type}', [MutuController::class, 'detailPending'])->name('detailPending');
+  });
   Route::prefix('order')->group(function () {
     Route::get('/', [MutuController::class, 'order'])->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
       Route::get('/accept', [MutuController::class, 'accept'])->name('accept');
       Route::post('/reject', [MutuController::class, 'reject'])->name('reject');
+      Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
     });
   });
 });
@@ -106,6 +114,12 @@ Route::name('ppk.')->prefix('ppk')->middleware(['ppk'])->group(function () {
   Route::get('/home', [PpkController::class, 'index'])->name('home');
   Route::prefix('order')->group(function () {
     Route::get('/', [PpkController::class, 'order'])->name('order');
+    Route::prefix('{id}')->group(function () {
+      Route::get('/detail', [PpkController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/approved/{type}', [PpkController::class, 'approved'])->name('approved');
+      Route::post('/pending', [PpkController::class, 'pending'])->name('pending');
+      Route::get('/acceptedAll', [PpkController::class, 'acceptedAll'])->name('acceptAll');
+    });
   });
 });
 

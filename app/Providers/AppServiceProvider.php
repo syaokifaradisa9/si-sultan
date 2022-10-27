@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
                 return auth()->guard('web')->user()->role === 'superadmin';
             }
         });
-        Blade::if('isTo', function () {
+        Blade::if('isMutu', function () {
             if (Auth::guard('web')->check()) {
                 return auth()->guard('web')->user()->role === 'mutu' || auth()->guard('web')->user()->role === 'superadmin';
             }
