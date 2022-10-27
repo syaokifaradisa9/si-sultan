@@ -2,8 +2,6 @@
 
 @section('container')
   <div class="section-body">
-    <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan</p>
 
     @if (session()->has('success'))
       <div id="success" data-flash="{{ session('success') }}"></div>
@@ -11,9 +9,9 @@
 
     <div class="card">
       <div class="card-header">
-        <h4>Tabel Order</h4>
+        <h4>Tabel Usulan</h4>
         <div class="ml-auto">
-          <a href="{{ route('addiv.create') }}" class="btn btn-primary"v>Buat Usulan</a>
+          <a href="{{ route('addiv.create') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Buat Usulan</a>
         </div>
       </div>
       <div class="card-body">
@@ -28,7 +26,7 @@
                 <th rowspan="2" style="vertical-align: middle">Aksi</th>
               </tr>
               <tr class="text-center">
-                <th width="100px" style="vertical-align: middle">Kepala Divisi</th>
+                <th width="100px" style="vertical-align: middle">Kepala Bagian</th>
                 <th width="100px" style="vertical-align: middle">Mutu</th>
                 <th width="100px" style="vertical-align: middle">Administrasi Umum</th>
                 <th width="100px" style="vertical-align: middle">Kepala LPFK</th>
@@ -61,7 +59,8 @@
                   <td style="vertical-align: middle" class="{{ $order->approved_by_kepala ? 'text-success' : 'text-warning' }}">
                     <i class="fas {{ $order->approved_by_kepala ? 'fa-check' : 'fa-history' }}" style="font-size: 20px"></i>
                   </td>
-                  <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info">Detail</a></td>
+                  <td><a href="{{ route('addiv.orderDetail', ['id' => $order->id]) }}" class="btn btn-info"><i class="fas fa-info-circle"></i>
+                      Detail</a></td>
                 </tr>
               @endforeach
             </tbody>

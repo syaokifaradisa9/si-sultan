@@ -34,7 +34,7 @@ class DatatableController extends Controller
   {
     if ($request->ajax()) {
       $proposeHp = ProposeHp::where('division_order_id', $id)->get();
-      $propose = Propose::where('division_order_id', $id)->get();
+      $propose = Propose::with('divisionOrder')->where('division_order_id', $id)->get();
 
       $usulanHp = [];
       foreach ($proposeHp as $hp) {
@@ -46,13 +46,29 @@ class DatatableController extends Controller
         array_push($usulanThp, $thp);
       }
 
+      $div = DivisionOrder::findOrFail($id);
+
       if ($type == 'hp') {
         $data = $usulanHp;
-        return DataTables::of($data)->make(true);
+        $hp = DataTables::of($data);
+
+        // if ($div->approved_by_kepala) {
+        //   $hp->addColumn('status', function () {
+        //     $status = 'test';
+        //     return $status;
+        //   });
+        // }
+        return $hp->rawColumns(['status'])->make(true);
       }
+
       if ($type == 'thp') {
         $data = $usulanThp;
-        return DataTables::of($data)->make(true);
+        $thp = DataTables::of($data);
+
+        if ($div->approved_by_kepala) {
+        }
+
+        return $thp->toJson();
       }
     }
   }

@@ -32,6 +32,7 @@
               <tbody class="duplicate-form">
                 @foreach ($hp as $item)
                   <tr class="text-center duplicate">
+                    <input type="hidden" name="inventory_hp_id[]" value="{{ $item->inventory_hp_id }}">
                     <td class="count">{{ $loop->iteration }}</td>
                     <td class="usulan" id="hp">
                       <?php
@@ -48,7 +49,8 @@
                         <select class="form-control form-control-sm eventSelect" id="usulan_hp" name="usulan_hp[]">
                           <option selected hidden value="">Pilih Barang</option>
                           @foreach ($invenHp as $inventory)
-                            <option value="{{ $inventory->id }}" selected>{{ $inventory->nama_barang }}</option>
+                            <option value="{{ $inventory->id }}" @if ($inventory->id == $item->inventory_hp_id) selected @endif>{{ $inventory->nama_barang }}
+                            </option>
                           @endforeach
                           <option value="lainnya">Lainnya...</option>
                         </select>
@@ -60,7 +62,7 @@
 
                     </td>
                     <td>
-                      <div class="total">-</div>
+                      <div class="total">{{ $item->inventoryHp ? $item->inventoryHp->total : '0' }}</div>
                     </td>
                     <td>
                       <div class="input-group">
@@ -106,6 +108,7 @@
               </thead>
               <tbody class="duplicate-form">
                 <tr class="text-center duplicate">
+                  <input type="hidden" name="inventory_hp_id[]">
                   <td class="count">1</td>
                   <td class="usulan" id="hp">
                     <select class="form-control form-control-sm eventSelect" id="usulan_hp" name="usulan_hp[]">
@@ -178,6 +181,7 @@
               <tbody class="duplicate-form">
                 @foreach ($thp as $item)
                   <tr class="text-center duplicate">
+                    <input type="hidden" name="inventory_id[]" value="{{ $item->inventory_id }}">
                     <td class="count">{{ $loop->iteration }}</td>
                     <td class="usulan" id="thp">
                       <?php
@@ -194,7 +198,8 @@
                         <select class="form-control form-control-sm eventSelect" id="usulan_thp" name="usulan_thp[]">
                           <option selected hidden value="">Pilih Barang</option>
                           @foreach ($invenThp as $inventory)
-                            <option value="{{ $inventory->id }}" selected>{{ $inventory->nama_barang }}</option>
+                            <option value="{{ $inventory->id }}" @if ($inventory->id == $item->inventory_id) selected @endif>{{ $inventory->nama_barang }}
+                            </option>
                           @endforeach
                           <option value="lainnya">Lainnya...</option>
                         </select>
@@ -204,9 +209,9 @@
                         </div>
                       @endif
                     </td>
-                    <td class="baik" name="baik">-</td>
-                    <td class="rusak_ringan" name="rusak_ringan">-</td>
-                    <td class="rusak_berat" name="rusak_berat">-</td>
+                    <td class="baik" name="baik">{{ $item->inventory ? $item->inventory->baik : '0' }}</td>
+                    <td class="rusak_ringan" name="rusak_ringan">{{ $item->inventory ? $item->inventory->rusak_ringan : '0' }}</td>
+                    <td class="rusak_berat" name="rusak_berat">{{ $item->inventory ? $item->inventory->rusak_berat : '0' }}</td>
                     <td>
                       <div class="input-group">
                         <input type="number" min="0" class="form-control input-jumlah" id="jumlah_thp" name="jumlah_thp[]"
@@ -253,6 +258,7 @@
               </thead>
               <tbody class="duplicate-form">
                 <tr class="text-center duplicate">
+                  <input type="hidden" name="inventory_id[]">
                   <td class="count">1</td>
                   <td class="usulan" id="thp">
                     <select class="form-control form-control-sm eventSelect" id="usulan_thp" name="usulan_thp[]">

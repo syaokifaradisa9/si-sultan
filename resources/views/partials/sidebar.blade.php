@@ -1,114 +1,141 @@
 <div class="main-sidebar sidebar-style-2">
-    <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
-            <img src="{{ asset('assets/img//logo/logo-crop.png') }}" alt="logo" width="60" class="mb-5 mt-2 mr-2">
-        </div>
-        <div class="text-center">SI-SULTAN</div>
-        <div class="sidebar-brand sidebar-brand-sm">
-            <a href="http://si-sultan.test/">SS</a>
-        </div>
-        <ul class="sidebar-menu">
-            @isAdminDiv
-                <li class="menu-header">Admin Divisi</li>
-                <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
-                    <a href="/addiv/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Beranda</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('addiv/order*') ? 'active' : '' }}">
-                    <a href="/addiv/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-                    </a>
-                </li>
-            @endisAdminDiv
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <img src="{{ asset('assets/img//logo/logo-crop.png') }}" alt="logo" width="60" class="mb-5 mt-2 mr-2">
+    </div>
+    <div class="text-center">SI-SULTAN</div>
+    <div class="sidebar-brand sidebar-brand-sm">
+      <a href="http://si-sultan.test/">SS</a>
+    </div>
+    <ul class="sidebar-menu">
+      @isAdminDiv
+        <li class="menu-header">Admin Divisi</li>
+        <li class="nav-item {{ Request::is('addiv/home') ? 'active' : '' }}">
+          <a href="/addiv/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('addiv/order*') ? 'active' : '' }}">
+          <a href="/addiv/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisAdminDiv
 
-            @isKadiv
-                <li class="menu-header">Kepala Divisi</li>
-                </li>
-                <li class="nav-item {{ Request::is('kadiv/home') ? 'active' : '' }}">
-                    <a href="/kadiv/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Beranda</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('kadiv/order*') ? 'active' : '' }}">
-                    <a href="/kadiv/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-                    </a>
-                </li>
-            @endisKadiv
+      @isKadiv
+        <li class="menu-header">Kepala Divisi</li>
+        </li>
+        <li class="nav-item {{ Request::is('kadiv/home') ? 'active' : '' }}">
+          <a href="/kadiv/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('kadiv/order*') ? 'active' : '' }}">
+          <a href="/kadiv/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisKadiv
 
-            @isTo
-                <li class="menu-header">Mutu Operasional</li>
-                </li>
-                <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
-                    <a href="/mutu/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Beranda</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
-                    <a href="/mutu/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-                    </a>
-                </li>
-            @endisTo
+      @isMutu
+        <li class="menu-header">Mutu Operasional</li>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
+          <a href="/mutu/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
+          <a href="/mutu/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
+          </a>
+        </li>
+        <hr style="margin: 15px 20px">
+        <li class="menu-header">Usulan</li>
+        <li class="nav-item {{ Request::is('mutu/approved*') ? 'active' : '' }}">
+          <a href="/mutu/approved" class="nav-link ">
+            <i class="fas fa-check-circle"></i><span>Disetujui</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/pending*') ? 'active' : '' }}">
+          <a href="/mutu/pending" class="nav-link ">
+            <i class="fas fa-exclamation-circle"></i><span>Ditunda</span>
+          </a>
+        </li>
+      @endisMutu
 
-            @isAdum
-                <li class="menu-header">Administrasi Umum</li>
-                </li>
-                <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
-                    <a href="/adum/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Beranda</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('adum/order*') ? 'active' : '' }}">
-                    <a href="/adum/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-                    </a>
-                </li>
-            @endisAdum
+      @isTo
+        <li class="menu-header">Mutu Operasional</li>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/home') ? 'active' : '' }}">
+          <a href="/mutu/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('mutu/order*') ? 'active' : '' }}">
+          <a href="/mutu/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisTo
 
-            @isLead
-                <li class="menu-header">Kepala LPFK</li>
-                </li>
-                <li class="nav-item {{ Request::is('lpfk/home') ? 'active' : '' }}">
-                    <a href="/lpfk/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Beranda</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('lpfk/order*') ? 'active' : '' }}">
-                    <a href="/lpfk/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i></i><span>Usulan</span>
-                    </a>
-                </li>
-            @endisLead
 
-            @isPpk
-                <li class="menu-header">PPK</li>
-                <li class="nav-item {{ Request::is('ppk/home') ? 'active' : '' }}">
-                    <a href="/ppk/home" class="nav-link ">
-                        <i class="fas fa-home"></i><span>Home</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('ppk/order*') ? 'active' : '' }}">
-                    <a href="/ppk/order" class="nav-link ">
-                        <i class="fas fa-plus-square"></i><span>Order</span>
-                    </a>
-                </li>
-            @endisPpk
+      @isAdum
+        <li class="menu-header">Administrasi Umum</li>
+        </li>
+        <li class="nav-item {{ Request::is('adum/home') ? 'active' : '' }}">
+          <a href="/adum/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('adum/order*') ? 'active' : '' }}">
+          <a href="/adum/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisAdum
 
-            @isSuperadmin
-                <li class="menu-header">Superadmin</li>
-                <li class="nav-item {{ Request::is('admin/home') ? 'active' : '' }}">
-                    <a href="/admin/home" class="nav-link ">
-                        <i class="fas fa-th-large"></i><span>Home</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Request::is('admin/register') ? 'active' : '' }}">
-                    <a href="/admin/register" class="nav-link ">
-                        <i class="fas fa-user-plus"></i><span>Add New User</span>
-                    </a>
-                </li>
-            @endisSuperadmin
-        </ul>
-    </aside>
+      @isLead
+        <li class="menu-header">Kepala LPFK</li>
+        </li>
+        <li class="nav-item {{ Request::is('lpfk/home') ? 'active' : '' }}">
+          <a href="/lpfk/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('lpfk/order*') ? 'active' : '' }}">
+          <a href="/lpfk/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisLead
+      @isPpk
+        <li class="menu-header">PPK</li>
+        <li class="nav-item {{ Request::is('ppk/home') ? 'active' : '' }}">
+          <a href="/ppk/home" class="nav-link ">
+            <i class="fas fa-home"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('ppk/order*') ? 'active' : '' }}">
+          <a href="/ppk/order" class="nav-link ">
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
+          </a>
+        </li>
+      @endisPpk
+
+      @isSuperadmin
+        <li class="menu-header">Superadmin</li>
+        <li class="nav-item {{ Request::is('admin/home') ? 'active' : '' }}">
+          <a href="/admin/home" class="nav-link ">
+            <i class="fas fa-th-large"></i><span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item {{ Request::is('admin/register') ? 'active' : '' }}">
+          <a href="/admin/register" class="nav-link ">
+            <i class="fas fa-user-plus"></i><span>Add New User</span>
+          </a>
+        </li>
+      @endisSuperadmin
+    </ul>
+  </aside>
 </div>

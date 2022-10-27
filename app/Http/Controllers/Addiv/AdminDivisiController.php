@@ -33,6 +33,7 @@ class AdminDivisiController extends Controller
 
   public function order()
   {
+    // untuk menampilkan data sesuai dengan divisi user
     $users = UserDivision::with('divisionOrders')->where('division_id', Auth::guard('division')->user()->division_id)->get();
 
     $orders = [];
@@ -42,19 +43,38 @@ class AdminDivisiController extends Controller
       }
     }
 
+    // untuk menampilkan nama divisi user
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
+
+    $divisions = [];
+    foreach ($division as $div) {
+      array_push($divisions, $div->division->nama);
+    }
+
     return view('roles.admin.order', [
-      'title' => 'Order',
-      'header' => 'Order ',
+      'title' => 'Usulan | ' . $divisions[0],
+      'header' => 'Usulan ' . $divisions[0],
       'divOrder' => collect($orders)->sortByDesc('created_at')
     ]);
   }
 
   public function orderDetail($id)
   {
+    $divOrders = DivisionOrder::findOrFail($id);
+
+    if ($divOrders->user_division_id !== Auth::guard('division')->user()->id) {
+      return redirect()->route('addiv.order');
+    }
+
+    $proposeHp = ProposeHp::where('division_order_id', $id)->get();
+    $propose = Propose::where('division_order_id', $id)->get();
 
     return view('roles.admin.orderDetail', [
       'header' => 'Detail',
-      'order_id' => $id
+      'order_id' => $id,
+      'divOrder' => $divOrders,
+      'proposeHp' => $proposeHp,
+      'propose' => $propose
     ]);
   }
 
@@ -62,8 +82,8 @@ class AdminDivisiController extends Controller
   {
     return view('roles.admin.usulan', [
       'header' => 'Usulan',
-      'hp' => InventoryHp::all(),
-      'thp' => Inventory::all(),
+      'hp' => InventoryHp::where('division_id', Auth::guard('division')->user()->division_id)->get(),
+      'thp' => Inventory::where('division_id', Auth::guard('division')->user()->division_id)->get(),
       'type' => 'create'
     ]);
   }
@@ -80,12 +100,20 @@ class AdminDivisiController extends Controller
 
     for ($i = 0; $i < $count_hp; $i++) {
       $name_hp = $request->usulan_hp[$i];
+      $invenId = $request->usulan_hp[$i];
 
       if (is_numeric($name_hp)) {
         $name_hp = InventoryHp::find($name_hp)->nama_barang;
       }
 
+      if (is_numeric($invenId)) {
+        $invenId = InventoryHp::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
       ProposeHp::create([
+        'inventory_hp_id' => $invenId,
         'division_order_id' => $divOrder->id,
         'usulan_hp' => $name_hp,
         'jumlah_hp' => $request->jumlah_hp[$i],
@@ -99,12 +127,20 @@ class AdminDivisiController extends Controller
 
     for ($i = 0; $i  < $count_thp; $i++) {
       $name_thp = $request->usulan_thp[$i];
+      $invenId = $request->usulan_thp[$i];
 
       if (is_numeric($name_thp)) {
         $name_thp = Inventory::find($name_thp)->nama_barang;
       }
 
+      if (is_numeric($invenId)) {
+        $invenId = Inventory::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
       Propose::create([
+        'inventory_id' => $invenId,
         'division_order_id' => $divOrder->id,
         'usulan_thp' => $name_thp,
         'jumlah_thp' => $request->jumlah_thp[$i],
@@ -118,15 +154,23 @@ class AdminDivisiController extends Controller
 
   public function edit($id)
   {
-    $hp = ProposeHp::where('division_order_id', $id)->get();
-    $thp = Propose::where('division_order_id', $id)->get();
+    $divOrder = DivisionOrder::all();
+
+
+    foreach ($divOrder as $div) {
+      if ($div->approved_by_kadiv) {
+        return redirect()->back();
+      }
+    }
+
+    $divId = Auth::guard('division')->user()->division_id;
 
     return view('roles.admin.usulan', [
       'header' => 'Edit Usulan',
-      'invenHp' => InventoryHp::all(),
-      'invenThp' => Inventory::all(),
-      'hp' => $hp,
-      'thp' => $thp,
+      'invenHp' => InventoryHp::where('division_id', $divId)->get(),
+      'invenThp' => Inventory::where('division_id', $divId)->get(),
+      'hp' => ProposeHp::with('inventoryHp')->where('division_order_id', $id)->get(),
+      'thp' => Propose::with('inventory')->where('division_order_id', $id)->get(),
       'order_id' => $id,
       'type' => 'edit',
     ]);
@@ -134,11 +178,18 @@ class AdminDivisiController extends Controller
 
   public function update(StoreRequest $request, $id)
   {
+    // menghapus deskripsi by mutu
+    $desc = DivisionOrder::findOrFail($id);
+    if ($desc->description_by_mutu) {
+      $desc->description_by_mutu = null;
+      $desc->save();
+    }
+
     // menghapus tabel usulan habis pakai
     ProposeHp::where('division_order_id', $id)->delete();
     // menghapus tabel usulan tidak habis pakai
     Propose::where('division_order_id', $id)->delete();
-
+    // reset auto increment id
     DBHelper::resetAutoIncrement('propose_hps');
     DBHelper::resetAutoIncrement('proposes');
 
@@ -147,12 +198,20 @@ class AdminDivisiController extends Controller
 
     for ($i = 0; $i < $count_hp; $i++) {
       $name_hp = $request->usulan_hp[$i];
+      $invenId = $request->usulan_hp[$i];
 
       if (is_numeric($name_hp)) {
         $name_hp = InventoryHp::find($name_hp)->nama_barang;
       }
 
+      if (is_numeric($invenId)) {
+        $invenId = InventoryHp::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
       ProposeHp::create([
+        'inventory_hp_id' => $invenId,
         'division_order_id' => $id,
         'usulan_hp' => $name_hp,
         'jumlah_hp' => $request->jumlah_hp[$i],
@@ -166,12 +225,20 @@ class AdminDivisiController extends Controller
 
     for ($i = 0; $i  < $count_thp; $i++) {
       $name_thp = $request->usulan_thp[$i];
+      $invenId = $request->usulan_thp[$i];
 
       if (is_numeric($name_thp)) {
         $name_thp = Inventory::find($name_thp)->nama_barang;
       }
 
+      if (is_numeric($invenId)) {
+        $invenId = Inventory::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
       Propose::create([
+        'inventory_id' => $invenId,
         'division_order_id' => $id,
         'usulan_thp' => $name_thp,
         'jumlah_thp' => $request->jumlah_thp[$i],

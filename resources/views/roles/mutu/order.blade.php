@@ -2,16 +2,13 @@
 
 @section('container')
   <div class="section-body">
-    <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan yang telah disetujui oleh Kepala Bagian</p>
-
     @if (session()->has('success'))
       <div id="success" data-flash="{{ session('success') }}"></div>
     @endif
 
     <div class="card">
       <div class="card-header">
-        <h4>Tabel Order</h4>
+        <h4>Tabel Usulan</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -29,29 +26,42 @@
               <tr class="text-center">
                 <td class="align-middle">{{ $loop->iteration }}</td>
                 <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
-                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
-                <td>
+                <td class="align-middle">{{ date_format($order->created_at, 'd F Y / H:i') }}</td>
+                <td class="text-left">
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Barang Tidak Habis Pakai' }}
                 </td>
-                <td class="align-middle" style="max-width: 700px;">
-                  @if (!$order->description_by_mutu)
-                    Tidak ada deskripsi
-                  @else
-                    {{ $order->description_by_mutu }}
-                  @endif
+                <td class="align-middle text-left" style="max-width: 450px;">
+                  {{ $description_by_mutu ?? '-' }}
                 </td>
-                <td class="align-middle text-danger">
-                  {{ $order->description_by_mutu ? 'Ditolak' : '' }}
+                <td class="align-middle {{ $order->description_by_mutu ? 'text-danger' : 'text-success' }}">
+                  @if ($order->description_by_mutu)
+                    {{ 'Ditolak' }}
+                  @elseif ($order->approved_by_mutu)
+                    {{ 'Disetujui' }}
+                  @else
+                    {{ '-' }}
+                  @endif
                 </td>
                 <td>
-                  <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="btn btn-primary">Detail</a>
-                  @if (!$order->approved_by_mutu && !$order->description_by_mutu)
-                    <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
-                  @endif
-                  @if (!$order->approved_by_mutu && !$order->description_by_mutu)
-                    <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="btn btn-danger" id="btn-reject">Tolak</a>
-                  @endif
+                  <div class="dropdown d-inline">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+                      <i class="fas fa-chevron-circle-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a href="{{ route('mutu.orderDetail', [$order->id]) }}" class="dropdown-item has-icon"><i
+                          class="fas fa-info-circle text-info"></i>
+                        Detail</a>
+                      @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                        <a href="{{ route('mutu.accept', ['id' => $order->id]) }}" class="dropdown-item has-icon" id="btn-confirm"><i
+                            class="fas fa-check-circle text-success"></i> Konfirmasi</a>
+                      @endif
+                      @if (!$order->approved_by_mutu && !$order->description_by_mutu)
+                        <a href="{{ route('mutu.reject', ['id' => $order->id]) }}" class="dropdown-item has-icon" id="btn-reject">
+                          <i class="fas fa-times-circle text-danger"></i> Tolak</a>
+                      @endif
+                    </div>
+                  </div>
                 </td>
               </tr>
             @endforeach
@@ -78,6 +88,9 @@
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Tolak!",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          cancelButtonText: 'Batal'
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire({
@@ -88,6 +101,9 @@
                 "aria-label": "Tuliskan deskripsi disini",
               },
               showCancelButton: true,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              cancelButtonText: 'Batal'
             }).then((result) => {
               if (result.isConfirmed) {
                 $.ajax({

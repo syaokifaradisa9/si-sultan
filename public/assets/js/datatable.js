@@ -1,4 +1,4 @@
-// function untuk home
+//! function untuk home
 let link = window.location.href;
 let splitLink = link.split("/");
 let host = splitLink[0];
@@ -56,9 +56,9 @@ $(function () {
     ],
   });
 });
-// end of home page
+//! end of home page
 
-// function untuk order detail
+//? function untuk order detail
 let url = window.location.href;
 let splitUrl = url.split("/");
 
@@ -92,6 +92,10 @@ $(function () {
         data: "justifikasi_hp",
         name: "justifikasi_hp",
       },
+      {
+        data: "status",
+        name: "status",
+      },
     ],
   });
 });
@@ -123,6 +127,12 @@ $(function () {
         data: "justifikasi_thp",
         name: "justifikasi_thp",
       },
+      {
+        data: "status",
+        name: "status",
+      },
     ],
   });
 });
+
+//? end of order detail

@@ -9,12 +9,15 @@ btnCofirm.forEach((element) => {
 
     Swal.fire({
       title: "Apakah anda yakin?",
-      text: "Usulan yang telah dikonfirmasi akan diteruskan ke bagian selanjutnya!",
+      text: "Usulan ini akan dikonfirmasi!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Konfirmasi!",
+      cancelButtonText: "Batal",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
     }).then((result) => {
       if (result.isConfirmed) {
         location.href = href;

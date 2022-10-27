@@ -20,8 +20,8 @@ class AdministrasiUmumController extends Controller
     $orders = DivisionOrder::with('userDivision')->where('approved_by_kadiv', 1)->where('approved_by_mutu', 1)->get();
 
     return view('roles.adum.order', [
-      'title' => 'Order | Administrasi Umum',
-      'header' => 'Order Administrasi Umum',
+      'title' => 'Usulan | Administrasi Umum',
+      'header' => 'Usulan Administrasi Umum',
       'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }

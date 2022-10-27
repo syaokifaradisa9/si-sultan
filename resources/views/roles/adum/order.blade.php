@@ -2,26 +2,23 @@
 
 @section('container')
   <div class="section-body">
-    <h2 class="section-title">Order</h2>
-    <p class="section-lead">Tabel order dari usulan yang telah disetujui oleh Mutu/Tata Operasional</p>
-
-
     @if (session()->has('success'))
       <div id="success" data-flash="{{ session('success') }}"></div>
     @endif
 
     <div class="card">
       <div class="card-header">
-        <h4>Tabel Order</h4>
+        <h4>Tabel Usulan</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-striped table-md">
             <tr class="text-center">
               <th>No</th>
-              <th>Order</th>
+              <th>Usulan</th>
               <th>Tanggal Usulan</th>
               <th>Deskripsi Usulan</th>
+              <th>Status</th>
               <th>Aksi</th>
             </tr>
             @foreach ($orders as $order)
@@ -33,11 +30,22 @@
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Barang Tak Habis Pakai' }}
                 </td>
+                <td class="align-middle {{ $order->approved_by_adum ? 'text-success' : 'text-danger' }}">
+                  {{ $order->approved_by_adum ? 'Telah dikonfirmasi' : 'Belum dikonfirmasi' }}</td>
                 <td>
-                  <a href="{{ route('adum.orderDetail', ['id' => $order->id]) }}" class="btn btn-primary">Detail</a>
-                  @if (!$order->approved_by_adum)
-                    <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="btn btn-success" id="btn-confirm">Konfirmasi</a>
-                  @endif
+                  <div class="dropdown d-inline">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+                      <i class="fas fa-chevron-circle-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a href="{{ route('adum.orderDetail', ['id' => $order->id]) }}" class="dropdown-item has-icon"><i
+                          class="fas fa-info-circle text-info"></i> Detail</a>
+                      @if (!$order->approved_by_adum)
+                        <a href="{{ route('adum.accept', ['id' => $order->id]) }}" class="dropdown-item has-icon" id="btn-confirm"><i
+                            class="fas fa-check-circle text-success"></i> Konfirmasi</a>
+                      @endif
+                    </div>
+                  </div>
                 </td>
               </tr>
             @endforeach

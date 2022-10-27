@@ -14,4 +14,9 @@ class Propose extends Model
     {
         return $this->belongsTo(DivisionOrder::class);
     }
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
+    }
 }

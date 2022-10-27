@@ -19,13 +19,14 @@ class CreateProposesTable extends Migration
         Schema::create('proposes', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(DivisionOrder::class)->constrained();
+            $table->foreignIdFor(Inventory::class)->nullable()->constrained();
             $table->string('usulan_thp');
             $table->integer('jumlah_thp');
-            $table->string('spesifikasi_thp');
-            $table->string('justifikasi_thp');
+            $table->text('spesifikasi_thp');
+            $table->text('justifikasi_thp');
             $table->enum('status', [
-                'diajukan', 'disetujui', 'ditunda'
-            ]);
+                'diajukan', 'disetujui', 'ditunda', 'diajukan kembali'
+            ])->default('diajukan');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

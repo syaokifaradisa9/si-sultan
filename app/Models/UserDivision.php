@@ -12,8 +12,6 @@ class UserDivision extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // protected $table = 'user_divisions';
-
     protected $guarded = ['id'];
 
     public function division()

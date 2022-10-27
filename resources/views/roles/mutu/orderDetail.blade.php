@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['header' => 'Detail'])
 
 @section('container')
   <div class="section-body">
@@ -23,6 +23,7 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,7 @@
                     <th>Jumlah</th>
                     <th>Spesifikasi</th>
                     <th>Justifikasi</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -98,6 +100,9 @@
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Tolak!",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          cancelButtonText: 'Batal'
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire({
@@ -108,6 +113,9 @@
                 "aria-label": "Tuliskan deskripsi disini",
               },
               showCancelButton: true,
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              cancelButtonText: 'Batal'
             }).then((result) => {
               if (result.isConfirmed) {
                 $.ajax({
