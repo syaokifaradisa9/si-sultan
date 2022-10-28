@@ -29,8 +29,11 @@
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Tidak Barang Habis Pakai' }}
                 </td>
-                <td class="align-middle {{ $order->approved_by_kadiv ? 'text-success' : '' }}">
-                  {{ $order->approved_by_kadiv ? 'Telah dikonfirmasi' : 'Belum dikonfirmasi' }}</td>
+                <td class="align-middle">
+                  <div class="{{ $order->approved_by_kadiv ? 'badge badge-success' : 'badge badge-light' }}">
+                    {{ $order->approved_by_kadiv ? 'Telah dikonfirmasi' : 'Belum dikonfirmasi' }}
+                  </div>
+                </td>
                 <td>
                   <div class="dropdown d-inline">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">

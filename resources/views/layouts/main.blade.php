@@ -59,7 +59,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2022 - <a target="_blank" href="http://127.0.0.1:8000/vendor/team-portfolio/index.html">BPFK
+          Copyright &copy; 2022 - <a target="_blank" href="http://si-sultan.test/vendor/team-portfolio/index.html">BPFK
             Banjarbaru</a>
         </div>
         <div class="footer-right">
@@ -82,7 +82,7 @@
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/alert.js') }}"></script>
   <script src="{{ asset('assets/js/btn-function.js') }}"></script>
-  <script src="{{ asset('assets/js/datatable.js') }}"></script>
+  {{-- <script src="{{ asset('assets/js/datatable.js') }}"></script> --}}
   <script src="{{ asset('assets/js/form-validate.js') }}"></script>
   <script src="{{ asset('assets/js/usulan-script.js') }}"></script>
   @stack('js-extends')

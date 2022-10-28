@@ -15,7 +15,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md" id="detail-hp">
+              <table class="table table-bordered table-striped table-md" id="detail-hp">
                 <thead>
                   <tr class="text-center">
                     <th>No</th>
@@ -46,7 +46,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md" id="detail-thp">
+              <table class="table table-bordered table-striped table-md" id="detail-thp">
                 <thead>
                   <tr class="text-center">
                     <th>No</th>
@@ -142,3 +142,7 @@
     });
   </script>
 @endsection
+
+@push('js-extends')
+  <script src="{{ asset('assets/js/detail-datatable.js') }}"></script>
+@endpush

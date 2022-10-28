@@ -25,6 +25,9 @@ class AdminDivisiController extends Controller
       array_push($divisions, $div->division->nama);
     }
 
+    $proposes = ProposeHp::where('status', 'ditunda')->get();
+    // dd($proposes);
+
     return view('roles.admin.index', [
       'title' => 'Beranda | ' . $divisions[0],
       'header' => 'Beranda ' . $divisions[0],
@@ -90,6 +93,7 @@ class AdminDivisiController extends Controller
 
   public function store(StoreRequest $request)
   {
+    // dd($request->all());
     $divOrder = DivisionOrder::create([
       'user_division_id' => Auth::guard('division')->user()->id
     ]);
@@ -245,5 +249,18 @@ class AdminDivisiController extends Controller
     }
 
     return redirect()->route('addiv.order')->with('success', 'Usulan berhasil diperbaharui');
+  }
+
+  public function pending()
+  {
+    $proposes = Propose::where('status', 'ditunda')->get();
+    dd($proposes);
+  }
+
+  public function reapply($id)
+  {
+    $proposes = Propose::where('id', $id)->get();
+
+    dd($proposes);
   }
 }

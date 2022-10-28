@@ -12,7 +12,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-striped table-md">
+          <table class="table table-bordered table-striped table-md">
             <tr class="text-center">
               <th>No</th>
               <th>Usulan</th>
@@ -30,8 +30,11 @@
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Tidak Barang Habis Pakai' }}
                 </td>
-                <td class="align-middle {{ $order->approved_by_kepala ? 'text-success' : '' }}">
-                  {{ $order->approved_by_kepala ? 'Telah dikonfirmasi' : 'Belum dikonfirmasi' }}</td>
+                <td class="align-middle">
+                  <div class="{{ $order->approved_by_kepala ? 'badge badge-success' : 'badge badge-danger' }}">
+                    {{ $order->approved_by_kepala ? 'Telah dikonfirmasi' : 'Belum dikonfirmasi' }}
+                  </div>
+                </td>
                 <td>
                   <div class="dropdown d-inline">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">

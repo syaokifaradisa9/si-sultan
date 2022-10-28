@@ -13,10 +13,10 @@ use App\Http\Controllers\Datatable\DatatableController;
 use App\Http\Controllers\Adum\AdministrasiUmumController;
 use App\Http\Controllers\Auth\Register\RegisterController;
 
-Route::middleware('guest')->group(function () {
-  Route::get('/', [LoginController::class, 'index'])->name('login');
-  Route::get('/login', [LoginController::class, 'index'])->name('login');
-  Route::post('/login', [LoginController::class, 'authenticate'])->name('login.auth');
+Route::middleware('guest')->controller(LoginController::class)->group(function () {
+  Route::get('/', 'index')->name('login');
+  Route::get('/login', 'index')->name('login');
+  Route::post('/login', 'authenticate')->name('login.auth');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -32,93 +32,95 @@ Route::prefix('api')->group(function () {
 
 
 // Route Datatable
-Route::name('datatable.')->prefix('datatable')->group(function () {
-  Route::get('/{type}/home', [DatatableController::class, 'home'])->name('home');
-  Route::get('/{type}/{id}/detail', [DatatableController::class, 'detail'])->name('detail');
+Route::name('datatable.')->controller(DatatableController::class)->prefix('datatable')->group(function () {
+  Route::get('/{type}/home', 'home')->name('home');
+  Route::get('/{type}/{id}/detail', 'detail')->name('detail');
 });
 
 // Admin Divisi
-Route::name('addiv.')->prefix('addiv')->middleware(['addiv'])->group(function () {
-  Route::get('/home', [AdminDivisiController::class, 'index'])->name('home');
+Route::name('addiv.')->controller(AdminDivisiController::class)->prefix('addiv')->middleware(['addiv'])->group(function () {
+  Route::get('/home', 'index')->name('home');
+  Route::get('/pending', 'pending')->name('proposePending');
   Route::prefix('order')->group(function () {
-    Route::get('/', [AdminDivisiController::class, 'order'])->name('order');
-    Route::get('/create', [AdminDivisiController::class, 'create'])->name('create');
-    Route::post('/store', [AdminDivisiController::class, 'store'])->name('store');
+    Route::get('/', 'order')->name('order');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [AdminDivisiController::class, 'orderDetail'])->name('orderDetail');
-      Route::get('/edit', [AdminDivisiController::class, 'edit'])->name(('edit'));
-      Route::put('/update', [AdminDivisiController::class, 'update'])->name('update');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
+      Route::get('/edit', 'edit')->name(('edit'));
+      Route::put('/update', 'update')->name('update');
+      Route::get('/reapply', 'reapply')->name('reapply');
     });
   });
 });
 
 // Kepala Divisi
-Route::name('kadiv.')->prefix('kadiv')->middleware(['kadiv'])->group(function () {
-  Route::get('/home', [KepalaDivisiController::class, 'index'])->name('home');
+Route::name('kadiv.')->controller(KepalaDivisiController::class)->prefix('kadiv')->middleware(['kadiv'])->group(function () {
+  Route::get('/home', 'index')->name('home');
   Route::prefix('/order')->group(function () {
-    Route::get('/', [KepalaDivisiController::class, 'order'])->name('order');
+    Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [KepalaDivisiController::class, 'orderDetail'])->name('orderDetail');
-      Route::get('/accept', [KepalaDivisiController::class, 'accept'])->name('accept');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
+      Route::get('/accept', 'accept')->name('accept');
     });
   });
 });
 
 // Mutu Operasional
-Route::name('mutu.')->prefix('mutu')->middleware(['mutu'])->group(function () {
-  Route::get('/home', [MutuController::class, 'index'])->name('home');
+Route::name('mutu.')->controller(MutuController::class)->prefix('mutu')->middleware(['mutu'])->group(function () {
+  Route::get('/home', 'index')->name('home');
   Route::prefix('/approved')->group(function () {
-    Route::get('/', [MutuController::class, 'approvedByPpk'])->name('approvedByPPK');
-    Route::get('/{id}/{type}', [MutuController::class, 'detailApproved'])->name('detailApproved');
+    Route::get('/', 'approvedByPpk')->name('approvedByPPK');
+    Route::get('/{id}/{type}', 'detailApproved')->name('detailApproved');
   });
   Route::prefix('pending')->group(function () {
-    Route::get('/', [MutuController::class, 'pendingByPpk'])->name('pendingByPPK');
-    Route::get('{id}/{type}', [MutuController::class, 'detailPending'])->name('detailPending');
+    Route::get('/', 'pendingByPpk')->name('pendingByPPK');
+    Route::get('{id}/{type}', 'detailPending')->name('detailPending');
   });
   Route::prefix('order')->group(function () {
-    Route::get('/', [MutuController::class, 'order'])->name('order');
+    Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/accept', [MutuController::class, 'accept'])->name('accept');
-      Route::post('/reject', [MutuController::class, 'reject'])->name('reject');
-      Route::get('/detail', [MutuController::class, 'orderDetail'])->name('orderDetail');
+      Route::get('/accept', 'accept')->name('accept');
+      Route::post('/reject', 'reject')->name('reject');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
     });
   });
 });
 
 // Administrasi Umum
-Route::name('adum.')->prefix('adum')->middleware(['adum'])->group(function () {
-  Route::get('/home', [AdministrasiUmumController::class, 'index'])->name('home');
+Route::name('adum.')->controller(AdministrasiUmumController::class)->prefix('adum')->middleware(['adum'])->group(function () {
+  Route::get('/home', 'index')->name('home');
   Route::prefix('order')->group(function () {
-    Route::get('/', [AdministrasiUmumController::class, 'order'])->name('order');
+    Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [AdministrasiUmumController::class, 'orderDetail'])->name('orderDetail');
-      Route::get('/accept', [AdministrasiUmumController::class, 'accept'])->name('accept');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
+      Route::get('/accept', 'accept')->name('accept');
     });
   });
 });
 
 // Kepala LPFK
-Route::name('lpfk.')->prefix('lpfk')->middleware(['leader'])->group(function () {
-  Route::get('/home', [KepalaLpfkController::class, 'index'])->name('home');
+Route::name('lpfk.')->controller(KepalaLpfkController::class)->prefix('lpfk')->middleware(['leader'])->group(function () {
+  Route::get('/home', 'index')->name('home');
   Route::prefix('order')->group(function () {
-    Route::get('/', [KepalaLpfkController::class, 'order'])->name('order');
+    Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [KepalaLpfkController::class, 'orderDetail'])->name('orderDetail');
-      Route::get('/accept', [KepalaLpfkController::class, 'accept'])->name('accept');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
+      Route::get('/accept', 'accept')->name('accept');
     });
   });
 });
 
 // PPK
-Route::name('ppk.')->prefix('ppk')->middleware(['ppk'])->group(function () {
-  Route::get('/home', [PpkController::class, 'index'])->name('home');
+Route::name('ppk.')->controller(PpkController::class)->prefix('ppk')->middleware(['ppk'])->group(function () {
+  Route::get('/home', 'index')->name('home');
   Route::prefix('order')->group(function () {
-    Route::get('/', [PpkController::class, 'order'])->name('order');
+    Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {
-      Route::get('/detail', [PpkController::class, 'orderDetail'])->name('orderDetail');
-      Route::get('/approved/{type}', [PpkController::class, 'approved'])->name('approved');
-      Route::post('/pending', [PpkController::class, 'pending'])->name('pending');
-      Route::get('/acceptedAll', [PpkController::class, 'acceptedAll'])->name('acceptAll');
+      Route::get('/detail', 'orderDetail')->name('orderDetail');
+      Route::get('/approved/{type}', 'approved')->name('approved');
+      Route::post('/pending', 'pending')->name('pending');
+      Route::get('/acceptedAll', 'acceptedAll')->name('acceptAll');
     });
   });
 });
@@ -126,8 +128,10 @@ Route::name('ppk.')->prefix('ppk')->middleware(['ppk'])->group(function () {
 // Superadmin
 Route::name('admin.')->prefix('admin')->middleware(['superadmin'])->group(function () {
   Route::get('/home', [SuperadminController::class, 'index'])->name('home');
-  Route::get('/register', [RegisterController::class, 'index'])->name('register');
-  Route::post('/register', [RegisterController::class, 'store'])->name('store');
+  Route::prefix('register')->group(function () {
+    Route::get('/', [RegisterController::class, 'index'])->name('register');
+    Route::post('/', [RegisterController::class, 'store'])->name('store');
+  });
 });
 
 Route::get('{prefix}', function () {

@@ -25,14 +25,14 @@
               <table class="table table-striped table-md">
                 <thead>
                   <tr class="text-center">
-                    <th>No</th>
-                    <th>Nama Usulan</th>
-                    <th>Jumlah</th>
-                    <th>Spesifikasi</th>
-                    <th>Justifikasi</th>
+                    <th class="align-middle">No</th>
+                    <th class="align-middle">Nama Usulan</th>
+                    <th class="align-middle">Jumlah</th>
+                    <th class="align-middle">Spesifikasi</th>
+                    <th class="align-middle">Justifikasi</th>
                     @if ($divOrder->approved_by_kepala)
-                      <th>Status</th>
-                      <th style="width: 350px;">Deskripsi</th>
+                      <th class="align-middle">Status</th>
+                      <th style="width: 350px;" class="align-middle">Deskripsi</th>
                     @endif
                   </tr>
                 </thead>
@@ -45,10 +45,14 @@
                       <td class="align-middle text-left">{{ $hp->spesifikasi_hp }}</td>
                       <td class="align-middle text-left">{{ $hp->justifikasi_hp }}</td>
                       @if ($divOrder->approved_by_kepala)
-                        <td
-                          @if ($hp->status == 'disetujui') class="text-success align-middle"
-                      @elseif ($hp->status == 'ditunda') class="text-danger align-middle" @endif>
-                          {{ $hp->status }}</td>
+                        <td class="align-middle">
+                          <div
+                            class="@if ($hp->status === 'disetujui') badge badge-success
+                            @elseif ($hp->status === 'ditunda') badge badge-warning
+                            @else badge badge-primary @endif">
+                            {{ $hp->status }}
+                          </div>
+                        </td>
                         <td class="align-middle text-left">
                           {{ $hp->deskripsi ? $hp->deskripsi : '-' }}
                         </td>
@@ -74,14 +78,14 @@
               <table class="table table-striped table-md">
                 <thead>
                   <tr class="text-center">
-                    <th>No</th>
-                    <th>Nama Usulan</th>
-                    <th>Jumlah</th>
-                    <th>Spesifikasi</th>
-                    <th>Justifikasi</th>
+                    <th class="align-middle">No</th>
+                    <th class="align-middle">Nama Usulan</th>
+                    <th class="align-middle">Jumlah</th>
+                    <th class="align-middle">Spesifikasi</th>
+                    <th class="align-middle">Justifikasi</th>
                     @if ($divOrder->approved_by_kepala)
-                      <th>Status</th>
-                      <th style="width: 350px;">Deskripsi</th>
+                      <th class="align-middle">Status</th>
+                      <th style="width: 350px;" class="align-middle">Deskripsi</th>
                     @endif
                   </tr>
                 </thead>
@@ -94,10 +98,14 @@
                       <td class="align-middle text-left">{{ $thp->spesifikasi_thp }}</td>
                       <td class="align-middle text-left">{{ $thp->justifikasi_thp }}</td>
                       @if ($divOrder->approved_by_kepala)
-                        <td
-                          @if ($thp->status == 'disetujui') class="text-success align-middle"
-                          @elseif ($thp->status == 'ditunda') class="text-danger align-middle" @endif>
-                          {{ $thp->status }}</td>
+                        <td class="align-middle">
+                          <div
+                            class="@if ($thp->status === 'disetujui') badge badge-success
+                          @elseif ($thp->status === 'ditunda') badge badge-warning
+                          @else badge badge-primary @endif">
+                            {{ $thp->status }}
+                          </div>
+                        </td>
                         <td class="align-middle text-left">
                           {{ $thp->deskripsi ? $thp->deskripsi : '-' }}
                         </td>

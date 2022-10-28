@@ -16,7 +16,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md">
+              <table class="table table-bordered table-striped table-md">
                 <thead>
                   <tr class="text-center">
                     <th class="align-middle">No</th>
@@ -37,10 +37,13 @@
                       <td class="align-middle">{{ $hp->jumlah_hp }}</td>
                       <td class="align-middle text-left">{{ $hp->spesifikasi_hp }}</td>
                       <td class="align-middle text-left">{{ $hp->justifikasi_hp }}</td>
-                      <td class="align-middle"
-                        @if ($hp->status == 'disetujui') style="color: green" 
-                        @elseif ($hp->status == 'ditunda') style="color: red" @endif>
-                        {{ $hp->status }}
+                      <td class="align-middle">
+                        <div
+                          class="@if ($hp->status == 'disetujui') badge badge-success 
+                          @elseif ($hp->status == 'ditunda') badge badge-warning 
+                          @else badge badge-light @endif">
+                          {{ $hp->status }}
+                        </div>
                       </td>
                       <td class="align-middle text-left" style="width: 350px">
                         {{ $hp->deskripsi ? $hp->deskripsi : 'Tidak ada deskripsi' }}
@@ -81,7 +84,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md">
+              <table class="table table-bordered table-striped table-md">
                 <thead>
                   <tr class="text-center">
                     <th class="align-middle">No</th>
@@ -102,10 +105,13 @@
                       <td class="align-middle">{{ $thp->jumlah_thp }}</td>
                       <td class="align-middle text-left">{{ $thp->spesifikasi_thp }}</td>
                       <td class="align-middle text-left">{{ $thp->justifikasi_thp }}</td>
-                      <td class="align-middle"
-                        @if ($thp->status == 'disetujui') style="color: green" 
-                        @elseif ($thp->status == 'ditunda') style="color: red" @endif>
-                        {{ $thp->status }}
+                      <td class="align-middle">
+                        <div
+                          class="@if ($thp->status == 'disetujui') badge badge-success 
+                          @elseif ($thp->status == 'ditunda') badge badge-warning
+                          @else badge badge-light @endif">
+                          {{ $thp->status }}
+                        </div>
                       </td>
                       <td class="align-middle text-left" style="width: 350px">
                         {{ $thp->deskripsi ? $thp->deskripsi : 'Tidak ada deskripsi' }}

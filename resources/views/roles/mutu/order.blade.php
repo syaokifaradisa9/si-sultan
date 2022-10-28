@@ -12,7 +12,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-striped table-md">
+          <table class="table table-bordered table-striped table-md">
             <tr class="text-center">
               <th>No</th>
               <th>Order</th>
@@ -34,14 +34,16 @@
                 <td class="align-middle text-left" style="max-width: 450px;">
                   {{ $description_by_mutu ?? '-' }}
                 </td>
-                <td class="align-middle {{ $order->description_by_mutu ? 'text-danger' : 'text-success' }}">
-                  @if ($order->description_by_mutu)
-                    {{ 'Ditolak' }}
-                  @elseif ($order->approved_by_mutu)
-                    {{ 'Disetujui' }}
-                  @else
-                    {{ '-' }}
-                  @endif
+                <td class="align-middle">
+                  <div class="{{ $order->description_by_mutu ? 'badge badge-danger' : 'badge badge-success' }}">
+                    @if ($order->description_by_mutu)
+                      {{ 'Ditolak' }}
+                    @elseif ($order->approved_by_mutu)
+                      {{ 'Disetujui' }}
+                    @else
+                      {{ '-' }}
+                    @endif
+                  </div>
                 </td>
                 <td>
                   <div class="dropdown d-inline">

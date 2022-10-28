@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item {{ Request::is('addiv/order*') ? 'active' : '' }}">
           <a href="/addiv/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+            <i class="fas fa-tasks"></i><span>Usulan</span>
           </a>
         </li>
       @endisAdminDiv
@@ -32,7 +32,7 @@
         </li>
         <li class="nav-item {{ Request::is('kadiv/order*') ? 'active' : '' }}">
           <a href="/kadiv/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
           </a>
         </li>
       @endisKadiv
@@ -74,7 +74,7 @@
         </li>
         <li class="nav-item {{ Request::is('adum/order*') ? 'active' : '' }}">
           <a href="/adum/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
           </a>
         </li>
       @endisAdum
@@ -89,7 +89,7 @@
         </li>
         <li class="nav-item {{ Request::is('lpfk/order*') ? 'active' : '' }}">
           <a href="/lpfk/order" class="nav-link ">
-            <i class="fas fa-plus-square"></i></i><span>Usulan</span>
+            <i class="fas fa-plus-square"></i><span>Usulan</span>
           </a>
         </li>
       @endisLead

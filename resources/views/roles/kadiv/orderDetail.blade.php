@@ -10,15 +10,15 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md" id="detail-hp">
+              <table class="table table-bordered table-striped table-md" id="detail-hp">
                 <thead>
                   <tr class="text-center">
-                    <th>No</th>
-                    <th>Nama Usulan</th>
-                    <th>Jumlah</th>
-                    <th>Spesifikasi</th>
-                    <th>Justifikasi</th>
-                    <th>Status</th>
+                    <th class="align-middle">No</th>
+                    <th class="align-middle">Nama Usulan</th>
+                    <th class="align-middle">Jumlah</th>
+                    <th class="align-middle">Spesifikasi</th>
+                    <th class="align-middle">Justifikasi</th>
+                    <th class="align-middle">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -38,20 +38,18 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-md" id="detail-thp">
+              <table class="table table-bordered table-striped table-md" id="detail-thp">
                 <thead>
                   <tr class="text-center">
-                    <th>No</th>
-                    <th>Nama Usulan</th>
-                    <th>Jumlah</th>
-                    <th>Spesifikasi</th>
-                    <th>Justifikasi</th>
-                    <th>Status</th>
+                    <th class="align-middle">No</th>
+                    <th class="align-middle">Nama Usulan</th>
+                    <th class="align-middle">Jumlah</th>
+                    <th class="align-middle">Spesifikasi</th>
+                    <th class="align-middle">Justifikasi</th>
+                    <th class="align-middle">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="text-center">
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -72,3 +70,7 @@
     </div>
   </div>
 @endsection
+
+@push('js-extends')
+  <script src="{{ asset('assets/js/detail-datatable.js') }}"></script>
+@endpush
