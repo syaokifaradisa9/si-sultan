@@ -33,37 +33,33 @@ class AppServiceProvider extends ServiceProvider
                 return auth()->guard('division')->user()->role === 'admin_divisi';
             }
 
-            if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'superadmin';
-            }
+            
         });
         Blade::if('isKadiv', function () {
             if (Auth::guard('division')->check()) {
                 return auth()->guard('division')->user()->role === 'kepala_divisi';
             }
 
-            if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'superadmin';
-            }
+            
         });
         Blade::if('isMutu', function () {
             if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'mutu' || auth()->guard('web')->user()->role === 'superadmin';
+                return auth()->guard('web')->user()->role === 'mutu' ;
             }
         });
         Blade::if('isAdum', function () {
             if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'administrasi_umum' || auth()->guard('web')->user()->role === 'superadmin';
+                return auth()->guard('web')->user()->role === 'administrasi_umum' ;
             }
         });
         Blade::if('isLead', function () {
             if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'kepala_lpfk' || auth()->guard('web')->user()->role === 'superadmin';
+                return auth()->guard('web')->user()->role === 'kepala_lpfk' ;
             }
         });
         Blade::if('isPpk', function () {
             if (Auth::guard('web')->check()) {
-                return auth()->guard('web')->user()->role === 'ppk' || auth()->guard('web')->user()->role === 'superadmin';
+                return auth()->guard('web')->user()->role === 'ppk' ;
             }
         });
         Blade::if('isSuperadmin', function () {
