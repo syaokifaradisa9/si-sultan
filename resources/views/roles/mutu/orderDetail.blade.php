@@ -144,5 +144,6 @@
 @endsection
 
 @push('js-extends')
+  <script src="{{ asset('assets/js/btn-function.js') }}"></script>
   <script src="{{ asset('assets/js/detail-datatable.js') }}"></script>
 @endpush

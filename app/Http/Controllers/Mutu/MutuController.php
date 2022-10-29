@@ -39,7 +39,7 @@ class MutuController extends Controller
   {
     $data = [];
     for ($i = 0; $i < 2; $i++) {
-      $proposes = $i === 0 ? ProposeHp::with('divisionOrder')->get() : Propose::with('divisionOrder')->get();
+      $proposes = $i === 0 ? ProposeHp::with('divisionOrder')->get()->sortByDesc('updated_at') : Propose::with('divisionOrder')->get()->sortByDesc('updated_at');
       $type = $i === 0 ? "hp" : "thp";
 
       foreach ($proposes as $propose) {
@@ -103,8 +103,7 @@ class MutuController extends Controller
     }
 
     return view('roles.mutu.detailApproved', [
-      'proposes' => $data,
-      'type' => $type
+      'proposes' => $data
     ]);
   }
 
@@ -113,7 +112,7 @@ class MutuController extends Controller
     $data = [];
     for ($i = 0; $i < 2; $i++) {
       // Pengambilan Habis Pakai Jika i = 0 dan seterusnya
-      $proposes = $i === 0 ? ProposeHp::with('divisionOrder')->get() : Propose::with('divisionOrder')->get();
+      $proposes = $i === 0 ? ProposeHp::with('divisionOrder')->get()->sortByDesc('updated_at') : Propose::with('divisionOrder')->get()->sortByDesc('updated_at');
       $type = $i === 0 ? "hp" : "thp";
 
       // Proses Pendataan Usulan Ditolak
@@ -190,7 +189,6 @@ class MutuController extends Controller
 
     return view('roles.mutu.detailPending', [
       'proposes' => $data,
-      'type' => $type
     ]);
   }
 

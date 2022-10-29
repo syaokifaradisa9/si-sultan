@@ -309,9 +309,14 @@
       <div class="card-body">
         <div class="float-right" style="padding-right: 2.3rem">
           <a href="{{ route('addiv.order') }}" class="btn btn-light mr-2">Kembali</a>
-          <button type="submit" class="btn btn-primary">{{ $type == 'create' ? 'Submit' : 'Update' }}</button>
+          <button type="submit" class="btn btn-primary">{{ $type == 'create' ? 'Buat Pengajuan' : 'Perbarui Pengajuan' }}</button>
         </div>
       </div>
     </div>
   </form>
 @endsection
+
+@push('js-extends')
+  <script src="{{ asset('assets/js/form-validate.js') }}"></script>
+  <script src="{{ asset('assets/js/usulan-script.js') }}"></script>
+@endpush

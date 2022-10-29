@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Addiv;
 
+use App\Helpers\DataPendingHelper;
 use App\Helpers\DBHelper;
 use App\Models\Inventory;
 use App\Models\InventoryHp;
@@ -25,12 +26,14 @@ class AdminDivisiController extends Controller
       array_push($divisions, $div->division->nama);
     }
 
-    $proposes = ProposeHp::where('status', 'ditunda')->get();
-    // dd($proposes);
+    $valueHp = DataPendingHelper::getHpPending();
+    $values = DataPendingHelper::getThpPending();
 
     return view('roles.admin.index', [
       'title' => 'Beranda | ' . $divisions[0],
       'header' => 'Beranda ' . $divisions[0],
+      'proposeHp' => $valueHp,
+      'proposes' => $values,
     ]);
   }
 
@@ -101,7 +104,6 @@ class AdminDivisiController extends Controller
     $data_hp = $request->usulan_hp;
     $count_hp = count($data_hp);
 
-
     for ($i = 0; $i < $count_hp; $i++) {
       $name_hp = $request->usulan_hp[$i];
       $invenId = $request->usulan_hp[$i];
@@ -160,7 +162,7 @@ class AdminDivisiController extends Controller
   {
     $divOrder = DivisionOrder::findOrFail($id);
 
-    if ($divOrder->approved_by_kadiv === 1) {
+    if ($divOrder->approved_by_kadiv === 1 && !$divOrder->description_by_mutu) {
       return redirect()->back();
     }
 
@@ -251,16 +253,102 @@ class AdminDivisiController extends Controller
     return redirect()->route('addiv.order')->with('success', 'Usulan berhasil diperbaharui');
   }
 
-  public function pending()
+  public function reapply()
   {
-    $proposes = Propose::where('status', 'ditunda')->get();
-    dd($proposes);
+    $valueHp = DataPendingHelper::getHpPending();
+    $values = DataPendingHelper::getThpPending();
+
+    $divId = Auth::guard('division')->user()->division_id;
+
+    return view('roles.admin.reapply', [
+      'header' => 'Pengajuan Ulang Usulan',
+      'proposeHp' => $valueHp,
+      'proposes' => $values,
+      'invenHp' => InventoryHp::where('division_id', $divId)->get(),
+      'invenThp' => Inventory::where('division_id', $divId)->get(),
+    ]);
   }
 
-  public function reapply($id)
+  public function storeReapply(Request $request)
   {
-    $proposes = Propose::where('id', $id)->get();
+    // dd($request->all());
 
-    dd($proposes);
+    $valueHp = DataPendingHelper::getHpPending();
+    $values = DataPendingHelper::getThpPending();
+
+    // dd($values);
+    foreach ($valueHp as $hp) {
+      $hp->delete();
+    }
+
+    foreach ($values as $thp) {
+      $thp->delete();
+    }
+
+    DBHelper::resetAutoIncrement('propose_hps');
+    DBHelper::resetAutoIncrement('proposes');
+
+
+    $divOrderId = DivisionOrder::create([
+      'user_division_id' => Auth::guard('division')->user()->id
+    ]);
+
+    $data_hp = $request->usulan_hp;
+    $count_hp = count($data_hp);
+
+    for ($i = 0; $i < $count_hp; $i++) {
+      $name_hp = $request->usulan_hp[$i];
+      $invenId = $request->usulan_hp[$i];
+
+      if (is_numeric($name_hp)) {
+        $name_hp = InventoryHp::find($name_hp)->nama_barang;
+      }
+
+      if (is_numeric($invenId)) {
+        $invenId = InventoryHp::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
+      ProposeHp::create([
+        'inventory_hp_id' => $invenId,
+        'division_order_id' => $divOrderId->id,
+        'usulan_hp' => $name_hp,
+        'jumlah_hp' => $request->jumlah_hp[$i],
+        'spesifikasi_hp' => $request->spesifikasi_hp[$i],
+        'justifikasi_hp' => $request->justifikasi_hp[$i],
+        'status' => 'diajukan kembali'
+      ]);
+    }
+
+    $data_thp = $request->usulan_thp;
+    $count_thp = count($data_thp);
+
+    for ($i = 0; $i  < $count_thp; $i++) {
+      $name_thp = $request->usulan_thp[$i];
+      $invenId = $request->usulan_thp[$i];
+
+      if (is_numeric($name_thp)) {
+        $name_thp = Inventory::find($name_thp)->nama_barang;
+      }
+
+      if (is_numeric($invenId)) {
+        $invenId = Inventory::find($invenId)->id;
+      } else {
+        $invenId = null;
+      }
+
+      Propose::create([
+        'inventory_id' => $invenId,
+        'division_order_id' => $divOrderId->id,
+        'usulan_thp' => $name_thp,
+        'jumlah_thp' => $request->jumlah_thp[$i],
+        'spesifikasi_thp' => $request->spesifikasi_thp[$i],
+        'justifikasi_thp' => $request->justifikasi_thp[$i],
+        'status' => 'diajukan kembali'
+      ]);
+    }
+
+    return redirect()->route('addiv.home')->with('success', 'Usulan berhasil diajukan kembali');
   }
 }

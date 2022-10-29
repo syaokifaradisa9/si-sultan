@@ -58,3 +58,7 @@
     </div>
   </div>
 @endsection
+
+@push('js-extends')
+  <script src="{{ asset('assets/js/btn-function.js') }}"></script>
+@endpush

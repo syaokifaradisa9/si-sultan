@@ -40,16 +40,16 @@ Route::name('datatable.')->controller(DatatableController::class)->prefix('datat
 // Admin Divisi
 Route::name('addiv.')->controller(AdminDivisiController::class)->prefix('addiv')->middleware(['addiv'])->group(function () {
   Route::get('/home', 'index')->name('home');
-  Route::get('/pending', 'pending')->name('proposePending');
   Route::prefix('order')->group(function () {
     Route::get('/', 'order')->name('order');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/reapply', 'reapply')->name('reapply');
+    Route::post('/storeReapply', 'storeReapply')->name('storeReapply');
     Route::prefix('{id}')->group(function () {
       Route::get('/detail', 'orderDetail')->name('orderDetail');
       Route::get('/edit', 'edit')->name(('edit'));
       Route::put('/update', 'update')->name('update');
-      Route::get('/reapply', 'reapply')->name('reapply');
     });
   });
 });

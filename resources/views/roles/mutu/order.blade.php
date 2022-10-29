@@ -35,7 +35,9 @@
                   {{ $description_by_mutu ?? '-' }}
                 </td>
                 <td class="align-middle">
-                  <div class="{{ $order->description_by_mutu ? 'badge badge-danger' : 'badge badge-success' }}">
+                  <div
+                    class="@if ($order->description_by_mutu) badge badge-danger
+                    @elseif ($order->approved_by_mutu) badge badge-success @endif">
                     @if ($order->description_by_mutu)
                       {{ 'Ditolak' }}
                     @elseif ($order->approved_by_mutu)
@@ -132,3 +134,7 @@
     });
   </script>
 @endsection
+
+@push('js-extends')
+  <script src="{{ asset('assets/js/btn-function.js') }}"></script>
+@endpush

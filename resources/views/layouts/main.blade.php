@@ -6,6 +6,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ $title ?? 'SI-SULTAN' }}</title>
+  <link rel="shortcut icon" href="{{ asset('assets/img/logo/logo-crop.png') }}" type="image/x-icon">
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -81,10 +82,6 @@
   <!-- Template JS File -->
   <script src="{{ asset('vendor/stisla/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/alert.js') }}"></script>
-  <script src="{{ asset('assets/js/btn-function.js') }}"></script>
-  {{-- <script src="{{ asset('assets/js/datatable.js') }}"></script> --}}
-  <script src="{{ asset('assets/js/form-validate.js') }}"></script>
-  <script src="{{ asset('assets/js/usulan-script.js') }}"></script>
   @stack('js-extends')
   <!-- Page Specific JS File -->
 </body>

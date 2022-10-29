@@ -233,6 +233,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'urlHelper' => App\Helpers\URLHelper::class,
         'DBHelper' => App\Helpers\DBHelper::class,
+        'DataPendingHelper' => App\Helpers\DataPendingHelper::class
     ],
 
 ];
