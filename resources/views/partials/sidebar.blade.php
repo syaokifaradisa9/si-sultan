@@ -1,11 +1,11 @@
 <div class="main-sidebar sidebar-style-2">
   <aside id="sidebar-wrapper">
-    <div class="sidebar-brand">
+    <div class="sidebar-brand text-center">
       <img src="{{ asset('assets/img//logo/logo-crop.png') }}" alt="logo" width="60">
+      <h6>SI-SULTAN</h6>
     </div>
-    <div class="text-center">SI-SULTAN</div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="http://si-sultan.test/">SS</a>
+      <a href="http://si-sultan.test/">BPFK</a>
     </div>
     <ul class="sidebar-menu mt-3">
       @isAdminDiv
