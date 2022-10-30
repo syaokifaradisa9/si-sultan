@@ -35,6 +35,15 @@ class PpkController extends Controller
     $proposeHp = ProposeHp::where('division_order_id', $id)->get();
     $propose = Propose::where('division_order_id', $id)->get();
 
+    $hp = '';
+    foreach ($proposeHp as $value) {
+      $hp = $value;
+    }
+    $thp = '';
+    foreach ($propose as $value) {
+      $thp = $value;
+    }
+
     $div = DivisionOrder::findOrFail($id);
 
     return view('roles.ppk.orderDetail', [
@@ -42,6 +51,8 @@ class PpkController extends Controller
       'header' => 'Detail Usulan ' . $div->userDivision->division->nama,
       'proposeHp' => $proposeHp,
       'propose' => $propose,
+      'hp' => $hp,
+      'thp' => $thp,
       'order_id' => $id
     ]);
   }

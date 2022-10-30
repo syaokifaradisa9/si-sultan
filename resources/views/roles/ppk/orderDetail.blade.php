@@ -149,7 +149,8 @@
     <div class="card-body">
       <div class="float-right" style="padding-right: 2.3rem">
         <a href="{{ route('ppk.order') }}" class="btn btn-light mr-2">Kembali</a>
-        <a href="{{ route('ppk.acceptAll', ['id' => $order_id]) }}" class="btn btn-success mr-2" id="btn-confirm">Konfirmasi Semua Usulan</a>
+        <a href="{{ route('ppk.acceptAll', ['id' => $order_id]) }}" class="btn btn-success mr-2" id="btn-confirm"><i class="fas fa-check-circle"></i>
+          Konfirmasi Semua Usulan</a>
       </div>
     </div>
   </div>

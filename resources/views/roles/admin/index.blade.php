@@ -132,9 +132,11 @@
               </tbody>
             </table>
           </div>
-          <div class="float-right">
-            <a href="{{ route('addiv.reapply') }}" class="btn btn-primary mt-3 mb-3">Ajukan Ulang</a>
-          </div>
+          @if ($hp || $thp)
+            <div class="float-right">
+              <a href="{{ route('addiv.reapply') }}" class="btn btn-primary mt-3 mb-3">Ajukan Ulang</a>
+            </div>
+          @endif
         </div>
       </div>
     </div>
