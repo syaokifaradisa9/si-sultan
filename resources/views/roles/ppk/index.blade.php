@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'Beranda | PPK', 'header' => 'Beranda'])
 
 @section('container')
   @if (session()->has('success'))
@@ -66,13 +66,17 @@
             <table class="table table-bordered table-md" id="pending-table">
               <thead>
                 <tr class="text-center">
-                  <th class="align-middle">No</th>
-                  <th class="align-middle">Nama Barang</th>
-                  <th class="align-middle" style="width: 150px">Jumlah Belum Diterima</th>
-                  <th class="align-middle">Spesifikasi</th>
-                  <th class="align-middle">Justifikasi</th>
-                  <th class="align-middle">Status</th>
-                  <th class="align-middle">Aksi</th>
+                  <th class="align-middle" rowspan="2">No</th>
+                  <th class="align-middle" rowspan="2">Nama Barang</th>
+                  <th class="align-middle" colspan="2">Jumlah</th>
+                  <th class="align-middle" rowspan="2">Spesifikasi</th>
+                  <th class="align-middle" rowspan="2">Justifikasi</th>
+                  <th class="align-middle" rowspan="2">Status</th>
+                  <th class="align-middle" rowspan="2">Aksi</th>
+                </tr>
+                <tr>
+                  <th class="align-middle" style="width: 150px">Disetujui</th>
+                  <th class="align-middle" style="width: 150px">Belum Diterima</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,6 +84,7 @@
                   <tr id="hp">
                     <td class="align-middle">{{ $loop->iteration }}</td>
                     <td class="align-middle">{{ $propose->usulan_hp }}</td>
+                    <td class="align-middle">{{ $firstAmountHp }}</td>
                     <td class="align-middle">{{ $propose->jumlah_hp }}</td>
                     <td class="align-middle text-left" style="max-width: 300px">{{ $propose->spesifikasi_hp }}</td>
                     <td class="align-middle text-left" style="max-width: 300px">{{ $propose->justifikasi_hp }}</td>
@@ -115,13 +120,17 @@
             <table class="table table-bordered table-md" id="pending-table">
               <thead>
                 <tr class="text-center">
-                  <th class="align-middle">No</th>
-                  <th class="align-middle">Nama Barang</th>
-                  <th class="align-middle" style="width: 150px">Jumlah Belum Diterima</th>
-                  <th class="align-middle">Spesifikasi</th>
-                  <th class="align-middle">Justifikasi</th>
-                  <th class="align-middle">Status</th>
-                  <th class="align-middle">Aksi</th>
+                  <th class="align-middle" rowspan="2">No</th>
+                  <th class="align-middle" rowspan="2">Nama Barang</th>
+                  <th class="align-middle" colspan="2">Jumlah</th>
+                  <th class="align-middle" rowspan="2">Spesifikasi</th>
+                  <th class="align-middle" rowspan="2">Justifikasi</th>
+                  <th class="align-middle" rowspan="2">Status</th>
+                  <th class="align-middle" rowspan="2">Aksi</th>
+                </tr>
+                <tr>
+                  <th class="align-middle" style="width: 150px">Disetujui</th>
+                  <th class="align-middle" style="width: 150px">Belum Diterima</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,6 +138,7 @@
                   <tr id="thp">
                     <td class="align-middle">{{ $loop->iteration }}</td>
                     <td class="align-middle">{{ $propose->usulan_thp }}</td>
+                    <td class="align-middle">{{ $firstAmount }}</td>
                     <td class="align-middle">{{ $propose->jumlah_thp }}</td>
                     <td class="align-middle text-left" style="max-width: 300px">{{ $propose->spesifikasi_thp }}</td>
                     <td class="align-middle text-left" style="max-width: 300px">{{ $propose->justifikasi_thp }}</td>

@@ -21,11 +21,31 @@ class PpkController extends Controller
     $valueHp = DataAcceptedHelper::dataHpAccepted();
     $values = DataAcceptedHelper::dataThpAccepted();
 
+    $firstAmountHp = '';
+    foreach ($valueHp as $hp) {
+      $reveived = ReceiveHp::with('proposeHp')->where('propose_hp_id', $hp->id)->first();
+      if ($reveived->proposeHp->status === 'diterima') {
+        $firstAmountHp = $reveived->jumlah;
+      } else {
+        $firstAmountHp = $reveived->jumlah + $hp->jumlah_hp;
+      }
+    }
+
+    $firstAmount = '';
+    foreach ($values as $thp) {
+      $received = Receive::with('propose')->where('propose_id', $thp->id)->first();
+      if ($received->propose->status === 'diterima') {
+        $firstAmount = $received->jumlah;
+      } else {
+        $firstAmount = $received->jumlah + $thp->jumlah_thp;
+      }
+    }
+
     return view('roles.ppk.index', [
-      'title' => 'Beranda | PPK',
-      'header' => 'Beranda',
       'proposeHp' => $valueHp,
       'proposes' => $values,
+      'firstAmountHp' => $firstAmountHp,
+      'firstAmount' => $firstAmount
     ]);
   }
 
@@ -290,7 +310,7 @@ class PpkController extends Controller
         $inven->save();
 
         $jumlahUsulan = $data->jumlah_hp;
-        if ($jumlahUsulan === $dataReceved->jumlah) {
+        if ($jumlahUsulan === 0) {
           $data->jumlah_thp = $dataReceved->jumlah;
           $data->status = 'diterima';
           $data->save();
@@ -327,13 +347,15 @@ class PpkController extends Controller
 
         $receivedAmount = $receive->jumlah;
 
-        $data[$type][$divisionName][$receivedName] = [
-          'id' => $receivedId,
-          'first_amount' => $firstAmount,
-          'received_amount' => $receivedAmount,
-          'propose_date' => $proposeDate,
-          'received_date' => $receivedDate
-        ];
+        if ($status !== 'diterima') {
+          $data[$type][$divisionName][$receivedName] = [
+            'id' => $receivedId,
+            'first_amount' => $firstAmount,
+            'received_amount' => $receivedAmount,
+            'propose_date' => $proposeDate,
+            'received_date' => $receivedDate
+          ];
+        }
       }
     }
 

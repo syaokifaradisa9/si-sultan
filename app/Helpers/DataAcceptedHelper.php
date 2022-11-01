@@ -70,7 +70,6 @@ class DataAcceptedHelper
       $proposeName = $propose->usulan_thp;
       $div_order_id = $propose->division_order_id;
       $inventory_id = $propose->inventory_id;
-      $status = $propose->status;
 
       $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id) {
         $isDivisionOrderSame = $proposeItem->division_order_id === $div_order_id;
