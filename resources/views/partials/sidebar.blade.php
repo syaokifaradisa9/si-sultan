@@ -106,6 +106,13 @@
             <i class="fas fa-list-ul"></i><span>Usulan</span>
           </a>
         </li>
+        <hr style="margin: 15px 20px">
+        <li class="menu-header">Usulan</li>
+        <li class="nav-item {{ Request::is('ppk/received*') ? 'active' : '' }}">
+          <a href="/ppk/received" class="nav-link ">
+            <i class="fas fa-check-circle"></i><span>Diterima</span>
+          </a>
+        </li>
       @endisPpk
 
       @isSuperadmin

@@ -49,6 +49,7 @@
                           <div
                             class="@if ($hp->status === 'disetujui') badge badge-success
                             @elseif ($hp->status === 'ditunda') badge badge-warning
+                            @elseif ($hp->status == 'diajukan kembali') badge badge-info
                             @else badge badge-primary @endif">
                             {{ $hp->status }}
                           </div>
@@ -102,6 +103,7 @@
                           <div
                             class="@if ($thp->status === 'disetujui') badge badge-success
                           @elseif ($thp->status === 'ditunda') badge badge-warning
+                          @elseif ($thp->status == 'diajukan kembali') badge badge-info
                           @else badge badge-primary @endif">
                             {{ $thp->status }}
                           </div>

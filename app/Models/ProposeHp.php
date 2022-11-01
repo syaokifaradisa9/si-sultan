@@ -19,4 +19,9 @@ class ProposeHp extends Model
     {
         return $this->belongsTo(InventoryHp::class);
     }
+
+    public function receiveHp()
+    {
+        return $this->hasMany(ReceiveHp::class);
+    }
 }

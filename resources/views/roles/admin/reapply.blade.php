@@ -29,8 +29,8 @@
               @foreach ($proposeHp as $data)
                 {{-- @foreach ($propose as $data) --}}
                 <tr class="text-center duplicate">
+                  <input type="hidden" name="id_hp[]" value="{{ $data->id }}">
                   <input type="hidden" name="inventory_hp_id[]" value="{{ $data->inventory_hp_id }}">
-                  <input type="hidden" name="division_order_id[]" value="{{ $data->division_order_id }}">
                   <td class="count">{{ $loop->iteration }}</td>
                   <td class="usulan" id="hp">
                     <?php
@@ -123,8 +123,8 @@
             <tbody class="duplicate-form">
               @foreach ($proposes as $data)
                 <tr class="text-center duplicate">
+                  <input type="hidden" name="id_thp[]" value="{{ $data->id }}">
                   <input type="hidden" name="inventory_id[]" value="{{ $data->inventory_id }}">
-                  <input type="hidden" name="division_order_id[]" value="{{ $data->division_order_id }}">
                   <td class="count">{{ $loop->iteration }}</td>
                   <td class="usulan" id="thp">
                     <?php

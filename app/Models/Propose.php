@@ -19,4 +19,9 @@ class Propose extends Model
     {
         return $this->belongsTo(Inventory::class);
     }
+
+    public function receives()
+    {
+        return $this->hasMany(Receive::class);
+    }
 }

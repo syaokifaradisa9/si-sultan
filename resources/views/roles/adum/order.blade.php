@@ -25,7 +25,7 @@
               <tr class="text-center">
                 <td class="align-middle">{{ $loop->iteration }}</td>
                 <td class="align-middle">{{ $order->userDivision->division->nama }}</td>
-                <td class="align-middle">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
+                <td class="align-middle">{{ date_format($order->created_at, 'd F Y H:i') }}</td>
                 <td>
                   {{ count($order->proposeHp) . ' Barang Habis Pakai' }} <br>
                   {{ count($order->propose) . ' Barang Tak Habis Pakai' }}

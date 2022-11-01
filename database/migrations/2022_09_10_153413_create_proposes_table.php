@@ -25,7 +25,7 @@ class CreateProposesTable extends Migration
             $table->text('spesifikasi_thp');
             $table->text('justifikasi_thp');
             $table->enum('status', [
-                'diajukan', 'disetujui', 'ditunda', 'diajukan kembali'
+                'diajukan', 'disetujui', 'ditunda', 'diajukan kembali', 'diterima'
             ])->default('diajukan');
             $table->text('deskripsi')->nullable();
             $table->timestamps();

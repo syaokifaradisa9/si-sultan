@@ -24,7 +24,7 @@ class CreateProposeHpsTable extends Migration
             $table->text('spesifikasi_hp');
             $table->text('justifikasi_hp');
             $table->enum('status', [
-                'diajukan', 'disetujui', 'ditunda', 'diajukan kembali'
+                'diajukan', 'disetujui', 'ditunda', 'diajukan kembali', 'diterima'
             ])->default('diajukan');
             $table->text('deskripsi')->nullable();
             $table->timestamps();

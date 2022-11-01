@@ -6,37 +6,27 @@ use App\Models\Propose;
 use App\Models\ProposeHp;
 use Illuminate\Support\Facades\Auth;
 
-class DataPendingHelper
+class DataAcceptedHelper
 {
-  public static function getHpPending()
+  public static function dataHpAccepted()
   {
     $dataHp = [];
-    $proposes = ProposeHp::with('divisionOrder')->get()->sortByDesc('updated_at');
+    $proposes = ProposeHp::with('divisionOrder')->where('status', 'disetujui')->get();
     $type = "hp";
 
     foreach ($proposes as $propose) {
       $proposeName = $propose->usulan_hp;
       $div_order_id = $propose->division_order_id;
       $inventory_id = $propose->inventory_hp_id;
-      $divisionId = $propose->divisionOrder->userDivision->division->id;
-      $jumlah_hp = $propose->jumlah_hp;
-      $spesifikasi = $propose->spesifikasi_hp;
-      $justifikasi = $propose->justifikasi_hp;
-      $status = $propose->status;
 
-      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id, $divisionId, $jumlah_hp, $spesifikasi, $justifikasi, $status) {
+      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id) {
         $isDivisionOrderSame = $proposeItem->division_order_id === $div_order_id;
         $isProposeNameSame =  $proposeItem->usulan_hp  === $proposeName;
         $isInventoryIdSame =  $proposeItem->inventory_hp_id === $inventory_id;
-        $isDivNameSame = Auth::guard('division')->user()->division_id === $divisionId;
-        $isAmountSame = $proposeItem->jumlah_hp === $jumlah_hp;
-        $isSpesificationSame = $proposeItem->spesifikasi_hp === $spesifikasi;
-        $isJustificationSame = $proposeItem->justifikasi_hp === $justifikasi;
-        $isStatusSame = $proposeItem->status === $status;
-        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame && $isDivNameSame && $isAmountSame && $isSpesificationSame && $isJustificationSame && $isStatusSame;
+        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame;
       });
 
-      $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "ditunda");
+      $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "disetujui");
 
       $uniqueCode = '';
       foreach ($filteredPending as $value) {
@@ -70,36 +60,26 @@ class DataPendingHelper
     return $valueHp;
   }
 
-  public static function getThpPending()
+  public static function dataThpAccepted()
   {
-    // Barang Tidak Habis Pakai
     $datas = [];
-    $proposes = Propose::with('divisionOrder')->get()->sortByDesc('updated_at');
+    $proposes = Propose::with('divisionOrder')->where('status', 'disetujui')->get();
     $type = "thp";
 
     foreach ($proposes as $propose) {
       $proposeName = $propose->usulan_thp;
       $div_order_id = $propose->division_order_id;
       $inventory_id = $propose->inventory_id;
-      $divisionId = $propose->divisionOrder->userDivision->division->id;
-      $jumlah_hp = $propose->jumlah_hp;
-      $spesifikasi = $propose->spesifikasi_hp;
-      $justifikasi = $propose->justifikasi_hp;
       $status = $propose->status;
 
-      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id, $divisionId, $jumlah_hp, $spesifikasi, $justifikasi, $status) {
+      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id) {
         $isDivisionOrderSame = $proposeItem->division_order_id === $div_order_id;
         $isProposeNameSame =  $proposeItem->usulan_thp  === $proposeName;
         $isInventoryIdSame =  $proposeItem->inventory_id === $inventory_id;
-        $isDivNameSame = Auth::guard('division')->user()->division_id === $divisionId;
-        $isAmountSame = $proposeItem->jumlah_hp === $jumlah_hp;
-        $isSpesificationSame = $proposeItem->spesifikasi_hp === $spesifikasi;
-        $isJustificationSame = $proposeItem->justifikasi_hp === $justifikasi;
-        $isStatusSame = $proposeItem->status === $status;
-        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame && $isDivNameSame && $isAmountSame && $isSpesificationSame && $isJustificationSame && $isStatusSame;
+        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame;
       });
 
-      $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "ditunda");
+      $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "disetujui");
 
       $uniqueCode = '';
       foreach ($filteredPending as $value) {
