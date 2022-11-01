@@ -2,15 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiController;
-use App\Http\Controllers\Ppk\PpkController;
-use App\Http\Controllers\Mutu\MutuController;
-use App\Http\Controllers\Lead\KepalaLpfkController;
+use App\Http\Controllers\PpkController;
+use App\Http\Controllers\MutuController;
+use App\Http\Controllers\KepalaLpfkController;
 use App\Http\Controllers\Admin\SuperadminController;
 use App\Http\Controllers\Auth\Login\LoginController;
-use App\Http\Controllers\Addiv\AdminDivisiController;
-use App\Http\Controllers\Kadiv\KepalaDivisiController;
+use App\Http\Controllers\AdminDivisiController;
+use App\Http\Controllers\KepalaDivisiController;
 use App\Http\Controllers\Datatable\DatatableController;
-use App\Http\Controllers\Adum\AdministrasiUmumController;
+use App\Http\Controllers\AdministrasiUmumController;
 use App\Http\Controllers\Auth\Register\RegisterController;
 
 Route::middleware('guest')->controller(LoginController::class)->group(function () {
@@ -113,7 +113,14 @@ Route::name('lpfk.')->controller(KepalaLpfkController::class)->prefix('lpfk')->m
 
 // PPK
 Route::name('ppk.')->controller(PpkController::class)->prefix('ppk')->middleware(['ppk'])->group(function () {
-  Route::get('/home', 'index')->name('home');
+  Route::prefix('home')->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::post('/{id}/received', 'itemReceived')->name('itemReceived');
+  });
+  Route::prefix('received')->group(function () {
+    Route::get('/', 'received')->name('received');
+    Route::get('/{id}/{type}/detail', 'detailReceived')->name('detailReceived');
+  });
   Route::prefix('order')->group(function () {
     Route::get('/', 'order')->name('order');
     Route::prefix('{id}')->group(function () {

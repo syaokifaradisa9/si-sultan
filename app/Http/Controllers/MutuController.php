@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Mutu;
+namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
@@ -177,7 +177,6 @@ class MutuController extends Controller
 
   public function detailPending($id, $type)
   {
-
     $dataId = explode("-", $id);
 
     $data = [];

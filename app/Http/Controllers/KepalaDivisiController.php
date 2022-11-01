@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Kadiv;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,16 +13,11 @@ class KepalaDivisiController extends Controller
 {
   public function index()
   {
-    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
-
-    $divisions = [];
-    foreach ($division as $div) {
-      array_push($divisions, $div->division->nama);
-    }
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->first();
 
     return view('roles.kadiv.index', [
-      'title' => 'Beranda | ' . $divisions[0],
-      'header' => 'Beranda ' . $divisions[0],
+      'title' => 'Beranda | ' . $division->division->nama,
+      'header' => 'Beranda ' . $division->division->nama,
     ]);
   }
   public function order()
@@ -38,16 +33,11 @@ class KepalaDivisiController extends Controller
     }
 
     // untuk menampilkan nama divisi user
-    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->get();
-
-    $divisions = [];
-    foreach ($division as $div) {
-      array_push($divisions, $div->division->nama);
-    }
+    $division = UserDivision::with('division')->where('division_id', Auth::guard('division')->user()->division_id)->first();
 
     return view('roles.kadiv.order', [
-      'title' => 'Usulan |' . $divisions[0],
-      'header' => 'Usulan ' . $divisions[0],
+      'title' => 'Usulan |' . $division->division->nama,
+      'header' => 'Usulan ' . $division->division->nama,
       'orders' => collect($orders)->sortByDesc('created_at')
     ]);
   }

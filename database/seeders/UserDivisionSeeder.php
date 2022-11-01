@@ -19,7 +19,7 @@ class UserDivisionSeeder extends Seeder
     UserDivision::create([
       'name' => 'addiv',
       'email' => 'addiv@gmail.com',
-      'password' => bcrypt('password'),
+      'password' => bcrypt('123'),
       'role' => 'admin_divisi',
       'division_id' => 1
     ]);
@@ -27,8 +27,8 @@ class UserDivisionSeeder extends Seeder
     UserDivision::create([
       'name' => 'kadiv',
       'email' => 'kadiv@gmail.com',
-      'password' => bcrypt('password'),
-      'role' => 'kepala_divisi',
+      'password' => bcrypt('123'),
+      'role' => 'ppk',
       'division_id' => 1
     ]);
   }
