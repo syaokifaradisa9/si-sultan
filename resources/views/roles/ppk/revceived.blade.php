@@ -18,7 +18,7 @@
                   <th rowspan="2" class="align-middle">No</th>
                   <th rowspan="2" class="align-middle">Nama Barang</th>
                   <th rowspan="2" class="align-middle">Bagian</th>
-                  <th colspan="2">Jumlah</th>
+                  <th colspan="2">Jumlah Barang</th>
                   <th colspan="2">Tanggal</th>
                   <th rowspan="2" class="align-middle">Aksi</th>
                 </tr>
