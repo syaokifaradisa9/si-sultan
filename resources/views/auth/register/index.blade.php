@@ -6,11 +6,14 @@
       <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
           <div class="login-brand">
-            <img src="{{ asset('vendor/stisla/img/stisla-fill.svg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
+            <img src="{{ asset('assets/img/logo/logo.png') }}" alt="logo" width="100">
           </div>
           <div class="card card-primary">
             <div class="card-header">
               <h4>Register</h4>
+              <div class="ml-auto">
+                <a href="{{ route('admin.home') }}" class="btn btn-primary"><i class="fas fa-chevron-circle-left"></i> Kembali</a>
+              </div>
             </div>
 
             <div class="card-body">

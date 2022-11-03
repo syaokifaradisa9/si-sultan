@@ -119,12 +119,7 @@
         <li class="menu-header">Superadmin</li>
         <li class="nav-item {{ Request::is('admin/home') ? 'active' : '' }}">
           <a href="/admin/home" class="nav-link ">
-            <i class="fas fa-th-large"></i><span>Home</span>
-          </a>
-        </li>
-        <li class="nav-item {{ Request::is('admin/register') ? 'active' : '' }}">
-          <a href="/admin/register" class="nav-link ">
-            <i class="fas fa-user-plus"></i><span>Add New User</span>
+            <i class="fas fa-home"></i><span>Beranda</span>
           </a>
         </li>
       @endisSuperadmin

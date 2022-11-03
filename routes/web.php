@@ -135,10 +135,13 @@ Route::name('ppk.')->controller(PpkController::class)->prefix('ppk')->middleware
 // Superadmin
 Route::name('admin.')->prefix('admin')->middleware(['superadmin'])->group(function () {
   Route::get('/home', [SuperadminController::class, 'index'])->name('home');
+  Route::get('/delete/{id}', [SuperadminController::class, 'delete'])->name('delete');
+  Route::get('/deleteDiv/{id}', [SuperadminController::class, 'deleteUserDiv'])->name('deleteUserDiv');
   Route::prefix('register')->group(function () {
     Route::get('/', [RegisterController::class, 'index'])->name('register');
     Route::post('/', [RegisterController::class, 'store'])->name('store');
   });
+  
 });
 
 Route::get('{prefix}', function () {
