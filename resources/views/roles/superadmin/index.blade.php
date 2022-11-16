@@ -9,7 +9,10 @@
       <div class="card-header">
         <h4>Data User</h4>
         <div class="ml-auto">
-          <a href="/admin/register" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add New User</a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register">
+            <i class="fas fa-user-plus"></i> Add New User
+          </button>
+          {{-- <a href="/admin/register" class="btn btn-primary"><i class="fas fa-user-plus"></i> Add New User</a> --}}
         </div>
       </div>
       <div class="card-body">
@@ -81,4 +84,6 @@
 
 @push('js-extends')
   <script src="{{ asset('assets/js/btn-function-delete.js') }}"></script>
+  <script src="{{ asset('assets/js/register.js') }}"></script>
 @endpush
+@include('auth.register.index')

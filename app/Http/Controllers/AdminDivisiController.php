@@ -283,8 +283,6 @@ class AdminDivisiController extends Controller
     $valueHp = DataPendingHelper::getHpPending();
     $values = DataPendingHelper::getThpPending();
 
-    dd($valueHp);
-
     $divId = Auth::guard('division')->user()->division_id;
 
     return view('roles.admin.reapply', [
