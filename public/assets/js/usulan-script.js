@@ -85,9 +85,6 @@ btnAdd.forEach((element) => {
     // duplikat form
     const newForm = duplicated.cloneNode(true);
 
-    // mendapatkan element terakhir dari form
-    const node = parent.lastElementChild;
-
     // untuk membuat nilai bpm di form baru menjadi kosong
     const type = newForm.querySelector(".usulan").getAttribute("id");
 
@@ -138,7 +135,7 @@ btnAdd.forEach((element) => {
           });
 
           pilihan.innerHTML = `
-          <select class="form-control form-control-sm eventSelect" id="usulan_hp" name="usulan_hp[]">
+          <select class="form-control form-control-sm input-hp eventSelect" id="usulan_hp" name="usulan_hp[]">
             <option selected hidden value="">Pilih Barang</option>
             ${options}
             <option value="lainnya">Lainnya...</option>
@@ -175,6 +172,8 @@ btnAdd.forEach((element) => {
       element.addEventListener("click", changeEvent);
     });
 
+    // mendapatkan element terakhir dari form
+    const node = parent.lastElementChild;
     parent.insertBefore(newForm, node);
   });
 });

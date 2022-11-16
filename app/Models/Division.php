@@ -15,4 +15,14 @@ class Division extends Model
     {
         return $this->hasMany(UserDivision::class);
     }
+
+    public function InventoryHp()
+    {
+        return $this->hasMany(InventoryHp::class);
+    }
+
+    public function Inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

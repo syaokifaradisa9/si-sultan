@@ -20,6 +20,13 @@
             <i class="fas fa-list-ul"></i><span>Usulan</span>
           </a>
         </li>
+        <hr style="margin: 15px 20px">
+        <li class="menu-header">Inventaris</li>
+        <li class="nav-item {{ Request::is('addiv/inventory*') ? 'active' : '' }}">
+          <a href="/addiv/inventory" class="nav-link ">
+            <i class="fas fa-archive"></i><span>Kelola Inventaris</span>
+          </a>
+        </li>
       @endisAdminDiv
 
       @isKadiv

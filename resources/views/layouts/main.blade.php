@@ -50,9 +50,8 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>{{ $header ?? 'Blank Page' }}</h1>
+            <h1>{{ $header ?? '' }}</h1>
           </div>
-
           <div class="section-body">
             @yield('container')
           </div>
@@ -64,7 +63,6 @@
             Banjarbaru</a>
         </div>
         <div class="footer-right">
-
         </div>
       </footer>
     </div>

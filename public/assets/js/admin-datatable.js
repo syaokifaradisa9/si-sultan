@@ -15,10 +15,6 @@ $(function () {
         render: (data, type, row, meta) => meta.row + 1,
       },
       {
-        data: "division.nama",
-        name: "division.nama",
-      },
-      {
         data: "nama_barang",
         name: "nama_barang",
       },
@@ -48,10 +44,6 @@ $(function () {
       {
         data: null,
         render: (data, type, row, meta) => meta.row + 1,
-      },
-      {
-        data: "division.nama",
-        name: "division.nama",
       },
       {
         data: "nama_barang",

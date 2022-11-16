@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Datatable;
 
 use App\Http\Controllers\Controller;
-use App\Models\Division;
-use App\Models\DivisionOrder;
 use App\Models\Inventory;
 use App\Models\InventoryHp;
 use App\Models\Propose;
 use App\Models\ProposeHp;
-use App\Models\UserDivision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -20,12 +17,22 @@ class DatatableController extends Controller
   {
     if ($request->ajax()) {
       if ($type == 'hp') {
-        $data = InventoryHp::all();
-        return DataTables::of($data)->make(true);
+        if (Auth::guard('division')->check()) {
+          $data = InventoryHp::where('division_id', Auth::guard('division')->user()->division_id)->get();
+          return DataTables::of($data)->make(true);
+        } else {
+          $data = InventoryHp::with('division')->get();
+          return DataTables::of($data)->toJson();
+        }
       }
       if ($type == 'thp') {
-        $data = Inventory::all();
-        return DataTables::of($data)->make(true);
+        if (Auth::guard('division')->check()) {
+          $data = Inventory::where('division_id', Auth::guard('division')->user()->division_id)->get();
+          return DataTables::of($data)->make(true);
+        } else {
+          $data = Inventory::with('division')->get();
+          return DataTables::of($data)->make(true);
+        }
       }
     }
   }
@@ -46,28 +53,15 @@ class DatatableController extends Controller
         array_push($usulanThp, $thp);
       }
 
-      $div = DivisionOrder::findOrFail($id);
-
       if ($type == 'hp') {
         $data = $usulanHp;
         $hp = DataTables::of($data);
-
-        // if ($div->approved_by_kepala) {
-        //   $hp->addColumn('status', function () {
-        //     $status = 'test';
-        //     return $status;
-        //   });
-        // }
-        return $hp->rawColumns(['status'])->make(true);
+        return $hp->make(true);
       }
 
       if ($type == 'thp') {
         $data = $usulanThp;
         $thp = DataTables::of($data);
-
-        if ($div->approved_by_kepala) {
-        }
-
         return $thp->toJson();
       }
     }

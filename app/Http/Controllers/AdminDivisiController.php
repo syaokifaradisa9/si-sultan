@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\DataPendingHelper;
 use App\Helpers\DBHelper;
+use App\Helpers\RequestHelper;
 use App\Models\Inventory;
 use App\Models\InventoryHp;
 use Illuminate\Http\Request;
@@ -96,65 +97,73 @@ class AdminDivisiController extends Controller
     ]);
   }
 
-  public function store(StoreRequest $request)
+  public function store(Request $request)
   {
-    // dd($request->all());
-    $divOrder = DivisionOrder::create([
-      'user_division_id' => Auth::guard('division')->user()->id
-    ]);
+    $proposeHp = RequestHelper::requestHp($request);
+    $proposeThp = RequestHelper::requestThp($request);
 
-    $data_hp = $request->usulan_hp;
-    $count_hp = count($data_hp);
-
-    for ($i = 0; $i < $count_hp; $i++) {
-      $name_hp = $request->usulan_hp[$i];
-      $invenId = $request->usulan_hp[$i];
-
-      if (is_numeric($name_hp)) {
-        $name_hp = InventoryHp::find($name_hp)->nama_barang;
-      }
-
-      if (is_numeric($invenId)) {
-        $invenId = InventoryHp::find($invenId)->id;
-      } else {
-        $invenId = null;
-      }
-
-      ProposeHp::create([
-        'inventory_hp_id' => $invenId,
-        'division_order_id' => $divOrder->id,
-        'usulan_hp' => $name_hp,
-        'jumlah_hp' => $request->jumlah_hp[$i],
-        'spesifikasi_hp' => $request->spesifikasi_hp[$i],
-        'justifikasi_hp' => $request->justifikasi_hp[$i]
+    if ($proposeHp || $proposeThp) {
+      $divOrder = DivisionOrder::create([
+        'user_division_id' => Auth::guard('division')->user()->id
       ]);
     }
 
-    $data_thp = $request->usulan_thp;
-    $count_thp = count($data_thp);
+    if ($proposeHp) {
+      $data_hp = $request->usulan_hp;
+      $count_hp = count($data_hp);
 
-    for ($i = 0; $i  < $count_thp; $i++) {
-      $name_thp = $request->usulan_thp[$i];
-      $invenId = $request->usulan_thp[$i];
+      for ($i = 0; $i < $count_hp; $i++) {
+        $name_hp = $request->usulan_hp[$i];
+        $invenId = $request->usulan_hp[$i];
 
-      if (is_numeric($name_thp)) {
-        $name_thp = Inventory::find($name_thp)->nama_barang;
+        if (is_numeric($name_hp)) {
+          $name_hp = InventoryHp::find($name_hp)->nama_barang;
+        }
+
+        if (is_numeric($invenId)) {
+          $invenId = InventoryHp::find($invenId)->id;
+        } else {
+          $invenId = null;
+        }
+
+        ProposeHp::create([
+          'inventory_hp_id' => $invenId,
+          'division_order_id' => $divOrder->id,
+          'usulan_hp' => $name_hp,
+          'jumlah_hp' => $request->jumlah_hp[$i],
+          'spesifikasi_hp' => $request->spesifikasi_hp[$i],
+          'justifikasi_hp' => $request->justifikasi_hp[$i]
+        ]);
       }
+    }
 
-      if (is_numeric($invenId)) {
-        $invenId = Inventory::find($invenId)->id;
-      } else {
-        $invenId = null;
+    if ($proposeThp) {
+      $data_thp = $request->usulan_thp;
+      $count_thp = count($data_thp);
+
+      for ($i = 0; $i  < $count_thp; $i++) {
+        $name_thp = $request->usulan_thp[$i];
+        $invenId = $request->usulan_thp[$i];
+
+        if (is_numeric($name_thp)) {
+          $name_thp = Inventory::find($name_thp)->nama_barang;
+        }
+
+        if (is_numeric($invenId)) {
+          $invenId = Inventory::find($invenId)->id;
+        } else {
+          $invenId = null;
+        }
+
+        Propose::create([
+          'inventory_id' => $invenId,
+          'division_order_id' => $divOrder->id,
+          'usulan_thp' => $name_thp,
+          'jumlah_thp' => $request->jumlah_thp[$i],
+          'spesifikasi_thp' => $request->spesifikasi_thp[$i],
+          'justifikasi_thp' => $request->justifikasi_thp[$i]
+        ]);
       }
-
-      Propose::create([
-        'inventory_id' => $invenId,
-        'division_order_id' => $divOrder->id,
-        'usulan_thp' => $name_thp,
-        'jumlah_thp' => $request->jumlah_thp[$i],
-        'spesifikasi_thp' => $request->spesifikasi_thp[$i],
-        'justifikasi_thp' => $request->justifikasi_thp[$i]
-      ]);
     }
 
     return redirect()->route('addiv.order')->with('success', 'Usulan berhasil ditambahkan');
@@ -181,8 +190,11 @@ class AdminDivisiController extends Controller
     ]);
   }
 
-  public function update(StoreRequest $request, $id)
+  public function update(Request $request, $id)
   {
+    $proposeHp = RequestHelper::requestHp($request);
+    $proposeThp = RequestHelper::requestThp($request);
+
     // menghapus deskripsi by mutu
     $desc = DivisionOrder::findOrFail($id);
     if ($desc->description_by_mutu) {
@@ -190,66 +202,77 @@ class AdminDivisiController extends Controller
       $desc->save();
     }
 
-    // menghapus tabel usulan habis pakai
-    ProposeHp::where('division_order_id', $id)->delete();
-    // menghapus tabel usulan tidak habis pakai
-    Propose::where('division_order_id', $id)->delete();
-    // reset auto increment id
-    DBHelper::resetAutoIncrement('propose_hps');
-    DBHelper::resetAutoIncrement('proposes');
-
-    $data_hp = $request->usulan_hp;
-    $count_hp = count($data_hp);
-
-    for ($i = 0; $i < $count_hp; $i++) {
-      $name_hp = $request->usulan_hp[$i];
-      $invenId = $request->usulan_hp[$i];
-
-      if (is_numeric($name_hp)) {
-        $name_hp = InventoryHp::find($name_hp)->nama_barang;
-      }
-
-      if (is_numeric($invenId)) {
-        $invenId = InventoryHp::find($invenId)->id;
-      } else {
-        $invenId = null;
-      }
-
-      ProposeHp::create([
-        'inventory_hp_id' => $invenId,
-        'division_order_id' => $id,
-        'usulan_hp' => $name_hp,
-        'jumlah_hp' => $request->jumlah_hp[$i],
-        'spesifikasi_hp' => $request->spesifikasi_hp[$i],
-        'justifikasi_hp' => $request->justifikasi_hp[$i]
-      ]);
+    if ($proposeHp) {
+      // menghapus tabel usulan habis pakai
+      ProposeHp::where('division_order_id', $id)->delete();
+      // reset auto increment id
+      DBHelper::resetAutoIncrement('propose_hps');
     }
 
-    $data_thp = $request->usulan_thp;
-    $count_thp = count($data_thp);
+    if ($proposeThp) {
+      // menghapus tabel usulan tidak habis pakai
+      Propose::where('division_order_id', $id)->delete();
+      // reset auto increment id
+      DBHelper::resetAutoIncrement('proposes');
+    }
 
-    for ($i = 0; $i  < $count_thp; $i++) {
-      $name_thp = $request->usulan_thp[$i];
-      $invenId = $request->usulan_thp[$i];
 
-      if (is_numeric($name_thp)) {
-        $name_thp = Inventory::find($name_thp)->nama_barang;
+    if ($proposeHp) {
+      $data_hp = $request->usulan_hp;
+      $count_hp = count($data_hp);
+
+      for ($i = 0; $i < $count_hp; $i++) {
+        $name_hp = $request->usulan_hp[$i];
+        $invenId = $request->usulan_hp[$i];
+
+        if (is_numeric($name_hp)) {
+          $name_hp = InventoryHp::find($name_hp)->nama_barang;
+        }
+
+        if (is_numeric($invenId)) {
+          $invenId = InventoryHp::find($invenId)->id;
+        } else {
+          $invenId = null;
+        }
+
+        ProposeHp::create([
+          'inventory_hp_id' => $invenId,
+          'division_order_id' => $id,
+          'usulan_hp' => $name_hp,
+          'jumlah_hp' => $request->jumlah_hp[$i],
+          'spesifikasi_hp' => $request->spesifikasi_hp[$i],
+          'justifikasi_hp' => $request->justifikasi_hp[$i]
+        ]);
       }
+    }
 
-      if (is_numeric($invenId)) {
-        $invenId = Inventory::find($invenId)->id;
-      } else {
-        $invenId = null;
+    if ($proposeThp) {
+      $data_thp = $request->usulan_thp;
+      $count_thp = count($data_thp);
+
+      for ($i = 0; $i  < $count_thp; $i++) {
+        $name_thp = $request->usulan_thp[$i];
+        $invenId = $request->usulan_thp[$i];
+
+        if (is_numeric($name_thp)) {
+          $name_thp = Inventory::find($name_thp)->nama_barang;
+        }
+
+        if (is_numeric($invenId)) {
+          $invenId = Inventory::find($invenId)->id;
+        } else {
+          $invenId = null;
+        }
+
+        Propose::create([
+          'inventory_id' => $invenId,
+          'division_order_id' => $id,
+          'usulan_thp' => $name_thp,
+          'jumlah_thp' => $request->jumlah_thp[$i],
+          'spesifikasi_thp' => $request->spesifikasi_thp[$i],
+          'justifikasi_thp' => $request->justifikasi_thp[$i]
+        ]);
       }
-
-      Propose::create([
-        'inventory_id' => $invenId,
-        'division_order_id' => $id,
-        'usulan_thp' => $name_thp,
-        'jumlah_thp' => $request->jumlah_thp[$i],
-        'spesifikasi_thp' => $request->spesifikasi_thp[$i],
-        'justifikasi_thp' => $request->justifikasi_thp[$i]
-      ]);
     }
 
     return redirect()->route('addiv.order')->with('success', 'Usulan berhasil diperbaharui');
@@ -259,6 +282,8 @@ class AdminDivisiController extends Controller
   {
     $valueHp = DataPendingHelper::getHpPending();
     $values = DataPendingHelper::getThpPending();
+
+    dd($valueHp);
 
     $divId = Auth::guard('division')->user()->division_id;
 
@@ -348,5 +373,88 @@ class AdminDivisiController extends Controller
     }
 
     return redirect()->route('addiv.home')->with('success', 'Usulan berhasil diajukan kembali');
+  }
+
+  public function inventory()
+  {
+    $divId = Auth::guard('division')->user()->division_id;
+
+    return view('roles.admin.inventaris.inventory', [
+      'invenHp' => InventoryHp::where('division_id', $divId)->get(),
+      'invenThp' => Inventory::where('division_id', $divId)->get()
+    ]);
+  }
+
+  public function createInventory()
+  {
+    return view('roles.admin.inventaris.create');
+  }
+
+  public function storeInventory(Request $request)
+  {
+    try {
+      $inventoryHp = RequestHelper::inventoryHp($request);
+      $inventoryThp = RequestHelper::inventoryThp($request);
+
+      $divId = Auth::guard('division')->user()->division_id;
+
+      if ($inventoryHp) {
+        $inven_hp = $request->inventory_hp;
+        $count_hp = count($inven_hp);
+
+        for ($i = 0; $i < $count_hp; $i++) {
+          InventoryHp::create([
+            'division_id' => $divId,
+            'nama_barang' => $request->inventory_hp[$i],
+            'total' => $request->total_hp[$i]
+          ]);
+        }
+      }
+
+      if ($inventoryThp) {
+        $inven_thp = $request->inventory_thp;
+        $count_thp = count($inven_thp);
+
+
+        for ($i = 0; $i < $count_thp; $i++) {
+          if (($request->baik_thp[$i] + $request->rusak_ringan_thp[$i] + $request->rusak_berat_thp[$i]) > 0) {
+            Inventory::create([
+              'division_id' => $divId,
+              'nama_barang' => $request->inventory_thp[$i],
+              'baik' => $request->baik_thp[$i],
+              'rusak_ringan' => $request->rusak_ringan_thp[$i],
+              'rusak_berat' => $request->rusak_berat_thp[$i]
+            ]);
+          }
+        }
+      }
+    } catch (\Throwable $e) {
+      dd($e);
+    }
+
+
+    return redirect()->route('addiv.inventory')->with('success', 'Inventory Berhasil Ditambahkan');
+  }
+
+  public function updateInventory(Request $request, $id, $type)
+  {
+    if ($type === 'hp') {
+      InventoryHp::where('id', $id)->update($request->except(['_method', '_token']));
+    } else {
+      Inventory::where('id', $id)->update($request->except(['_method', '_token']));
+    }
+
+    return redirect()->route('addiv.inventory')->with('success', 'Data berhasil diperbaharui');
+  }
+
+  public function deleteInventory($id, $type)
+  {
+    if ($type === 'hp') {
+      InventoryHp::destroy($id);
+    } else {
+      Inventory::destroy($id);
+    }
+
+    return redirect()->route('addiv.inventory')->with('success', 'Data berhasil dihapus');
   }
 }

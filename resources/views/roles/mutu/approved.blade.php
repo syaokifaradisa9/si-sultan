@@ -23,10 +23,10 @@
                   <th rowspan="2" class="align-middle">Aksi</th>
                 </tr>
                 <tr class="text-center">
-                  <th>Awal</th>
-                  <th>Akhir</th>
-                  <th>Usulan</th>
-                  <th>Ditunda</th>
+                  <th>Awal Usulan</th>
+                  <th>Disetujui</th>
+                  <th>Awal Usulan</th>
+                  <th>Disetujui</th>
                 </tr>
               </thead>
               <?php $num = 1; ?>
