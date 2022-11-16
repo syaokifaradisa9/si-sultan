@@ -35,8 +35,8 @@
                       <form action="{{ route('addiv.deleteInven', ['id' => $item->id, 'type' => 'hp']) }}" method="POST" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button class="badge bg-danger border-0 btn-delete" onclick="return confirm('Apakah anda yakin?')"
-                          onfocus="this.style.outline = 'none'"><i class="fas fa-trash ml-0 text-white"></i></button>
+                        <button class="badge bg-danger border-0 btn-delete" id="btn-confirm" onfocus="this.style.outline = 'none'"><i
+                            class="fas fa-trash ml-0 text-white"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -84,8 +84,8 @@
                       <form action="{{ route('addiv.deleteInven', ['id' => $item->id, 'type' => 'thp']) }}" method="POST" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button class="badge bg-danger border-0 btn-delete" onclick="return confirm('Apakah anda yakin?')"
-                          onfocus="this.style.outline = 'none'"><i class="fas fa-trash ml-0 text-white"></i></button>
+                        <button class="badge bg-danger border-0 btn-delete" id="btn-confirm" onfocus="this.style.outline = 'none'"><i
+                            class="fas fa-trash ml-0 text-white"></i></button>
                       </form>
                     </td>
                   </tr>
