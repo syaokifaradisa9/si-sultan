@@ -16,7 +16,8 @@
             <table class="table table-bordered table-md" id="used-table">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
+                  <th class="text-center" style="width: 10px">No</th>
+                  <th class="text-center">Bagian</th>
                   <th class="text-center">Nama Barang</th>
                   <th class="text-center">Total</th>
                 </tr>
@@ -38,11 +39,12 @@
             <table class="table table-bordered table-md" id="order-table">
               <thead>
                 <tr>
-                  <th class="text-center">No</th>
-                  <th class="text-center">Nama Barang</th>
-                  <th class="text-center">Baik</th>
-                  <th class="text-center">Rusak Ringan</th>
-                  <th class="text-center">Rusak Berat</th>
+                  <th class="text-center align-middle" style="width: 10px">No</th>
+                  <th class="text-center align-middle">Bagian</th>
+                  <th class="text-center align-middle">Nama Barang</th>
+                  <th class="text-center align-middle" style="width: 10px">Baik</th>
+                  <th class="text-center align-middle" style="width: 10px">Rusak Ringan</th>
+                  <th class="text-center align-middle" style="width: 10px">Rusak Berat</th>
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -81,30 +83,32 @@
               </thead>
               <tbody>
                 @foreach ($proposeHp as $propose)
-                  <tr id="hp">
-                    <td class="align-middle">{{ $loop->iteration }}</td>
-                    <td class="align-middle">{{ $propose->usulan_hp }}</td>
-                    <td class="align-middle">{{ $firstAmountHp }}</td>
-                    <td class="align-middle">{{ $propose->jumlah_hp }}</td>
-                    <td class="align-middle text-left" style="max-width: 300px">{{ $propose->spesifikasi_hp }}</td>
-                    <td class="align-middle text-left" style="max-width: 300px">{{ $propose->justifikasi_hp }}</td>
-                    <td class="align-middle text-center">
-                      <div class="badge badge-success">
-                        {{ $propose->status }}
-                      </div>
-                    </td>
-                    <td class="align-middle text-center">
-                      <div class="dropdown d-inline">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
-                          <i class="fas fa-chevron-circle-down"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a href="{{ route('ppk.itemReceived', ['id' => $propose->id]) }}" class="dropdown-item has-icon" id="btn-received">
-                            <i class="fas fa-check-circle text-success"></i> Barang Diterima</a>
+                  @foreach ($propose as $data)
+                    <tr id="hp">
+                      <td class="align-middle">{{ 1 }}</td>
+                      <td class="align-middle">{{ $data['name'] }}</td>
+                      <td class="align-middle">{{ $data['accepted'] ?? '0' }}</td>
+                      <td class="align-middle">{{ $data['not_received'] }}</td>
+                      <td class="align-middle text-left" style="max-width: 300px">{{ $data['spesification'] }}</td>
+                      <td class="align-middle text-left" style="max-width: 300px">{{ $data['justification'] }}</td>
+                      <td class="align-middle text-center">
+                        <div class="badge badge-success">
+                          {{ $data['status'] }}
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                      <td class="align-middle text-center">
+                        <div class="dropdown d-inline">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+                            <i class="fas fa-chevron-circle-down"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                            <a href="{{ route('ppk.itemReceived', ['id' => $data['id']]) }}" class="dropdown-item has-icon" id="btn-received">
+                              <i class="fas fa-check-circle text-success"></i> Barang Diterima</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
                 @endforeach
               </tbody>
             </table>
@@ -135,30 +139,32 @@
               </thead>
               <tbody>
                 @foreach ($proposes as $propose)
-                  <tr id="thp">
-                    <td class="align-middle">{{ $loop->iteration }}</td>
-                    <td class="align-middle">{{ $propose->usulan_thp }}</td>
-                    <td class="align-middle">{{ $firstAmount }}</td>
-                    <td class="align-middle">{{ $propose->jumlah_thp }}</td>
-                    <td class="align-middle text-left" style="max-width: 300px">{{ $propose->spesifikasi_thp }}</td>
-                    <td class="align-middle text-left" style="max-width: 300px">{{ $propose->justifikasi_thp }}</td>
-                    <td class="align-middle text-center">
-                      <div class="badge badge-success">
-                        {{ $propose->status }}
-                      </div>
-                    </td>
-                    <td class="align-middle text-center">
-                      <div class="dropdown d-inline">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
-                          <i class="fas fa-chevron-circle-down"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a href="{{ route('ppk.itemReceived', ['id' => $propose->id]) }}" class="dropdown-item has-icon" id="btn-received">
-                            <i class="fas fa-check-circle text-success"></i> Barang Diterima</a>
+                  @foreach ($propose as $data)
+                    <tr id="thp">
+                      <td class="align-middle">{{ $loop->iteration }}</td>
+                      <td class="align-middle">{{ $data['name'] }}</td>
+                      <td class="align-middle">{{ $data['accepted'] ?? '0' }}</td>
+                      <td class="align-middle">{{ $data['not_received'] }}</td>
+                      <td class="align-middle text-left" style="max-width: 300px">{{ $data['spesification'] }}</td>
+                      <td class="align-middle text-left" style="max-width: 300px">{{ $data['justification'] }}</td>
+                      <td class="align-middle text-center">
+                        <div class="badge badge-success">
+                          {{ $data['status'] }}
                         </div>
-                      </div>
-                    </td>
-                  </tr>
+                      </td>
+                      <td class="align-middle text-center">
+                        <div class="dropdown d-inline">
+                          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown">
+                            <i class="fas fa-chevron-circle-down"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                            <a href="{{ route('ppk.itemReceived', ['id' => $data['id']]) }}" class="dropdown-item has-icon" id="btn-received">
+                              <i class="fas fa-check-circle text-success"></i> Barang Diterima</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
                 @endforeach
               </tbody>
             </table>

@@ -33,8 +33,10 @@ Route::prefix('api')->group(function () {
 
 // Route Datatable
 Route::name('datatable.')->controller(DatatableController::class)->prefix('datatable')->group(function () {
-  Route::get('/{type}/home', 'home')->name('home');
-  Route::get('/{type}/{id}/detail', 'detail')->name('detail');
+  Route::prefix('{type}')->group(function () {
+    Route::get('/home', 'home')->name('home');
+    Route::get('/{id}/detail', 'detail')->name('detail');
+  });
 });
 
 // Admin Divisi
@@ -50,6 +52,15 @@ Route::name('addiv.')->controller(AdminDivisiController::class)->prefix('addiv')
       Route::get('/detail', 'orderDetail')->name('orderDetail');
       Route::get('/edit', 'edit')->name(('edit'));
       Route::put('/update', 'update')->name('update');
+    });
+  });
+  Route::prefix('inventory')->group(function () {
+    Route::get('/', 'inventory')->name('inventory');
+    Route::get('/create', 'createInventory')->name('createInven');
+    Route::post('/store', 'storeInventory')->name('storeInven');
+    Route::prefix('{id}')->group(function () {
+      Route::put('/update/{type}', 'updateInventory')->name('updateInven');
+      Route::delete('/delete/{type}', 'deleteInventory')->name('deleteInven');
     });
   });
 });

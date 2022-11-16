@@ -27,11 +27,11 @@ class AdministrasiUmumController extends Controller
   }
   public function orderDetail($id)
   {
-    $orders = DivisionOrder::findOrFail($id);
+    $order = DivisionOrder::findOrFail($id);
 
     return view('roles.adum.orderDetail', [
       'header' => 'Detail',
-      'order' => $orders
+      'order' => $order
     ]);
   }
 

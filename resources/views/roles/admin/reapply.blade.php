@@ -27,7 +27,6 @@
             </thead>
             <tbody class="duplicate-form">
               @foreach ($proposeHp as $data)
-                {{-- @foreach ($propose as $data) --}}
                 <tr class="text-center duplicate">
                   <input type="hidden" name="id_hp[]" value="{{ $data->id }}">
                   <input type="hidden" name="inventory_hp_id[]" value="{{ $data->inventory_hp_id }}">
@@ -82,7 +81,6 @@
                     <button type="button" class="btn btn-danger btn-delete"><i class="fas fa-trash" style="pointer-events: none"></i></button>
                   </td>
                 </tr>
-                {{-- @endforeach --}}
               @endforeach
               <tr class="text-center">
                 <td colspan="6"></td>

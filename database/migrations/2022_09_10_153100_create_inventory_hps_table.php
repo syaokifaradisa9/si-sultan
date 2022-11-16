@@ -18,7 +18,7 @@ class CreateInventoryHpsTable extends Migration
             $table->id();
             $table->foreignIdFor(Division::class)->constrained();
             $table->string('nama_barang');
-            $table->integer('total');
+            $table->integer('total')->default(0);
             $table->timestamps();
         });
     }

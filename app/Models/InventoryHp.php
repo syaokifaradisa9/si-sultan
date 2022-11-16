@@ -14,4 +14,9 @@ class InventoryHp extends Model
     {
         return $this->hasMany(ProposeHp::class);
     }
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 }

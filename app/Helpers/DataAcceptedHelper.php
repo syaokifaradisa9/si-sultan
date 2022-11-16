@@ -4,7 +4,8 @@ namespace App\Helpers;
 
 use App\Models\Propose;
 use App\Models\ProposeHp;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Receive;
+use App\Models\ReceiveHp;
 
 class DataAcceptedHelper
 {
@@ -18,12 +19,14 @@ class DataAcceptedHelper
       $proposeName = $propose->usulan_hp;
       $div_order_id = $propose->division_order_id;
       $inventory_id = $propose->inventory_hp_id;
+      $status = $propose->status;
 
-      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id) {
+      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id, $status) {
         $isDivisionOrderSame = $proposeItem->division_order_id === $div_order_id;
         $isProposeNameSame =  $proposeItem->usulan_hp  === $proposeName;
         $isInventoryIdSame =  $proposeItem->inventory_hp_id === $inventory_id;
-        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame;
+        $isStatusSame = $proposeItem->status ===  $status;
+        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame && $isStatusSame;
       });
 
       $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "disetujui");
@@ -33,6 +36,18 @@ class DataAcceptedHelper
         $uniqueCode = $uniqueCode . ($uniqueCode == '' ? "" : "-") . $value->id;
       }
 
+      $firstAmount = '';
+      foreach ($filteredPending as $propose) {
+        $received = ReceiveHp::with('proposeHp')->where('propose_hp_id', $propose->id)->get();
+        foreach ($received as $receive) {
+          if ($receive->proposeHp->status === 'diterima') {
+            $firstAmount = $receive->jumlah;
+          } else {
+            $firstAmount = $receive->jumlah + $propose->jumlah_hp;
+          }
+        }
+      }
+
       $finalProposeCount = $filteredPending->sum("jumlah_hp");
 
       if ($finalProposeCount !== 0) {
@@ -40,24 +55,18 @@ class DataAcceptedHelper
         if (!$isFilled) {
           $dataHp[$type][$proposeName] = [
             'id' => $uniqueCode,
+            'name' => $propose->usulan_hp,
+            'accepted' => $firstAmount ? $firstAmount : $propose->jumlah_hp,
+            'not_received' => $propose->jumlah_hp,
+            'spesification' => $propose->spesifikasi_hp,
+            'justification' => $propose->justifikasi_hp,
+            'status' => $propose->status
           ];
         }
       }
     }
 
-    $valueHp = [];
-    foreach ($dataHp as $data) {
-      foreach ($data as $id) {
-        $dataId = explode('-', $id['id']);
-        foreach ($dataId as $value) {
-          $proposeHp = ProposeHp::with('divisionOrder')->find($value);
-
-          array_push($valueHp, $proposeHp);
-        }
-      }
-    }
-
-    return $valueHp;
+    return $dataHp;
   }
 
   public static function dataThpAccepted()
@@ -70,12 +79,14 @@ class DataAcceptedHelper
       $proposeName = $propose->usulan_thp;
       $div_order_id = $propose->division_order_id;
       $inventory_id = $propose->inventory_id;
+      $status = $propose->status;
 
-      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id) {
+      $filteredPrepose = $proposes->filter(function ($proposeItem) use ($div_order_id, $proposeName, $inventory_id, $status) {
         $isDivisionOrderSame = $proposeItem->division_order_id === $div_order_id;
         $isProposeNameSame =  $proposeItem->usulan_thp  === $proposeName;
         $isInventoryIdSame =  $proposeItem->inventory_id === $inventory_id;
-        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame;
+        $isStatusSame = $proposeItem->status ===  $status;
+        return $isDivisionOrderSame && $isProposeNameSame && $isInventoryIdSame && $isStatusSame;
       });
 
       $filteredPending = $filteredPrepose->filter(fn ($proposeItem) => $proposeItem->status == "disetujui");
@@ -85,6 +96,18 @@ class DataAcceptedHelper
         $uniqueCode = $uniqueCode . ($uniqueCode == '' ? "" : "-") . $value->id;
       }
 
+      $firstAmount = '';
+      foreach ($filteredPending as $propose) {
+        $received = Receive::with('propose')->where('propose_id', $propose->id)->get();
+        foreach ($received as $receive) {
+          if ($receive->propose->status === 'diterima') {
+            $firstAmount = $receive->jumlah;
+          } else {
+            $firstAmount = $receive->jumlah + $propose->jumlah_thp;
+          }
+        }
+      }
+
       $finalProposeCount = $filteredPending->sum("jumlah_thp");
 
       if ($finalProposeCount !== 0) {
@@ -92,23 +115,17 @@ class DataAcceptedHelper
         if (!$isFilled) {
           $datas[$type][$proposeName] = [
             'id' => $uniqueCode,
+            'name' => $propose->usulan_thp,
+            'accepted' => $firstAmount ? $firstAmount : $propose->jumlah_thp,
+            'not_received' => $propose->jumlah_thp,
+            'spesification' => $propose->spesifikasi_thp,
+            'justification' => $propose->justifikasi_thp,
+            'status' => $propose->status
           ];
         }
       }
     }
 
-    $values = [];
-    foreach ($datas as $data) {
-      foreach ($data as $id) {
-        $dataId = explode('-', $id['id']);
-        foreach ($dataId as $value) {
-          $proposes = Propose::with('divisionOrder')->find($value);
-
-          array_push($values, $proposes);
-        }
-      }
-    }
-
-    return $values;
+    return $datas;
   }
 }

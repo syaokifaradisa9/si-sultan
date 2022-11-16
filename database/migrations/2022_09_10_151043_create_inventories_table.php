@@ -18,9 +18,9 @@ class CreateInventoriesTable extends Migration
             $table->id();
             $table->foreignIdFor(Division::class)->constrained();
             $table->string('nama_barang');
-            $table->integer('baik');
-            $table->integer('rusak_ringan');
-            $table->integer('rusak_berat');
+            $table->integer('baik')->default(0);
+            $table->integer('rusak_ringan')->default(0);
+            $table->integer('rusak_berat')->default(0);
             $table->timestamps();
         });
     }

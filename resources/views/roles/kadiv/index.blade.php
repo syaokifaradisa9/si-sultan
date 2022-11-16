@@ -52,5 +52,5 @@
 @endsection
 
 @push('js-extends')
-  <script src="{{ asset('assets/js/datatable.js') }}"></script>
+  <script src="{{ asset('assets/js/admin-datatable.js') }}"></script>
 @endpush

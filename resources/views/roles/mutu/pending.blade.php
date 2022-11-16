@@ -23,9 +23,9 @@
                   <th rowspan="2" class="align-middle">Aksi</th>
                 </tr>
                 <tr class="text-center">
-                  <th>Awal</th>
-                  <th>Akhir</th>
-                  <th>Usulan</th>
+                  <th>Usulan Awal</th>
+                  <th>Ditunda</th>
+                  <th>Usulan Awal</th>
                   <th>Ditunda</th>
                 </tr>
               </thead>

@@ -21,31 +21,9 @@ class PpkController extends Controller
     $valueHp = DataAcceptedHelper::dataHpAccepted();
     $values = DataAcceptedHelper::dataThpAccepted();
 
-    $firstAmountHp = '';
-    foreach ($valueHp as $hp) {
-      $reveived = ReceiveHp::with('proposeHp')->where('propose_hp_id', $hp->id)->first();
-      if ($reveived->proposeHp->status === 'diterima') {
-        $firstAmountHp = $reveived->jumlah;
-      } else {
-        $firstAmountHp = $reveived->jumlah + $hp->jumlah_hp;
-      }
-    }
-
-    $firstAmount = '';
-    foreach ($values as $thp) {
-      $received = Receive::with('propose')->where('propose_id', $thp->id)->first();
-      if ($received->propose->status === 'diterima') {
-        $firstAmount = $received->jumlah;
-      } else {
-        $firstAmount = $received->jumlah + $thp->jumlah_thp;
-      }
-    }
-
     return view('roles.ppk.index', [
       'proposeHp' => $valueHp,
       'proposes' => $values,
-      'firstAmountHp' => $firstAmountHp,
-      'firstAmount' => $firstAmount
     ]);
   }
 
@@ -207,9 +185,10 @@ class PpkController extends Controller
         $proposeName = $newReceived->proposeHp->usulan_hp;
         $divId = $newReceived->proposeHp->divisionOrder->userDivision->division->id;
 
-        $invenHp = InventoryHp::findOrFail($invenId); // 2
+        $inventory = InventoryHp::where('id', $invenId)->exists();
 
-        if ($invenId === $invenHp->id) {
+        if ($inventory) {
+          $invenHp = InventoryHp::findOrFail($invenId);
           $invenHp->total = ($invenHp->total + $newReceived->jumlah);
           $invenHp->save();
         } else {
@@ -272,9 +251,10 @@ class PpkController extends Controller
         $proposeName = $newReceived->propose->usulan_thp;
         $divId = $newReceived->propose->divisionOrder->userDivision->division->id;
 
-        $inven = Inventory::findOrFail($invenId); // 2
+        $inventory = Inventory::where('id', $invenId)->exists();
 
-        if ($invenId === $inven->id) {
+        if ($inventory) {
+          $inven = Inventory::findOrFail($invenId);
           $inven->baik = ($inven->baik + $newReceived->jumlah);
           $inven->save();
         } else {
